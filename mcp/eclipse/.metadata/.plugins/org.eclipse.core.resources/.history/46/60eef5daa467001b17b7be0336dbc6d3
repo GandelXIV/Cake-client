@@ -1,0 +1,5 @@
+package CakeClient.modules.combat;
+
+public class KillAura {
+
+}

@@ -1,0 +1,112 @@
+src/minecraft/net/minecraft/tileentity/TileEntity.java:123: warning: [deprecation] newInstance() in Class has been deprecated
+                var1 = (TileEntity)var2.newInstance();
+                                       ^
+  where T is a type-variable:
+    T extends Object declared in class Class
+src/minecraft/net/minecraft/network/EnumConnectionState.java:296: warning: [deprecation] newInstance() in Class has been deprecated
+        return var3 == null ? null : (Packet)var3.newInstance();
+                                                 ^
+  where T is a type-variable:
+    T extends Object declared in class Class
+src/minecraft/net/minecraft/network/EnumConnectionState.java:345: warning: [deprecation] newInstance() in Class has been deprecated
+                        var7.newInstance();
+                            ^
+  where T is a type-variable:
+    T extends Object declared in class Class
+src/minecraft/net/minecraft/entity/item/EntityMinecart.java:99: warning: [deprecation] Integer(int) in Integer has been deprecated
+        this.dataWatcher.addObject(17, new Integer(0));
+                                       ^
+src/minecraft/net/minecraft/entity/item/EntityMinecart.java:100: warning: [deprecation] Integer(int) in Integer has been deprecated
+        this.dataWatcher.addObject(18, new Integer(1));
+                                       ^
+src/minecraft/net/minecraft/entity/item/EntityMinecart.java:101: warning: [deprecation] Float(float) in Float has been deprecated
+        this.dataWatcher.addObject(19, new Float(0.0F));
+                                       ^
+src/minecraft/net/minecraft/entity/item/EntityMinecart.java:102: warning: [deprecation] Integer(int) in Integer has been deprecated
+        this.dataWatcher.addObject(20, new Integer(0));
+                                       ^
+src/minecraft/net/minecraft/entity/item/EntityMinecart.java:103: warning: [deprecation] Integer(int) in Integer has been deprecated
+        this.dataWatcher.addObject(21, new Integer(6));
+                                       ^
+src/minecraft/net/minecraft/entity/monster/EntitySpider.java:58: warning: [deprecation] Byte(byte) in Byte has been deprecated
+        this.dataWatcher.addObject(16, new Byte((byte)0));
+                                       ^
+src/minecraft/net/minecraft/entity/monster/EntityEnderman.java:90: warning: [deprecation] Short(short) in Short has been deprecated
+        this.dataWatcher.addObject(16, new Short((short)0));
+                                       ^
+src/minecraft/net/minecraft/entity/monster/EntityEnderman.java:91: warning: [deprecation] Byte(byte) in Byte has been deprecated
+        this.dataWatcher.addObject(17, new Byte((byte)0));
+                                       ^
+src/minecraft/net/minecraft/entity/monster/EntityEnderman.java:92: warning: [deprecation] Byte(byte) in Byte has been deprecated
+        this.dataWatcher.addObject(18, new Byte((byte)0));
+                                       ^
+src/minecraft/net/minecraft/entity/monster/EntityBlaze.java:56: warning: [deprecation] Byte(byte) in Byte has been deprecated
+        this.dataWatcher.addObject(16, new Byte((byte)0));
+                                       ^
+src/minecraft/net/minecraft/entity/monster/EntitySkeleton.java:90: warning: [deprecation] Byte(byte) in Byte has been deprecated
+        this.dataWatcher.addObject(13, new Byte((byte)0));
+                                       ^
+src/minecraft/net/minecraft/entity/passive/EntityWolf.java:137: warning: [deprecation] Float(float) in Float has been deprecated
+        this.dataWatcher.addObject(18, new Float(this.getHealth()));
+                                       ^
+src/minecraft/net/minecraft/entity/passive/EntityWolf.java:138: warning: [deprecation] Byte(byte) in Byte has been deprecated
+        this.dataWatcher.addObject(19, new Byte((byte)0));
+                                       ^
+src/minecraft/net/minecraft/entity/passive/EntityWolf.java:139: warning: [deprecation] Byte(byte) in Byte has been deprecated
+        this.dataWatcher.addObject(20, new Byte((byte)EnumDyeColor.RED.func_176765_a()));
+                                       ^
+src/minecraft/net/minecraft/entity/passive/EntitySheep.java:113: warning: [deprecation] Byte(byte) in Byte has been deprecated
+        this.dataWatcher.addObject(16, new Byte((byte)0));
+                                       ^
+src/minecraft/net/minecraft/entity/passive/EntityBat.java:30: warning: [deprecation] Byte(byte) in Byte has been deprecated
+        this.dataWatcher.addObject(16, new Byte((byte)0));
+                                       ^
+src/minecraft/net/minecraft/entity/boss/EntityWither.java:86: warning: [deprecation] Integer(int) in Integer has been deprecated
+        this.dataWatcher.addObject(17, new Integer(0));
+                                       ^
+src/minecraft/net/minecraft/entity/boss/EntityWither.java:87: warning: [deprecation] Integer(int) in Integer has been deprecated
+        this.dataWatcher.addObject(18, new Integer(0));
+                                       ^
+src/minecraft/net/minecraft/entity/boss/EntityWither.java:88: warning: [deprecation] Integer(int) in Integer has been deprecated
+        this.dataWatcher.addObject(19, new Integer(0));
+                                       ^
+src/minecraft/net/minecraft/entity/boss/EntityWither.java:89: warning: [deprecation] Integer(int) in Integer has been deprecated
+        this.dataWatcher.addObject(20, new Integer(0));
+                                       ^
+src/minecraft/net/minecraft/entity/item/EntityBoat.java:57: warning: [deprecation] Integer(int) in Integer has been deprecated
+        this.dataWatcher.addObject(17, new Integer(0));
+                                       ^
+src/minecraft/net/minecraft/entity/item/EntityBoat.java:58: warning: [deprecation] Integer(int) in Integer has been deprecated
+        this.dataWatcher.addObject(18, new Integer(1));
+                                       ^
+src/minecraft/net/minecraft/entity/item/EntityBoat.java:59: warning: [deprecation] Float(float) in Float has been deprecated
+        this.dataWatcher.addObject(19, new Float(0.0F));
+                                       ^
+src/minecraft/net/minecraft/entity/item/EntityMinecartFurnace.java:42: warning: [deprecation] Byte(byte) in Byte has been deprecated
+        this.dataWatcher.addObject(16, new Byte((byte)0));
+                                       ^
+src/minecraft/net/minecraft/world/gen/structure/MapGenStructureIO.java:51: warning: [deprecation] newInstance() in Class has been deprecated
+                var2 = (StructureStart)var3.newInstance();
+                                           ^
+  where T is a type-variable:
+    T extends Object declared in class Class
+src/minecraft/net/minecraft/world/gen/structure/MapGenStructureIO.java:82: warning: [deprecation] newInstance() in Class has been deprecated
+                var2 = (StructureComponent)var3.newInstance();
+                                               ^
+  where T is a type-variable:
+    T extends Object declared in class Class
+src/minecraft/net/minecraft/client/resources/FallbackResourceManager.java:129: warning: [deprecation] finalize() in Object has been deprecated
+        protected void finalize() throws Throwable
+                       ^
+src/minecraft/net/minecraft/client/resources/FallbackResourceManager.java:136: warning: [deprecation] finalize() in Object has been deprecated
+            super.finalize();
+                 ^
+src/minecraft/net/minecraft/client/resources/FileResourcePack.java:110: warning: [deprecation] finalize() in Object has been deprecated
+    protected void finalize() throws Throwable
+                   ^
+src/minecraft/net/minecraft/client/resources/FileResourcePack.java:113: warning: [deprecation] finalize() in Object has been deprecated
+        super.finalize();
+             ^
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+33 warnings

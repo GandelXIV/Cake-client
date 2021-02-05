@@ -1,0 +1,32 @@
+!SESSION 2021-02-05 12:10:00.314 -----------------------------------------------
+eclipse.buildId=4.14.0.I20191210-0610
+java.version=11.0.9.1
+java.vendor=Ubuntu
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.jdt.launching 4 116 2021-02-05 12:11:20.937
+!MESSAGE Unrecognized option: -Xincgc
+Error: Could not create the Java Virtual Machine.
+Error: A fatal exception has occurred. Program will exit.
+
+
+!ENTRY org.eclipse.jdt.launching 4 116 2021-02-05 12:11:33.617
+!MESSAGE Unrecognized option: -Xincgc
+Error: Could not create the Java Virtual Machine.
+Error: A fatal exception has occurred. Program will exit.
+
+
+!ENTRY org.eclipse.core.resources 2 10035 2021-02-05 12:13:55.727
+!MESSAGE The workspace will exit with unsaved changes in this session.
+!SESSION 2021-02-05 12:13:59.744 -----------------------------------------------
+eclipse.buildId=4.14.0.I20191210-0610
+java.version=11.0.9.1
+java.vendor=Ubuntu
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2021-02-05 12:14:03.752
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.

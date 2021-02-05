@@ -1,0 +1,40 @@
+[12:41:11] [Client thread/INFO]: Setting user: Player681
+[12:41:11] [Client thread/INFO]: (Session ID is token:0:Player681)
+[12:41:12] [Client thread/INFO]: LWJGL Version: 2.9.1
+[12:41:13] [Client thread/INFO]: Reloading ResourceManager: Default
+[12:41:13] [Client thread/ERROR]: Couldn't initialize twitch stream
+[12:41:13] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[12:41:13] [Thread-6/INFO]: Initializing LWJGL OpenAL
+[12:41:13] [Thread-6/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[12:41:13] [Thread-6/INFO]: OpenAL initialized.
+[12:41:13] [Sound Library Loader/INFO]: Sound engine started
+[12:41:15] [Client thread/INFO]: Created: 512x512 textures-atlas
+[12:41:19] [Server thread/INFO]: Starting integrated minecraft server version 1.8
+[12:41:19] [Server thread/INFO]: Generating keypair
+[12:41:19] [Server thread/INFO]: Preparing start region for level 0
+[12:41:20] [Server thread/INFO]: Changing view distance to 12, from 10
+[12:41:20] [Server thread/INFO]: Player681[local:E:f146694f] logged in with entity id 223 at (583.7873906387729, 70.17254604685309, 180.88554454220113)
+[12:41:20] [Server thread/INFO]: Player681 joined the game
+[12:41:23] [Server thread/WARN]: Biome ID is out of bounds: 35281, defaulting to 0 (Ocean)
+[12:41:23] [Server thread/WARN]: Biome ID is out of bounds: 70882, defaulting to 0 (Ocean)
+[12:41:23] [Server thread/WARN]: Biome ID is out of bounds: 70882, defaulting to 0 (Ocean)
+[12:41:23] [Server thread/WARN]: Biome ID is out of bounds: 2049, defaulting to 0 (Ocean)
+[12:41:23] [Server thread/WARN]: Biome ID is out of bounds: 35281, defaulting to 0 (Ocean)
+[12:41:23] [Server thread/WARN]: Biome ID is out of bounds: 2563, defaulting to 0 (Ocean)
+[12:41:23] [Server thread/WARN]: Biome ID is out of bounds: 2049, defaulting to 0 (Ocean)
+[12:41:23] [Server thread/WARN]: Biome ID is out of bounds: 2049, defaulting to 0 (Ocean)
+[12:41:42] [Server thread/INFO]: Player681 has just earned the achievement [Taking Inventory]
+[12:41:42] [Client thread/INFO]: [CHAT] Player681 has just earned the achievement [Taking Inventory]
+[12:42:18] [Server thread/INFO]: Saving and pausing game...
+[12:42:18] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Overworld
+[12:42:18] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Nether
+[12:42:18] [Server thread/INFO]: Saving chunks for level 'mcpworld'/The End
+[12:42:19] [Server thread/INFO]: Stopping server
+[12:42:19] [Server thread/INFO]: Saving players
+[12:42:19] [Server thread/INFO]: Saving worlds
+[12:42:19] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Overworld
+[12:42:19] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Nether
+[12:42:19] [Server thread/INFO]: Saving chunks for level 'mcpworld'/The End
+[12:42:20] [Client thread/INFO]: Stopping!
+[12:42:20] [Client thread/INFO]: SoundSystem shutting down...
+[12:42:20] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
