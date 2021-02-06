@@ -10,12 +10,12 @@ bobView:true
 anaglyph3d:false
 maxFps:120
 fboEnable:true
-difficulty:2
+difficulty:1
 fancyGraphics:true
 ao:2
 renderClouds:true
 resourcePacks:[]
-lastServer:
+lastServer:BewdarsAnarchy.aternos.me
 lang:en_US
 chatVisibility:0
 chatColors:true

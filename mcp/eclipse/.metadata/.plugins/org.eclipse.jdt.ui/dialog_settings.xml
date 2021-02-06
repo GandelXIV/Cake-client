@@ -16,4 +16,8 @@
 	<section name="ClasspathContainerSelectionPage">
 		<item key="index" value="0"/>
 	</section>
+	<section name="completion_proposal_size">
+	</section>
+	<section name="quick_assist_proposal_size">
+	</section>
 </section>
