@@ -81,4 +81,5 @@ public class FontMetadataSectionSerializer extends BaseMetadataSectionSerializer
     {
         return "font";
     }
+
 }

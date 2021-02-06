@@ -10,6 +10,8 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
+import optifine.CustomColors;
+import optifine.RenderEnv;
 
 public class BlockFluidRenderer
 {
@@ -36,13 +38,18 @@ public class BlockFluidRenderer
         BlockLiquid var5 = (BlockLiquid)p_178270_2_.getBlock();
         var5.setBlockBoundsBasedOnState(p_178270_1_, p_178270_3_);
         TextureAtlasSprite[] var6 = var5.getMaterial() == Material.lava ? this.field_178272_a : this.field_178271_b;
-        int var7 = var5.colorMultiplier(p_178270_1_, p_178270_3_);
+        RenderEnv renderEnv = RenderEnv.getInstance(p_178270_1_, p_178270_2_, p_178270_3_);
+        int var7 = CustomColors.getFluidColor(p_178270_1_, p_178270_2_, p_178270_3_, renderEnv);
         float var8 = (float)(var7 >> 16 & 255) / 255.0F;
         float var9 = (float)(var7 >> 8 & 255) / 255.0F;
         float var10 = (float)(var7 & 255) / 255.0F;
         boolean var11 = var5.shouldSideBeRendered(p_178270_1_, p_178270_3_.offsetUp(), EnumFacing.UP);
         boolean var12 = var5.shouldSideBeRendered(p_178270_1_, p_178270_3_.offsetDown(), EnumFacing.DOWN);
-        boolean[] var13 = new boolean[] {var5.shouldSideBeRendered(p_178270_1_, p_178270_3_.offsetNorth(), EnumFacing.NORTH), var5.shouldSideBeRendered(p_178270_1_, p_178270_3_.offsetSouth(), EnumFacing.SOUTH), var5.shouldSideBeRendered(p_178270_1_, p_178270_3_.offsetWest(), EnumFacing.WEST), var5.shouldSideBeRendered(p_178270_1_, p_178270_3_.offsetEast(), EnumFacing.EAST)};
+        boolean[] var13 = renderEnv.getBorderFlags();
+        var13[0] = var5.shouldSideBeRendered(p_178270_1_, p_178270_3_.offsetNorth(), EnumFacing.NORTH);
+        var13[1] = var5.shouldSideBeRendered(p_178270_1_, p_178270_3_.offsetSouth(), EnumFacing.SOUTH);
+        var13[2] = var5.shouldSideBeRendered(p_178270_1_, p_178270_3_.offsetWest(), EnumFacing.WEST);
+        var13[3] = var5.shouldSideBeRendered(p_178270_1_, p_178270_3_.offsetEast(), EnumFacing.EAST);
 
         if (!var11 && !var12 && !var13[0] && !var13[1] && !var13[2] && !var13[3])
         {
@@ -83,53 +90,54 @@ public class BlockFluidRenderer
                     var31 = var6[1];
                 }
 
+                p_178270_4_.setSprite(var31);
                 var20 -= var30;
                 var21 -= var30;
                 var22 -= var30;
                 var23 -= var30;
-                float var38;
-                float var39;
-                float var40;
+                float var52;
+                float var53;
+                float var54;
 
                 if (var32 < -999.0F)
                 {
                     var33 = var31.getInterpolatedU(0.0D);
                     var37 = var31.getInterpolatedV(0.0D);
                     var34 = var33;
-                    var38 = var31.getInterpolatedV(16.0D);
+                    var52 = var31.getInterpolatedV(16.0D);
                     var35 = var31.getInterpolatedU(16.0D);
-                    var39 = var38;
+                    var53 = var52;
                     var36 = var35;
-                    var40 = var37;
+                    var54 = var37;
                 }
                 else
                 {
-                    float var41 = MathHelper.sin(var32) * 0.25F;
-                    float var42 = MathHelper.cos(var32) * 0.25F;
+                    float var55 = MathHelper.sin(var32) * 0.25F;
+                    float var44 = MathHelper.cos(var32) * 0.25F;
                     float var43 = 8.0F;
-                    var33 = var31.getInterpolatedU((double)(8.0F + (-var42 - var41) * 16.0F));
-                    var37 = var31.getInterpolatedV((double)(8.0F + (-var42 + var41) * 16.0F));
-                    var34 = var31.getInterpolatedU((double)(8.0F + (-var42 + var41) * 16.0F));
-                    var38 = var31.getInterpolatedV((double)(8.0F + (var42 + var41) * 16.0F));
-                    var35 = var31.getInterpolatedU((double)(8.0F + (var42 + var41) * 16.0F));
-                    var39 = var31.getInterpolatedV((double)(8.0F + (var42 - var41) * 16.0F));
-                    var36 = var31.getInterpolatedU((double)(8.0F + (var42 - var41) * 16.0F));
-                    var40 = var31.getInterpolatedV((double)(8.0F + (-var42 - var41) * 16.0F));
+                    var33 = var31.getInterpolatedU((double)(8.0F + (-var44 - var55) * 16.0F));
+                    var37 = var31.getInterpolatedV((double)(8.0F + (-var44 + var55) * 16.0F));
+                    var34 = var31.getInterpolatedU((double)(8.0F + (-var44 + var55) * 16.0F));
+                    var52 = var31.getInterpolatedV((double)(8.0F + (var44 + var55) * 16.0F));
+                    var35 = var31.getInterpolatedU((double)(8.0F + (var44 + var55) * 16.0F));
+                    var53 = var31.getInterpolatedV((double)(8.0F + (var44 - var55) * 16.0F));
+                    var36 = var31.getInterpolatedU((double)(8.0F + (var44 - var55) * 16.0F));
+                    var54 = var31.getInterpolatedV((double)(8.0F + (-var44 - var55) * 16.0F));
                 }
 
                 p_178270_4_.func_178963_b(var5.getMixedBrightnessForBlock(p_178270_1_, p_178270_3_));
                 p_178270_4_.func_178986_b(var16 * var8, var16 * var9, var16 * var10);
                 p_178270_4_.addVertexWithUV(var24 + 0.0D, var26 + (double)var20, var28 + 0.0D, (double)var33, (double)var37);
-                p_178270_4_.addVertexWithUV(var24 + 0.0D, var26 + (double)var21, var28 + 1.0D, (double)var34, (double)var38);
-                p_178270_4_.addVertexWithUV(var24 + 1.0D, var26 + (double)var22, var28 + 1.0D, (double)var35, (double)var39);
-                p_178270_4_.addVertexWithUV(var24 + 1.0D, var26 + (double)var23, var28 + 0.0D, (double)var36, (double)var40);
+                p_178270_4_.addVertexWithUV(var24 + 0.0D, var26 + (double)var21, var28 + 1.0D, (double)var34, (double)var52);
+                p_178270_4_.addVertexWithUV(var24 + 1.0D, var26 + (double)var22, var28 + 1.0D, (double)var35, (double)var53);
+                p_178270_4_.addVertexWithUV(var24 + 1.0D, var26 + (double)var23, var28 + 0.0D, (double)var36, (double)var54);
 
                 if (var5.func_176364_g(p_178270_1_, p_178270_3_.offsetUp()))
                 {
                     p_178270_4_.addVertexWithUV(var24 + 0.0D, var26 + (double)var20, var28 + 0.0D, (double)var33, (double)var37);
-                    p_178270_4_.addVertexWithUV(var24 + 1.0D, var26 + (double)var23, var28 + 0.0D, (double)var36, (double)var40);
-                    p_178270_4_.addVertexWithUV(var24 + 1.0D, var26 + (double)var22, var28 + 1.0D, (double)var35, (double)var39);
-                    p_178270_4_.addVertexWithUV(var24 + 0.0D, var26 + (double)var21, var28 + 1.0D, (double)var34, (double)var38);
+                    p_178270_4_.addVertexWithUV(var24 + 1.0D, var26 + (double)var23, var28 + 0.0D, (double)var36, (double)var54);
+                    p_178270_4_.addVertexWithUV(var24 + 1.0D, var26 + (double)var22, var28 + 1.0D, (double)var35, (double)var53);
+                    p_178270_4_.addVertexWithUV(var24 + 0.0D, var26 + (double)var21, var28 + 1.0D, (double)var34, (double)var52);
                 }
             }
 
@@ -148,67 +156,68 @@ public class BlockFluidRenderer
                 var14 = true;
             }
 
-            for (int var52 = 0; var52 < 4; ++var52)
+            for (int var571 = 0; var571 < 4; ++var571)
             {
-                int var53 = 0;
-                int var54 = 0;
+                int var581 = 0;
+                int var59 = 0;
 
-                if (var52 == 0)
+                if (var571 == 0)
                 {
-                    --var54;
+                    --var59;
                 }
 
-                if (var52 == 1)
+                if (var571 == 1)
                 {
-                    ++var54;
+                    ++var59;
                 }
 
-                if (var52 == 2)
+                if (var571 == 2)
                 {
-                    --var53;
+                    --var581;
                 }
 
-                if (var52 == 3)
+                if (var571 == 3)
                 {
-                    ++var53;
+                    ++var581;
                 }
 
-                BlockPos var55 = p_178270_3_.add(var53, 0, var54);
+                BlockPos var60 = p_178270_3_.add(var581, 0, var59);
                 var31 = var6[1];
+                p_178270_4_.setSprite(var31);
 
-                if (var13[var52])
+                if (var13[var571])
                 {
-                    double var44;
                     double var56;
                     double var57;
                     double var58;
+                    double var61;
 
-                    if (var52 == 0)
+                    if (var571 == 0)
                     {
                         var36 = var20;
                         var37 = var23;
                         var56 = var24;
                         var58 = var24 + 1.0D;
                         var57 = var28 + (double)var30;
-                        var44 = var28 + (double)var30;
+                        var61 = var28 + (double)var30;
                     }
-                    else if (var52 == 1)
+                    else if (var571 == 1)
                     {
                         var36 = var22;
                         var37 = var21;
                         var56 = var24 + 1.0D;
                         var58 = var24;
                         var57 = var28 + 1.0D - (double)var30;
-                        var44 = var28 + 1.0D - (double)var30;
+                        var61 = var28 + 1.0D - (double)var30;
                     }
-                    else if (var52 == 2)
+                    else if (var571 == 2)
                     {
                         var36 = var21;
                         var37 = var20;
                         var56 = var24 + (double)var30;
                         var58 = var24 + (double)var30;
                         var57 = var28 + 1.0D;
-                        var44 = var28;
+                        var61 = var28;
                     }
                     else
                     {
@@ -217,7 +226,7 @@ public class BlockFluidRenderer
                         var56 = var24 + 1.0D - (double)var30;
                         var58 = var24 + 1.0D - (double)var30;
                         var57 = var28;
-                        var44 = var28 + 1.0D;
+                        var61 = var28 + 1.0D;
                     }
 
                     var14 = true;
@@ -226,21 +235,22 @@ public class BlockFluidRenderer
                     float var48 = var31.getInterpolatedV((double)((1.0F - var36) * 16.0F * 0.5F));
                     float var49 = var31.getInterpolatedV((double)((1.0F - var37) * 16.0F * 0.5F));
                     float var50 = var31.getInterpolatedV(8.0D);
-                    p_178270_4_.func_178963_b(var5.getMixedBrightnessForBlock(p_178270_1_, var55));
+                    p_178270_4_.func_178963_b(var5.getMixedBrightnessForBlock(p_178270_1_, var60));
                     float var51 = 1.0F;
-                    var51 *= var52 < 2 ? var17 : var18;
+                    var51 *= var571 < 2 ? var17 : var18;
                     p_178270_4_.func_178986_b(var16 * var51 * var8, var16 * var51 * var9, var16 * var51 * var10);
                     p_178270_4_.addVertexWithUV(var56, var26 + (double)var36, var57, (double)var46, (double)var48);
-                    p_178270_4_.addVertexWithUV(var58, var26 + (double)var37, var44, (double)var47, (double)var49);
-                    p_178270_4_.addVertexWithUV(var58, var26 + 0.0D, var44, (double)var47, (double)var50);
+                    p_178270_4_.addVertexWithUV(var58, var26 + (double)var37, var61, (double)var47, (double)var49);
+                    p_178270_4_.addVertexWithUV(var58, var26 + 0.0D, var61, (double)var47, (double)var50);
                     p_178270_4_.addVertexWithUV(var56, var26 + 0.0D, var57, (double)var46, (double)var50);
                     p_178270_4_.addVertexWithUV(var56, var26 + 0.0D, var57, (double)var46, (double)var50);
-                    p_178270_4_.addVertexWithUV(var58, var26 + 0.0D, var44, (double)var47, (double)var50);
-                    p_178270_4_.addVertexWithUV(var58, var26 + (double)var37, var44, (double)var47, (double)var49);
+                    p_178270_4_.addVertexWithUV(var58, var26 + 0.0D, var61, (double)var47, (double)var50);
+                    p_178270_4_.addVertexWithUV(var58, var26 + (double)var37, var61, (double)var47, (double)var49);
                     p_178270_4_.addVertexWithUV(var56, var26 + (double)var36, var57, (double)var46, (double)var48);
                 }
             }
 
+            p_178270_4_.setSprite((TextureAtlasSprite)null);
             return var14;
         }
     }

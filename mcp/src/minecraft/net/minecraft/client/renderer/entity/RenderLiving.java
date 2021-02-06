@@ -10,6 +10,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityHanging;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import optifine.Config;
+import shadersmod.client.Shaders;
 
 public abstract class RenderLiving extends RendererLivingEntity
 {
@@ -65,96 +67,111 @@ public abstract class RenderLiving extends RendererLivingEntity
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)var4 / 1.0F, (float)var5 / 1.0F);
     }
 
-    private double func_110828_a(double p_110828_1_, double p_110828_3_, double p_110828_5_)
+    private double func_110828_a(double start, double end, double pct)
     {
-        return p_110828_1_ + (p_110828_3_ - p_110828_1_) * p_110828_5_;
+        return start + (end - start) * pct;
     }
 
     protected void func_110827_b(EntityLiving p_110827_1_, double p_110827_2_, double p_110827_4_, double p_110827_6_, float p_110827_8_, float p_110827_9_)
     {
-        Entity var10 = p_110827_1_.getLeashedToEntity();
-
-        if (var10 != null)
+        if (!Config.isShaders() || !Shaders.isShadowPass)
         {
-            p_110827_4_ -= (1.6D - (double)p_110827_1_.height) * 0.5D;
-            Tessellator var11 = Tessellator.getInstance();
-            WorldRenderer var12 = var11.getWorldRenderer();
-            double var13 = this.func_110828_a((double)var10.prevRotationYaw, (double)var10.rotationYaw, (double)(p_110827_9_ * 0.5F)) * 0.01745329238474369D;
-            double var15 = this.func_110828_a((double)var10.prevRotationPitch, (double)var10.rotationPitch, (double)(p_110827_9_ * 0.5F)) * 0.01745329238474369D;
-            double var17 = Math.cos(var13);
-            double var19 = Math.sin(var13);
-            double var21 = Math.sin(var15);
+            Entity var10 = p_110827_1_.getLeashedToEntity();
 
-            if (var10 instanceof EntityHanging)
+            if (var10 != null)
             {
-                var17 = 0.0D;
-                var19 = 0.0D;
-                var21 = -1.0D;
+                p_110827_4_ -= (1.6D - (double)p_110827_1_.height) * 0.5D;
+                Tessellator var11 = Tessellator.getInstance();
+                WorldRenderer var12 = var11.getWorldRenderer();
+                double var13 = this.func_110828_a((double)var10.prevRotationYaw, (double)var10.rotationYaw, (double)(p_110827_9_ * 0.5F)) * 0.01745329238474369D;
+                double var15 = this.func_110828_a((double)var10.prevRotationPitch, (double)var10.rotationPitch, (double)(p_110827_9_ * 0.5F)) * 0.01745329238474369D;
+                double var17 = Math.cos(var13);
+                double var19 = Math.sin(var13);
+                double var21 = Math.sin(var15);
+
+                if (var10 instanceof EntityHanging)
+                {
+                    var17 = 0.0D;
+                    var19 = 0.0D;
+                    var21 = -1.0D;
+                }
+
+                double var23 = Math.cos(var15);
+                double var25 = this.func_110828_a(var10.prevPosX, var10.posX, (double)p_110827_9_) - var17 * 0.7D - var19 * 0.5D * var23;
+                double var27 = this.func_110828_a(var10.prevPosY + (double)var10.getEyeHeight() * 0.7D, var10.posY + (double)var10.getEyeHeight() * 0.7D, (double)p_110827_9_) - var21 * 0.5D - 0.25D;
+                double var29 = this.func_110828_a(var10.prevPosZ, var10.posZ, (double)p_110827_9_) - var19 * 0.7D + var17 * 0.5D * var23;
+                double var31 = this.func_110828_a((double)p_110827_1_.prevRenderYawOffset, (double)p_110827_1_.renderYawOffset, (double)p_110827_9_) * 0.01745329238474369D + (Math.PI / 2D);
+                var17 = Math.cos(var31) * (double)p_110827_1_.width * 0.4D;
+                var19 = Math.sin(var31) * (double)p_110827_1_.width * 0.4D;
+                double var33 = this.func_110828_a(p_110827_1_.prevPosX, p_110827_1_.posX, (double)p_110827_9_) + var17;
+                double var35 = this.func_110828_a(p_110827_1_.prevPosY, p_110827_1_.posY, (double)p_110827_9_);
+                double var37 = this.func_110828_a(p_110827_1_.prevPosZ, p_110827_1_.posZ, (double)p_110827_9_) + var19;
+                p_110827_2_ += var17;
+                p_110827_6_ += var19;
+                double var39 = (double)((float)(var25 - var33));
+                double var41 = (double)((float)(var27 - var35));
+                double var43 = (double)((float)(var29 - var37));
+                GlStateManager.func_179090_x();
+                GlStateManager.disableLighting();
+                GlStateManager.disableCull();
+
+                if (Config.isShaders())
+                {
+                    Shaders.beginLeash();
+                }
+
+                boolean var45 = true;
+                double var46 = 0.025D;
+                var12.startDrawing(5);
+                int var48;
+                float var49;
+
+                for (var48 = 0; var48 <= 24; ++var48)
+                {
+                    if (var48 % 2 == 0)
+                    {
+                        var12.func_178960_a(0.5F, 0.4F, 0.3F, 1.0F);
+                    }
+                    else
+                    {
+                        var12.func_178960_a(0.35F, 0.28F, 0.21000001F, 1.0F);
+                    }
+
+                    var49 = (float)var48 / 24.0F;
+                    var12.addVertex(p_110827_2_ + var39 * (double)var49 + 0.0D, p_110827_4_ + var41 * (double)(var49 * var49 + var49) * 0.5D + (double)((24.0F - (float)var48) / 18.0F + 0.125F), p_110827_6_ + var43 * (double)var49);
+                    var12.addVertex(p_110827_2_ + var39 * (double)var49 + 0.025D, p_110827_4_ + var41 * (double)(var49 * var49 + var49) * 0.5D + (double)((24.0F - (float)var48) / 18.0F + 0.125F) + 0.025D, p_110827_6_ + var43 * (double)var49);
+                }
+
+                var11.draw();
+                var12.startDrawing(5);
+
+                for (var48 = 0; var48 <= 24; ++var48)
+                {
+                    if (var48 % 2 == 0)
+                    {
+                        var12.func_178960_a(0.5F, 0.4F, 0.3F, 1.0F);
+                    }
+                    else
+                    {
+                        var12.func_178960_a(0.35F, 0.28F, 0.21000001F, 1.0F);
+                    }
+
+                    var49 = (float)var48 / 24.0F;
+                    var12.addVertex(p_110827_2_ + var39 * (double)var49 + 0.0D, p_110827_4_ + var41 * (double)(var49 * var49 + var49) * 0.5D + (double)((24.0F - (float)var48) / 18.0F + 0.125F) + 0.025D, p_110827_6_ + var43 * (double)var49);
+                    var12.addVertex(p_110827_2_ + var39 * (double)var49 + 0.025D, p_110827_4_ + var41 * (double)(var49 * var49 + var49) * 0.5D + (double)((24.0F - (float)var48) / 18.0F + 0.125F), p_110827_6_ + var43 * (double)var49 + 0.025D);
+                }
+
+                var11.draw();
+
+                if (Config.isShaders())
+                {
+                    Shaders.endLeash();
+                }
+
+                GlStateManager.enableLighting();
+                GlStateManager.func_179098_w();
+                GlStateManager.enableCull();
             }
-
-            double var23 = Math.cos(var15);
-            double var25 = this.func_110828_a(var10.prevPosX, var10.posX, (double)p_110827_9_) - var17 * 0.7D - var19 * 0.5D * var23;
-            double var27 = this.func_110828_a(var10.prevPosY + (double)var10.getEyeHeight() * 0.7D, var10.posY + (double)var10.getEyeHeight() * 0.7D, (double)p_110827_9_) - var21 * 0.5D - 0.25D;
-            double var29 = this.func_110828_a(var10.prevPosZ, var10.posZ, (double)p_110827_9_) - var19 * 0.7D + var17 * 0.5D * var23;
-            double var31 = this.func_110828_a((double)p_110827_1_.prevRenderYawOffset, (double)p_110827_1_.renderYawOffset, (double)p_110827_9_) * 0.01745329238474369D + (Math.PI / 2D);
-            var17 = Math.cos(var31) * (double)p_110827_1_.width * 0.4D;
-            var19 = Math.sin(var31) * (double)p_110827_1_.width * 0.4D;
-            double var33 = this.func_110828_a(p_110827_1_.prevPosX, p_110827_1_.posX, (double)p_110827_9_) + var17;
-            double var35 = this.func_110828_a(p_110827_1_.prevPosY, p_110827_1_.posY, (double)p_110827_9_);
-            double var37 = this.func_110828_a(p_110827_1_.prevPosZ, p_110827_1_.posZ, (double)p_110827_9_) + var19;
-            p_110827_2_ += var17;
-            p_110827_6_ += var19;
-            double var39 = (double)((float)(var25 - var33));
-            double var41 = (double)((float)(var27 - var35));
-            double var43 = (double)((float)(var29 - var37));
-            GlStateManager.func_179090_x();
-            GlStateManager.disableLighting();
-            GlStateManager.disableCull();
-            boolean var45 = true;
-            double var46 = 0.025D;
-            var12.startDrawing(5);
-            int var48;
-            float var49;
-
-            for (var48 = 0; var48 <= 24; ++var48)
-            {
-                if (var48 % 2 == 0)
-                {
-                    var12.func_178960_a(0.5F, 0.4F, 0.3F, 1.0F);
-                }
-                else
-                {
-                    var12.func_178960_a(0.35F, 0.28F, 0.21000001F, 1.0F);
-                }
-
-                var49 = (float)var48 / 24.0F;
-                var12.addVertex(p_110827_2_ + var39 * (double)var49 + 0.0D, p_110827_4_ + var41 * (double)(var49 * var49 + var49) * 0.5D + (double)((24.0F - (float)var48) / 18.0F + 0.125F), p_110827_6_ + var43 * (double)var49);
-                var12.addVertex(p_110827_2_ + var39 * (double)var49 + 0.025D, p_110827_4_ + var41 * (double)(var49 * var49 + var49) * 0.5D + (double)((24.0F - (float)var48) / 18.0F + 0.125F) + 0.025D, p_110827_6_ + var43 * (double)var49);
-            }
-
-            var11.draw();
-            var12.startDrawing(5);
-
-            for (var48 = 0; var48 <= 24; ++var48)
-            {
-                if (var48 % 2 == 0)
-                {
-                    var12.func_178960_a(0.5F, 0.4F, 0.3F, 1.0F);
-                }
-                else
-                {
-                    var12.func_178960_a(0.35F, 0.28F, 0.21000001F, 1.0F);
-                }
-
-                var49 = (float)var48 / 24.0F;
-                var12.addVertex(p_110827_2_ + var39 * (double)var49 + 0.0D, p_110827_4_ + var41 * (double)(var49 * var49 + var49) * 0.5D + (double)((24.0F - (float)var48) / 18.0F + 0.125F) + 0.025D, p_110827_6_ + var43 * (double)var49);
-                var12.addVertex(p_110827_2_ + var39 * (double)var49 + 0.025D, p_110827_4_ + var41 * (double)(var49 * var49 + var49) * 0.5D + (double)((24.0F - (float)var48) / 18.0F + 0.125F), p_110827_6_ + var43 * (double)var49 + 0.025D);
-            }
-
-            var11.draw();
-            GlStateManager.enableLighting();
-            GlStateManager.func_179098_w();
-            GlStateManager.enableCull();
         }
     }
 

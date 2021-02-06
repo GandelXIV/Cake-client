@@ -1,7 +1,7 @@
 package net.minecraft.client.entity;
 
-import CakeClient.Client;
 import net.minecraft.client.Minecraft;
+import CakeClient.Client;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.GuiCommandBlock;
@@ -153,7 +153,6 @@ public class EntityPlayerSP extends AbstractClientPlayer
     {
     	
     	Client.onUpdate();
-    	
         boolean var1 = this.isSprinting();
 
         if (var1 != this.field_175171_bO)

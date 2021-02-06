@@ -2,6 +2,10 @@ package net.minecraft.potion;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
+import optifine.Config;
+import optifine.CustomColors;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -30,7 +34,6 @@ public class PotionHelper
 
     /** An array of possible potion prefix names, as translation IDs. */
     private static final String[] potionPrefixes;
-    private static final String __OBFID = "CL_00000078";
 
     /**
      * Checks if the bit at 1 << j is on in i.
@@ -84,6 +87,11 @@ public class PotionHelper
                 {
                     int var8 = Potion.potionTypes[var7.getPotionID()].getLiquidColor();
 
+                    if (Config.isCustomColors())
+                    {
+                        var8 = CustomColors.getPotionColor(var7.getPotionID(), var8);
+                    }
+
                     for (int var9 = 0; var9 <= var7.getAmplifier(); ++var9)
                     {
                         var2 += (float)(var8 >> 16 & 255) / 255.0F;
@@ -108,47 +116,50 @@ public class PotionHelper
         }
         else
         {
+            if (Config.isCustomColors())
+            {
+                var1 = CustomColors.getPotionColor(0, var1);
+            }
+
             return var1;
         }
     }
 
-    public static boolean func_82817_b(Collection p_82817_0_)
+    public static boolean func_82817_b(Collection potionEffects)
     {
-        Iterator var1 = p_82817_0_.iterator();
-        PotionEffect var2;
+        Iterator var1 = potionEffects.iterator();
 
-        do
+        while (var1.hasNext())
         {
-            if (!var1.hasNext())
+            PotionEffect var2 = (PotionEffect)var1.next();
+
+            if (!var2.getIsAmbient())
             {
-                return true;
+                return false;
             }
-
-            var2 = (PotionEffect)var1.next();
         }
-        while (var2.getIsAmbient());
 
-        return false;
+        return true;
     }
 
-    public static int func_77915_a(int p_77915_0_, boolean p_77915_1_)
+    public static int func_77915_a(int dataValue, boolean bypassCache)
     {
-        if (!p_77915_1_)
+        if (!bypassCache)
         {
-            if (field_77925_n.containsKey(Integer.valueOf(p_77915_0_)))
+            if (field_77925_n.containsKey(Integer.valueOf(dataValue)))
             {
-                return ((Integer)field_77925_n.get(Integer.valueOf(p_77915_0_))).intValue();
+                return ((Integer)field_77925_n.get(Integer.valueOf(dataValue))).intValue();
             }
             else
             {
-                int var2 = calcPotionLiquidColor(getPotionEffects(p_77915_0_, false));
-                field_77925_n.put(Integer.valueOf(p_77915_0_), Integer.valueOf(var2));
+                int var2 = calcPotionLiquidColor(getPotionEffects(dataValue, false));
+                field_77925_n.put(Integer.valueOf(dataValue), Integer.valueOf(var2));
                 return var2;
             }
         }
         else
         {
-            return calcPotionLiquidColor(getPotionEffects(p_77915_0_, true));
+            return calcPotionLiquidColor(getPotionEffects(dataValue, true));
         }
     }
 
@@ -580,6 +591,11 @@ public class PotionHelper
     public static int func_77908_a(int p_77908_0_, int p_77908_1_, int p_77908_2_, int p_77908_3_, int p_77908_4_, int p_77908_5_)
     {
         return (checkFlag(p_77908_0_, p_77908_1_) ? 16 : 0) | (checkFlag(p_77908_0_, p_77908_2_) ? 8 : 0) | (checkFlag(p_77908_0_, p_77908_3_) ? 4 : 0) | (checkFlag(p_77908_0_, p_77908_4_) ? 2 : 0) | (checkFlag(p_77908_0_, p_77908_5_) ? 1 : 0);
+    }
+
+    public static void clearPotionColorCache()
+    {
+        field_77925_n.clear();
     }
 
     static

@@ -153,7 +153,7 @@ public class EntityChicken extends EntityAnimal
         }
     }
 
-    public EntityChicken createChild(EntityAgeable p_90011_1_)
+    public EntityChicken createChild1(EntityAgeable p_90011_1_)
     {
         return new EntityChicken(this.worldObj);
     }
@@ -230,5 +230,10 @@ public class EntityChicken extends EntityAnimal
     public void func_152117_i(boolean p_152117_1_)
     {
         this.field_152118_bv = p_152117_1_;
+    }
+
+    public EntityAgeable createChild(EntityAgeable p_90011_1_)
+    {
+        return this.createChild1(p_90011_1_);
     }
 }

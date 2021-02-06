@@ -6,7 +6,7 @@ import net.minecraft.network.status.server.S01PacketPong;
 
 public interface INetHandlerStatusClient extends INetHandler
 {
-    void handleServerInfo(S00PacketServerInfo packetIn);
+    void handleServerInfo(S00PacketServerInfo var1);
 
-    void handlePong(S01PacketPong packetIn);
+    void handlePong(S01PacketPong var1);
 }

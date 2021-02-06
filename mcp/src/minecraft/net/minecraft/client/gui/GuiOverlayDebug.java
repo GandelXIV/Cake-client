@@ -2,8 +2,9 @@ package net.minecraft.client.gui;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
+import com.google.common.collect.UnmodifiableIterator;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
 import net.minecraft.block.Block;
@@ -23,6 +24,8 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.chunk.Chunk;
+import optifine.Reflector;
+
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
@@ -129,9 +132,9 @@ public class GuiOverlayDebug extends Gui
 
             if (this.mc.theWorld != null && this.mc.theWorld.isBlockLoaded(var1))
             {
-                Chunk var6 = this.mc.theWorld.getChunkFromBlockCoords(var1);
-                var5.add("Biome: " + var6.getBiome(var1, this.mc.theWorld.getWorldChunkManager()).biomeName);
-                var5.add("Light: " + var6.setLight(var1, 0) + " (" + var6.getLightFor(EnumSkyBlock.SKY, var1) + " sky, " + var6.getLightFor(EnumSkyBlock.BLOCK, var1) + " block)");
+                Chunk var9 = this.mc.theWorld.getChunkFromBlockCoords(var1);
+                var5.add("Biome: " + var9.getBiome(var1, this.mc.theWorld.getWorldChunkManager()).biomeName);
+                var5.add("Light: " + var9.setLight(var1, 0) + " (" + var9.getLightFor(EnumSkyBlock.SKY, var1) + " sky, " + var9.getLightFor(EnumSkyBlock.BLOCK, var1) + " block)");
                 DifficultyInstance var7 = this.mc.theWorld.getDifficultyForLocation(var1);
 
                 if (this.mc.isIntegratedServerRunning() && this.mc.getIntegratedServer() != null)
@@ -154,8 +157,8 @@ public class GuiOverlayDebug extends Gui
 
             if (this.mc.objectMouseOver != null && this.mc.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK && this.mc.objectMouseOver.func_178782_a() != null)
             {
-                BlockPos var9 = this.mc.objectMouseOver.func_178782_a();
-                var5.add(String.format("Looking at: %d %d %d", new Object[] {Integer.valueOf(var9.getX()), Integer.valueOf(var9.getY()), Integer.valueOf(var9.getZ())}));
+                BlockPos var91 = this.mc.objectMouseOver.func_178782_a();
+                var5.add(String.format("Looking at: %d %d %d", new Object[] {Integer.valueOf(var91.getX()), Integer.valueOf(var91.getY()), Integer.valueOf(var91.getZ())}));
             }
 
             return var5;
@@ -170,6 +173,13 @@ public class GuiOverlayDebug extends Gui
         long var7 = var3 - var5;
         ArrayList var9 = Lists.newArrayList(new String[] {String.format("Java: %s %dbit", new Object[]{System.getProperty("java.version"), Integer.valueOf(this.mc.isJava64bit() ? 64 : 32)}), String.format("Mem: % 2d%% %03d/%03dMB", new Object[]{Long.valueOf(var7 * 100L / var1), Long.valueOf(func_175240_a(var7)), Long.valueOf(func_175240_a(var1))}), String.format("Allocated: % 2d%% %03dMB", new Object[]{Long.valueOf(var3 * 100L / var1), Long.valueOf(func_175240_a(var3))}), "", String.format("Display: %dx%d (%s)", new Object[]{Integer.valueOf(Display.getWidth()), Integer.valueOf(Display.getHeight()), GL11.glGetString(GL11.GL_VENDOR)}), GL11.glGetString(GL11.GL_RENDERER), GL11.glGetString(GL11.GL_VERSION)});
 
+        if (Reflector.FMLCommonHandler_getBrandings.exists())
+        {
+            Object var10 = Reflector.call(Reflector.FMLCommonHandler_instance, new Object[0]);
+            var9.add("");
+            var9.addAll((Collection)Reflector.call(var10, Reflector.FMLCommonHandler_getBrandings, new Object[] {Boolean.valueOf(false)}));
+        }
+
         if (this.func_175236_d())
         {
             return var9;
@@ -178,12 +188,12 @@ public class GuiOverlayDebug extends Gui
         {
             if (this.mc.objectMouseOver != null && this.mc.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK && this.mc.objectMouseOver.func_178782_a() != null)
             {
-                BlockPos var10 = this.mc.objectMouseOver.func_178782_a();
-                IBlockState var11 = this.mc.theWorld.getBlockState(var10);
+                BlockPos var101 = this.mc.objectMouseOver.func_178782_a();
+                IBlockState var11 = this.mc.theWorld.getBlockState(var101);
 
                 if (this.mc.theWorld.getWorldType() != WorldType.DEBUG_WORLD)
                 {
-                    var11 = var11.getBlock().getActualState(var11, this.mc.theWorld, var10);
+                    var11 = var11.getBlock().getActualState(var11, this.mc.theWorld, var101);
                 }
 
                 var9.add("");
@@ -191,7 +201,7 @@ public class GuiOverlayDebug extends Gui
                 Entry var13;
                 String var14;
 
-                for (Iterator var12 = var11.getProperties().entrySet().iterator(); var12.hasNext(); var9.add(((IProperty)var13.getKey()).getName() + ": " + var14))
+                for (UnmodifiableIterator var12 = var11.getProperties().entrySet().iterator(); var12.hasNext(); var9.add(((IProperty)var13.getKey()).getName() + ": " + var14))
                 {
                     var13 = (Entry)var12.next();
                     var14 = ((Comparable)var13.getValue()).toString();

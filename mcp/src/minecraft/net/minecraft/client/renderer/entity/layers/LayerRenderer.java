@@ -4,7 +4,7 @@ import net.minecraft.entity.EntityLivingBase;
 
 public interface LayerRenderer
 {
-    void doRenderLayer(EntityLivingBase p_177141_1_, float p_177141_2_, float p_177141_3_, float p_177141_4_, float p_177141_5_, float p_177141_6_, float p_177141_7_, float p_177141_8_);
+    void doRenderLayer(EntityLivingBase var1, float var2, float var3, float var4, float var5, float var6, float var7, float var8);
 
     boolean shouldCombineTextures();
 }

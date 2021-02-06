@@ -8,21 +8,21 @@ import net.minecraft.village.MerchantRecipeList;
 
 public interface IMerchant
 {
-    void setCustomer(EntityPlayer p_70932_1_);
+    void setCustomer(EntityPlayer var1);
 
     EntityPlayer getCustomer();
 
-    MerchantRecipeList getRecipes(EntityPlayer p_70934_1_);
+    MerchantRecipeList getRecipes(EntityPlayer var1);
 
-    void setRecipes(MerchantRecipeList p_70930_1_);
+    void setRecipes(MerchantRecipeList var1);
 
-    void useRecipe(MerchantRecipe p_70933_1_);
+    void useRecipe(MerchantRecipe var1);
 
     /**
      * Notifies the merchant of a possible merchantrecipe being fulfilled or not. Usually, this is just a sound byte
      * being played depending if the suggested itemstack is not null.
      */
-    void verifySellingItem(ItemStack p_110297_1_);
+    void verifySellingItem(ItemStack var1);
 
     IChatComponent getDisplayName();
 }

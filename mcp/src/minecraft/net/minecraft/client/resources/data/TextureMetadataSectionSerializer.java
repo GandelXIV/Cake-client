@@ -64,4 +64,5 @@ public class TextureMetadataSectionSerializer extends BaseMetadataSectionSeriali
     {
         return "texture";
     }
+
 }

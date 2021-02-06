@@ -6,6 +6,19 @@ import java.util.UUID;
 public class MathHelper
 {
     public static final float field_180189_a = sqrt_float(2.0F);
+    private static final int SIN_BITS = 12;
+    private static final int SIN_MASK = 4095;
+    private static final int SIN_COUNT = 4096;
+    public static final float PI = (float)Math.PI;
+    public static final float PI2 = ((float)Math.PI * 2F);
+    public static final float PId2 = ((float)Math.PI / 2F);
+    private static final float radFull = ((float)Math.PI * 2F);
+    private static final float degFull = 360.0F;
+    private static final float radToIndex = 651.8986F;
+    private static final float degToIndex = 11.377778F;
+    public static final float deg2Rad = 0.017453292F;
+    private static final float[] SIN_TABLE_FAST = new float[4096];
+    public static boolean fastMath = false;
 
     /**
      * A table of sin values computed from 0 (inclusive) to 2*pi (exclusive), with steps of 2*PI / 65536.
@@ -27,7 +40,7 @@ public class MathHelper
      */
     public static float sin(float p_76126_0_)
     {
-        return SIN_TABLE[(int)(p_76126_0_ * 10430.378F) & 65535];
+        return fastMath ? SIN_TABLE_FAST[(int)(p_76126_0_ * 651.8986F) & 4095] : SIN_TABLE[(int)(p_76126_0_ * 10430.378F) & 65535];
     }
 
     /**
@@ -35,7 +48,7 @@ public class MathHelper
      */
     public static float cos(float p_76134_0_)
     {
-        return SIN_TABLE[(int)(p_76134_0_ * 10430.378F + 16384.0F) & 65535];
+        return fastMath ? SIN_TABLE_FAST[(int)((p_76134_0_ + ((float)Math.PI / 2F)) * 651.8986F) & 4095] : SIN_TABLE[(int)(p_76134_0_ * 10430.378F + 16384.0F) & 65535];
     }
 
     public static float sqrt_float(float p_76129_0_)
@@ -380,14 +393,14 @@ public class MathHelper
         return p_180188_0_ & -16777216 | var8 << 16 | var9 << 8 | var10;
     }
 
-    public static long func_180186_a(Vec3i p_180186_0_)
+    public static long func_180186_a(Vec3i pos)
     {
-        return func_180187_c(p_180186_0_.getX(), p_180186_0_.getY(), p_180186_0_.getZ());
+        return func_180187_c(pos.getX(), pos.getY(), pos.getZ());
     }
 
-    public static long func_180187_c(int p_180187_0_, int p_180187_1_, int p_180187_2_)
+    public static long func_180187_c(int x, int y, int z)
     {
-        long var3 = (long)(p_180187_0_ * 3129871) ^ (long)p_180187_2_ * 116129781L ^ (long)p_180187_1_;
+        long var3 = (long)(x * 3129871) ^ (long)z * 116129781L ^ (long)y;
         var3 = var3 * var3 * 42317861L + var3 * 11L;
         return var3;
     }
@@ -401,11 +414,23 @@ public class MathHelper
 
     static
     {
-        for (int var0 = 0; var0 < 65536; ++var0)
+        int i;
+
+        for (i = 0; i < 65536; ++i)
         {
-            SIN_TABLE[var0] = (float)Math.sin((double)var0 * Math.PI * 2.0D / 65536.0D);
+            SIN_TABLE[i] = (float)Math.sin((double)i * Math.PI * 2.0D / 65536.0D);
         }
 
         multiplyDeBruijnBitPosition = new int[] {0, 1, 28, 2, 29, 14, 24, 3, 30, 22, 20, 15, 25, 17, 4, 8, 31, 27, 13, 23, 21, 19, 16, 7, 26, 12, 18, 6, 11, 5, 10, 9};
+
+        for (i = 0; i < 4096; ++i)
+        {
+            SIN_TABLE_FAST[i] = (float)Math.sin((double)(((float)i + 0.5F) / 4096.0F * ((float)Math.PI * 2F)));
+        }
+
+        for (i = 0; i < 360; i += 90)
+        {
+            SIN_TABLE_FAST[(int)((float)i * 11.377778F) & 4095] = (float)Math.sin((double)((float)i * 0.017453292F));
+        }
     }
 }

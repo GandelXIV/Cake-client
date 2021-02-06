@@ -23,9 +23,13 @@ import net.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
+import optifine.Config;
+import optifine.Reflector;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.GL11;
+import shadersmod.client.Shaders;
 
 public abstract class RendererLivingEntity extends Render
 {
@@ -36,6 +40,8 @@ public abstract class RendererLivingEntity extends Render
     protected List field_177097_h = Lists.newArrayList();
     protected boolean field_177098_i = false;
     private static final String __OBFID = "CL_00001012";
+    public static float NAME_TAG_RANGE = 64.0F;
+    public static float NAME_TAG_RANGE_SNEAK = 32.0F;
 
     public RendererLivingEntity(RenderManager p_i46156_1_, ModelBase p_i46156_2_, float p_i46156_3_)
     {
@@ -44,7 +50,7 @@ public abstract class RendererLivingEntity extends Render
         this.shadowSize = p_i46156_3_;
     }
 
-    protected boolean addLayer(LayerRenderer p_177094_1_)
+    public boolean addLayer(LayerRenderer p_177094_1_)
     {
         return this.field_177097_h.add(p_177094_1_);
     }
@@ -91,115 +97,129 @@ public abstract class RendererLivingEntity extends Render
      */
     public void doRender(EntityLivingBase p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-        GlStateManager.pushMatrix();
-        GlStateManager.disableCull();
-        this.mainModel.swingProgress = this.getSwingProgress(p_76986_1_, p_76986_9_);
-        this.mainModel.isRiding = p_76986_1_.isRiding();
-        this.mainModel.isChild = p_76986_1_.isChild();
-
-        try
+        if (!Reflector.RenderLivingEvent_Pre_Constructor.exists() || !Reflector.postForgeBusEvent(Reflector.RenderLivingEvent_Pre_Constructor, new Object[] {p_76986_1_, this, Double.valueOf(p_76986_2_), Double.valueOf(p_76986_4_), Double.valueOf(p_76986_6_)}))
         {
-            float var10 = this.interpolateRotation(p_76986_1_.prevRenderYawOffset, p_76986_1_.renderYawOffset, p_76986_9_);
-            float var11 = this.interpolateRotation(p_76986_1_.prevRotationYawHead, p_76986_1_.rotationYawHead, p_76986_9_);
-            float var12 = var11 - var10;
-            float var14;
+            GlStateManager.pushMatrix();
+            GlStateManager.disableCull();
+            this.mainModel.swingProgress = this.getSwingProgress(p_76986_1_, p_76986_9_);
+            this.mainModel.isRiding = p_76986_1_.isRiding();
 
-            if (p_76986_1_.isRiding() && p_76986_1_.ridingEntity instanceof EntityLivingBase)
+            if (Reflector.ForgeEntity_shouldRiderSit.exists())
             {
-                EntityLivingBase var13 = (EntityLivingBase)p_76986_1_.ridingEntity;
-                var10 = this.interpolateRotation(var13.prevRenderYawOffset, var13.renderYawOffset, p_76986_9_);
-                var12 = var11 - var10;
-                var14 = MathHelper.wrapAngleTo180_float(var12);
-
-                if (var14 < -85.0F)
-                {
-                    var14 = -85.0F;
-                }
-
-                if (var14 >= 85.0F)
-                {
-                    var14 = 85.0F;
-                }
-
-                var10 = var11 - var14;
-
-                if (var14 * var14 > 2500.0F)
-                {
-                    var10 += var14 * 0.2F;
-                }
+                this.mainModel.isRiding = p_76986_1_.isRiding() && p_76986_1_.ridingEntity != null && Reflector.callBoolean(p_76986_1_.ridingEntity, Reflector.ForgeEntity_shouldRiderSit, new Object[0]);
             }
 
-            float var20 = p_76986_1_.prevRotationPitch + (p_76986_1_.rotationPitch - p_76986_1_.prevRotationPitch) * p_76986_9_;
-            this.renderLivingAt(p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_);
-            var14 = this.handleRotationFloat(p_76986_1_, p_76986_9_);
-            this.rotateCorpse(p_76986_1_, var14, var10, p_76986_9_);
-            GlStateManager.enableRescaleNormal();
-            GlStateManager.scale(-1.0F, -1.0F, 1.0F);
-            this.preRenderCallback(p_76986_1_, p_76986_9_);
-            float var15 = 0.0625F;
-            GlStateManager.translate(0.0F, -1.5078125F, 0.0F);
-            float var16 = p_76986_1_.prevLimbSwingAmount + (p_76986_1_.limbSwingAmount - p_76986_1_.prevLimbSwingAmount) * p_76986_9_;
-            float var17 = p_76986_1_.limbSwing - p_76986_1_.limbSwingAmount * (1.0F - p_76986_9_);
+            this.mainModel.isChild = p_76986_1_.isChild();
 
-            if (p_76986_1_.isChild())
+            try
             {
-                var17 *= 3.0F;
-            }
+                float var19 = this.interpolateRotation(p_76986_1_.prevRenderYawOffset, p_76986_1_.renderYawOffset, p_76986_9_);
+                float var11 = this.interpolateRotation(p_76986_1_.prevRotationYawHead, p_76986_1_.rotationYawHead, p_76986_9_);
+                float var12 = var11 - var19;
+                float var14;
 
-            if (var16 > 1.0F)
-            {
-                var16 = 1.0F;
-            }
-
-            GlStateManager.enableAlpha();
-            this.mainModel.setLivingAnimations(p_76986_1_, var17, var16, p_76986_9_);
-            this.mainModel.setRotationAngles(var17, var16, var14, var12, var20, 0.0625F, p_76986_1_);
-            boolean var18;
-
-            if (this.field_177098_i)
-            {
-                var18 = this.func_177088_c(p_76986_1_);
-                this.renderModel(p_76986_1_, var17, var16, var14, var12, var20, 0.0625F);
-
-                if (var18)
+                if (this.mainModel.isRiding && p_76986_1_.ridingEntity instanceof EntityLivingBase)
                 {
-                    this.func_180565_e();
-                }
-            }
-            else
-            {
-                var18 = this.func_177090_c(p_76986_1_, p_76986_9_);
-                this.renderModel(p_76986_1_, var17, var16, var14, var12, var20, 0.0625F);
+                    EntityLivingBase var20 = (EntityLivingBase)p_76986_1_.ridingEntity;
+                    var19 = this.interpolateRotation(var20.prevRenderYawOffset, var20.renderYawOffset, p_76986_9_);
+                    var12 = var11 - var19;
+                    var14 = MathHelper.wrapAngleTo180_float(var12);
 
-                if (var18)
-                {
-                    this.func_177091_f();
+                    if (var14 < -85.0F)
+                    {
+                        var14 = -85.0F;
+                    }
+
+                    if (var14 >= 85.0F)
+                    {
+                        var14 = 85.0F;
+                    }
+
+                    var19 = var11 - var14;
+
+                    if (var14 * var14 > 2500.0F)
+                    {
+                        var19 += var14 * 0.2F;
+                    }
                 }
 
-                GlStateManager.depthMask(true);
+                float var201 = p_76986_1_.prevRotationPitch + (p_76986_1_.rotationPitch - p_76986_1_.prevRotationPitch) * p_76986_9_;
+                this.renderLivingAt(p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_);
+                var14 = this.handleRotationFloat(p_76986_1_, p_76986_9_);
+                this.rotateCorpse(p_76986_1_, var14, var19, p_76986_9_);
+                GlStateManager.enableRescaleNormal();
+                GlStateManager.scale(-1.0F, -1.0F, 1.0F);
+                this.preRenderCallback(p_76986_1_, p_76986_9_);
+                float var15 = 0.0625F;
+                GlStateManager.translate(0.0F, -1.5078125F, 0.0F);
+                float var16 = p_76986_1_.prevLimbSwingAmount + (p_76986_1_.limbSwingAmount - p_76986_1_.prevLimbSwingAmount) * p_76986_9_;
+                float var17 = p_76986_1_.limbSwing - p_76986_1_.limbSwingAmount * (1.0F - p_76986_9_);
 
-                if (!(p_76986_1_ instanceof EntityPlayer) || !((EntityPlayer)p_76986_1_).func_175149_v())
+                if (p_76986_1_.isChild())
                 {
-                    this.func_177093_a(p_76986_1_, var17, var16, p_76986_9_, var14, var12, var20, 0.0625F);
+                    var17 *= 3.0F;
                 }
+
+                if (var16 > 1.0F)
+                {
+                    var16 = 1.0F;
+                }
+
+                GlStateManager.enableAlpha();
+                this.mainModel.setLivingAnimations(p_76986_1_, var17, var16, p_76986_9_);
+                this.mainModel.setRotationAngles(var17, var16, var14, var12, var201, 0.0625F, p_76986_1_);
+                boolean var18;
+
+                if (this.field_177098_i)
+                {
+                    var18 = this.func_177088_c(p_76986_1_);
+                    this.renderModel(p_76986_1_, var17, var16, var14, var12, var201, 0.0625F);
+
+                    if (var18)
+                    {
+                        this.func_180565_e();
+                    }
+                }
+                else
+                {
+                    var18 = this.func_177090_c(p_76986_1_, p_76986_9_);
+                    this.renderModel(p_76986_1_, var17, var16, var14, var12, var201, 0.0625F);
+
+                    if (var18)
+                    {
+                        this.func_177091_f();
+                    }
+
+                    GlStateManager.depthMask(true);
+
+                    if (!(p_76986_1_ instanceof EntityPlayer) || !((EntityPlayer)p_76986_1_).func_175149_v())
+                    {
+                        this.func_177093_a(p_76986_1_, var17, var16, p_76986_9_, var14, var12, var201, 0.0625F);
+                    }
+                }
+
+                GlStateManager.disableRescaleNormal();
+            }
+            catch (Exception var191)
+            {
+                logger.error("Couldn\'t render entity", var191);
             }
 
-            GlStateManager.disableRescaleNormal();
-        }
-        catch (Exception var19)
-        {
-            logger.error("Couldn\'t render entity", var19);
-        }
+            GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
+            GlStateManager.func_179098_w();
+            GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
+            GlStateManager.enableCull();
+            GlStateManager.popMatrix();
 
-        GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
-        GlStateManager.func_179098_w();
-        GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
-        GlStateManager.enableCull();
-        GlStateManager.popMatrix();
+            if (!this.field_177098_i)
+            {
+                super.doRender(p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
+            }
 
-        if (!this.field_177098_i)
-        {
-            super.doRender(p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
+            if (!Reflector.RenderLivingEvent_Post_Constructor.exists() || !Reflector.postForgeBusEvent(Reflector.RenderLivingEvent_Post_Constructor, new Object[] {p_76986_1_, this, Double.valueOf(p_76986_2_), Double.valueOf(p_76986_4_), Double.valueOf(p_76986_6_)}))
+            {
+                ;
+            }
         }
     }
 
@@ -209,25 +229,25 @@ public abstract class RendererLivingEntity extends Render
 
         if (p_177088_1_ instanceof EntityPlayer)
         {
-            ScorePlayerTeam var3 = (ScorePlayerTeam)p_177088_1_.getTeam();
+            ScorePlayerTeam var6 = (ScorePlayerTeam)p_177088_1_.getTeam();
 
-            if (var3 != null)
+            if (var6 != null)
             {
-                String var4 = FontRenderer.getFormatFromString(var3.getColorPrefix());
+                String var7 = FontRenderer.getFormatFromString(var6.getColorPrefix());
 
-                if (var4.length() >= 2)
+                if (var7.length() >= 2)
                 {
-                    var2 = this.getFontRendererFromRenderManager().func_175064_b(var4.charAt(1));
+                    var2 = this.getFontRendererFromRenderManager().func_175064_b(var7.charAt(1));
                 }
             }
         }
 
-        float var6 = (float)(var2 >> 16 & 255) / 255.0F;
-        float var7 = (float)(var2 >> 8 & 255) / 255.0F;
+        float var61 = (float)(var2 >> 16 & 255) / 255.0F;
+        float var71 = (float)(var2 >> 8 & 255) / 255.0F;
         float var5 = (float)(var2 & 255) / 255.0F;
         GlStateManager.disableLighting();
         GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
-        GlStateManager.color(var6, var7, var5, 1.0F);
+        GlStateManager.color(var61, var71, var5, 1.0F);
         GlStateManager.func_179090_x();
         GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
         GlStateManager.func_179090_x();
@@ -336,6 +356,11 @@ public abstract class RendererLivingEntity extends Render
                 this.field_177095_g.put(0.0F);
                 this.field_177095_g.put(0.0F);
                 this.field_177095_g.put(0.3F);
+
+                if (Config.isShaders())
+                {
+                    Shaders.setEntityColor(1.0F, 0.0F, 0.0F, 0.3F);
+                }
             }
             else
             {
@@ -347,6 +372,11 @@ public abstract class RendererLivingEntity extends Render
                 this.field_177095_g.put(var10);
                 this.field_177095_g.put(var11);
                 this.field_177095_g.put(1.0F - var8);
+
+                if (Config.isShaders())
+                {
+                    Shaders.setEntityColor(var9, var10, var11, 1.0F - var8);
+                }
             }
 
             this.field_177095_g.flip();
@@ -407,6 +437,11 @@ public abstract class RendererLivingEntity extends Render
         GL11.glTexEnvi(GL11.GL_TEXTURE_ENV, OpenGlHelper.field_176085_I, GL11.GL_SRC_ALPHA);
         GL11.glTexEnvi(GL11.GL_TEXTURE_ENV, OpenGlHelper.field_176078_F, GL11.GL_TEXTURE);
         GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
+
+        if (Config.isShaders())
+        {
+            Shaders.setEntityColor(0.0F, 0.0F, 0.0F, 0.0F);
+        }
     }
 
     /**
@@ -423,21 +458,21 @@ public abstract class RendererLivingEntity extends Render
 
         if (p_77043_1_.deathTime > 0)
         {
-            float var5 = ((float)p_77043_1_.deathTime + p_77043_4_ - 1.0F) / 20.0F * 1.6F;
-            var5 = MathHelper.sqrt_float(var5);
+            float var6 = ((float)p_77043_1_.deathTime + p_77043_4_ - 1.0F) / 20.0F * 1.6F;
+            var6 = MathHelper.sqrt_float(var6);
 
-            if (var5 > 1.0F)
+            if (var6 > 1.0F)
             {
-                var5 = 1.0F;
+                var6 = 1.0F;
             }
 
-            GlStateManager.rotate(var5 * this.getDeathMaxRotation(p_77043_1_), 0.0F, 0.0F, 1.0F);
+            GlStateManager.rotate(var6 * this.getDeathMaxRotation(p_77043_1_), 0.0F, 0.0F, 1.0F);
         }
         else
         {
-            String var6 = EnumChatFormatting.getTextWithoutFormattingCodes(p_77043_1_.getName());
+            String var61 = EnumChatFormatting.getTextWithoutFormattingCodes(p_77043_1_.getName());
 
-            if (var6 != null && (var6.equals("Dinnerbone") || var6.equals("Grumm")) && (!(p_77043_1_ instanceof EntityPlayer) || ((EntityPlayer)p_77043_1_).func_175148_a(EnumPlayerModelParts.CAPE)))
+            if (var61 != null && (var61.equals("Dinnerbone") || var61.equals("Grumm")) && (!(p_77043_1_ instanceof EntityPlayer) || ((EntityPlayer)p_77043_1_).func_175148_a(EnumPlayerModelParts.CAPE)))
             {
                 GlStateManager.translate(0.0F, p_77043_1_.height + 0.1F, 0.0F);
                 GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
@@ -502,54 +537,62 @@ public abstract class RendererLivingEntity extends Render
      */
     public void passSpecialRender(EntityLivingBase p_77033_1_, double p_77033_2_, double p_77033_4_, double p_77033_6_)
     {
-        if (this.canRenderName(p_77033_1_))
+        if (!Reflector.RenderLivingEvent_Specials_Pre_Constructor.exists() || !Reflector.postForgeBusEvent(Reflector.RenderLivingEvent_Specials_Pre_Constructor, new Object[] {p_77033_1_, this, Double.valueOf(p_77033_2_), Double.valueOf(p_77033_4_), Double.valueOf(p_77033_6_)}))
         {
-            double var8 = p_77033_1_.getDistanceSqToEntity(this.renderManager.livingPlayer);
-            float var10 = p_77033_1_.isSneaking() ? 32.0F : 64.0F;
-
-            if (var8 < (double)(var10 * var10))
+            if (this.canRenderName(p_77033_1_))
             {
-                String var11 = p_77033_1_.getDisplayName().getFormattedText();
-                float var12 = 0.02666667F;
-                GlStateManager.alphaFunc(516, 0.1F);
+                double var8 = p_77033_1_.getDistanceSqToEntity(this.renderManager.livingPlayer);
+                float var10 = p_77033_1_.isSneaking() ? NAME_TAG_RANGE_SNEAK : NAME_TAG_RANGE;
 
-                if (p_77033_1_.isSneaking())
+                if (var8 < (double)(var10 * var10))
                 {
-                    FontRenderer var13 = this.getFontRendererFromRenderManager();
-                    GlStateManager.pushMatrix();
-                    GlStateManager.translate((float)p_77033_2_, (float)p_77033_4_ + p_77033_1_.height + 0.5F - (p_77033_1_.isChild() ? p_77033_1_.height / 2.0F : 0.0F), (float)p_77033_6_);
-                    GL11.glNormal3f(0.0F, 1.0F, 0.0F);
-                    GlStateManager.rotate(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
-                    GlStateManager.rotate(this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
-                    GlStateManager.scale(-0.02666667F, -0.02666667F, 0.02666667F);
-                    GlStateManager.translate(0.0F, 9.374999F, 0.0F);
-                    GlStateManager.disableLighting();
-                    GlStateManager.depthMask(false);
-                    GlStateManager.enableBlend();
-                    GlStateManager.func_179090_x();
-                    GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-                    Tessellator var14 = Tessellator.getInstance();
-                    WorldRenderer var15 = var14.getWorldRenderer();
-                    var15.startDrawingQuads();
-                    int var16 = var13.getStringWidth(var11) / 2;
-                    var15.func_178960_a(0.0F, 0.0F, 0.0F, 0.25F);
-                    var15.addVertex((double)(-var16 - 1), -1.0D, 0.0D);
-                    var15.addVertex((double)(-var16 - 1), 8.0D, 0.0D);
-                    var15.addVertex((double)(var16 + 1), 8.0D, 0.0D);
-                    var15.addVertex((double)(var16 + 1), -1.0D, 0.0D);
-                    var14.draw();
-                    GlStateManager.func_179098_w();
-                    GlStateManager.depthMask(true);
-                    var13.drawString(var11, -var13.getStringWidth(var11) / 2, 0, 553648127);
-                    GlStateManager.enableLighting();
-                    GlStateManager.disableBlend();
-                    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-                    GlStateManager.popMatrix();
+                    String var11 = p_77033_1_.getDisplayName().getFormattedText();
+                    float var12 = 0.02666667F;
+                    GlStateManager.alphaFunc(516, 0.1F);
+
+                    if (p_77033_1_.isSneaking())
+                    {
+                        FontRenderer var13 = this.getFontRendererFromRenderManager();
+                        GlStateManager.pushMatrix();
+                        GlStateManager.translate((float)p_77033_2_, (float)p_77033_4_ + p_77033_1_.height + 0.5F - (p_77033_1_.isChild() ? p_77033_1_.height / 2.0F : 0.0F), (float)p_77033_6_);
+                        GL11.glNormal3f(0.0F, 1.0F, 0.0F);
+                        GlStateManager.rotate(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
+                        GlStateManager.rotate(this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
+                        GlStateManager.scale(-0.02666667F, -0.02666667F, 0.02666667F);
+                        GlStateManager.translate(0.0F, 9.374999F, 0.0F);
+                        GlStateManager.disableLighting();
+                        GlStateManager.depthMask(false);
+                        GlStateManager.enableBlend();
+                        GlStateManager.func_179090_x();
+                        GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+                        Tessellator var14 = Tessellator.getInstance();
+                        WorldRenderer var15 = var14.getWorldRenderer();
+                        var15.startDrawingQuads();
+                        int var16 = var13.getStringWidth(var11) / 2;
+                        var15.func_178960_a(0.0F, 0.0F, 0.0F, 0.25F);
+                        var15.addVertex((double)(-var16 - 1), -1.0D, 0.0D);
+                        var15.addVertex((double)(-var16 - 1), 8.0D, 0.0D);
+                        var15.addVertex((double)(var16 + 1), 8.0D, 0.0D);
+                        var15.addVertex((double)(var16 + 1), -1.0D, 0.0D);
+                        var14.draw();
+                        GlStateManager.func_179098_w();
+                        GlStateManager.depthMask(true);
+                        var13.drawString(var11, -var13.getStringWidth(var11) / 2, 0, 553648127);
+                        GlStateManager.enableLighting();
+                        GlStateManager.disableBlend();
+                        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                        GlStateManager.popMatrix();
+                    }
+                    else
+                    {
+                        this.func_177069_a(p_77033_1_, p_77033_2_, p_77033_4_ - (p_77033_1_.isChild() ? (double)(p_77033_1_.height / 2.0F) : 0.0D), p_77033_6_, var11, 0.02666667F, var8);
+                    }
                 }
-                else
-                {
-                    this.func_177069_a(p_77033_1_, p_77033_2_, p_77033_4_ - (p_77033_1_.isChild() ? (double)(p_77033_1_.height / 2.0F) : 0.0D), p_77033_6_, var11, 0.02666667F, var8);
-                }
+            }
+
+            if (!Reflector.RenderLivingEvent_Specials_Post_Constructor.exists() || !Reflector.postForgeBusEvent(Reflector.RenderLivingEvent_Specials_Post_Constructor, new Object[] {p_77033_1_, this, Double.valueOf(p_77033_2_), Double.valueOf(p_77033_4_), Double.valueOf(p_77033_6_)}))
+            {
+                ;
             }
         }
     }
@@ -634,7 +677,6 @@ public abstract class RendererLivingEntity extends Render
     static final class SwitchEnumVisible
     {
         static final int[] field_178679_a = new int[Team.EnumVisible.values().length];
-        private static final String __OBFID = "CL_00002435";
 
         static
         {

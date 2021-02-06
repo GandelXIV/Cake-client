@@ -14,24 +14,24 @@ public interface IInventory extends IWorldNameable
     /**
      * Returns the stack in slot i
      */
-    ItemStack getStackInSlot(int slotIn);
+    ItemStack getStackInSlot(int var1);
 
     /**
      * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a
      * new stack.
      */
-    ItemStack decrStackSize(int index, int count);
+    ItemStack decrStackSize(int var1, int var2);
 
     /**
      * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem -
      * like when you close a workbench GUI.
      */
-    ItemStack getStackInSlotOnClosing(int index);
+    ItemStack getStackInSlotOnClosing(int var1);
 
     /**
      * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
      */
-    void setInventorySlotContents(int index, ItemStack stack);
+    void setInventorySlotContents(int var1, ItemStack var2);
 
     /**
      * Returns the maximum stack size for a inventory slot. Seems to always be 64, possibly will be extended. *Isn't
@@ -48,20 +48,20 @@ public interface IInventory extends IWorldNameable
     /**
      * Do not make give this method the name canInteractWith because it clashes with Container
      */
-    boolean isUseableByPlayer(EntityPlayer playerIn);
+    boolean isUseableByPlayer(EntityPlayer var1);
 
-    void openInventory(EntityPlayer playerIn);
+    void openInventory(EntityPlayer var1);
 
-    void closeInventory(EntityPlayer playerIn);
+    void closeInventory(EntityPlayer var1);
 
     /**
      * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
      */
-    boolean isItemValidForSlot(int index, ItemStack stack);
+    boolean isItemValidForSlot(int var1, ItemStack var2);
 
-    int getField(int id);
+    int getField(int var1);
 
-    void setField(int id, int value);
+    void setField(int var1, int var2);
 
     int getFieldCount();
 

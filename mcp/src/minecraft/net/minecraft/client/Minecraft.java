@@ -12,9 +12,6 @@ import com.mojang.authlib.minecraft.MinecraftSessionService;
 import com.mojang.authlib.properties.Property;
 import com.mojang.authlib.properties.PropertyMap;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
-
-import CakeClient.Client;
-
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -186,6 +183,7 @@ import org.lwjgl.opengl.GLContext;
 import org.lwjgl.opengl.OpenGLException;
 import org.lwjgl.opengl.PixelFormat;
 import org.lwjgl.util.glu.GLU;
+import CakeClient.Client;
 
 public class Minecraft implements IThreadListener, IPlayerUsage
 {
@@ -1783,6 +1781,10 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                     {
                         return Minecraft.this.currentScreen.getClass().getCanonicalName();
                     }
+                    public Object call1()
+                    {
+                        return this.call();
+                    }
                 });
                 throw new ReportedException(var2);
             }
@@ -1803,6 +1805,10 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                         public String call()
                         {
                             return Minecraft.this.currentScreen.getClass().getCanonicalName();
+                        }
+                        public Object call1()
+                        {
+                            return this.call();
                         }
                     });
                     throw new ReportedException(var2);
@@ -2641,6 +2647,10 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             {
                 return Minecraft.this.launchedVersion;
             }
+            public Object call1()
+            {
+                return this.call();
+            }
         });
         theCrash.getCategory().addCrashSectionCallable("LWJGL", new Callable()
         {
@@ -2648,6 +2658,10 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             public String call()
             {
                 return Sys.getVersion();
+            }
+            public Object call1()
+            {
+                return this.call();
             }
         });
         theCrash.getCategory().addCrashSectionCallable("OpenGL", new Callable()
@@ -2657,6 +2671,10 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             {
                 return GL11.glGetString(GL11.GL_RENDERER) + " GL version " + GL11.glGetString(GL11.GL_VERSION) + ", " + GL11.glGetString(GL11.GL_VENDOR);
             }
+            public Object call1()
+            {
+                return this.call();
+            }
         });
         theCrash.getCategory().addCrashSectionCallable("GL Caps", new Callable()
         {
@@ -2665,6 +2683,10 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             {
                 return OpenGlHelper.func_153172_c();
             }
+            public Object call1()
+            {
+                return this.call();
+            }
         });
         theCrash.getCategory().addCrashSectionCallable("Using VBOs", new Callable()
         {
@@ -2672,6 +2694,10 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             public String call()
             {
                 return Minecraft.this.gameSettings.field_178881_t ? "Yes" : "No";
+            }
+            public Object call1()
+            {
+                return this.call();
             }
         });
         theCrash.getCategory().addCrashSectionCallable("Is Modded", new Callable()
@@ -2682,6 +2708,10 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                 String var1 = ClientBrandRetriever.getClientModName();
                 return !var1.equals("vanilla") ? "Definitely; Client brand changed to \'" + var1 + "\'" : (Minecraft.class.getSigners() == null ? "Very likely; Jar signature invalidated" : "Probably not. Jar signature remains and client brand is untouched.");
             }
+            public Object call1()
+            {
+                return this.call();
+            }
         });
         theCrash.getCategory().addCrashSectionCallable("Type", new Callable()
         {
@@ -2689,6 +2719,10 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             public String call()
             {
                 return "Client (map_client.txt)";
+            }
+            public Object call1()
+            {
+                return this.call();
             }
         });
         theCrash.getCategory().addCrashSectionCallable("Resource Packs", new Callable()
@@ -2698,6 +2732,10 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             {
                 return Minecraft.this.gameSettings.resourcePacks.toString();
             }
+            public Object call1()
+            {
+                return this.call();
+            }
         });
         theCrash.getCategory().addCrashSectionCallable("Current Language", new Callable()
         {
@@ -2706,13 +2744,21 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             {
                 return Minecraft.this.mcLanguageManager.getCurrentLanguage().toString();
             }
+            public Object call1()
+            {
+                return this.call();
+            }
         });
         theCrash.getCategory().addCrashSectionCallable("Profiler Position", new Callable()
         {
             private static final String __OBFID = "CL_00000637";
-            public String call()
+            public String call1()
             {
                 return Minecraft.this.mcProfiler.profilingEnabled ? Minecraft.this.mcProfiler.getNameOfLastSection() : "N/A (disabled)";
+            }
+            public Object call()
+            {
+                return this.call1();
             }
         });
 

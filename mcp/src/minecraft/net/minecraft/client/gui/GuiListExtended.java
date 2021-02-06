@@ -78,16 +78,16 @@ public abstract class GuiListExtended extends GuiSlot
     /**
      * Gets the IGuiListEntry object for the given index
      */
-    public abstract GuiListExtended.IGuiListEntry getListEntry(int p_148180_1_);
+    public abstract GuiListExtended.IGuiListEntry getListEntry(int var1);
 
     public interface IGuiListEntry
     {
-        void setSelected(int p_178011_1_, int p_178011_2_, int p_178011_3_);
+        void setSelected(int var1, int var2, int var3);
 
-        void drawEntry(int slotIndex, int x, int y, int listWidth, int slotHeight, int mouseX, int mouseY, boolean isSelected);
+        void drawEntry(int var1, int var2, int var3, int var4, int var5, int var6, int var7, boolean var8);
 
-        boolean mousePressed(int p_148278_1_, int p_148278_2_, int p_148278_3_, int p_148278_4_, int p_148278_5_, int p_148278_6_);
+        boolean mousePressed(int var1, int var2, int var3, int var4, int var5, int var6);
 
-        void mouseReleased(int slotIndex, int x, int y, int mouseEvent, int relativeX, int relativeY);
+        void mouseReleased(int var1, int var2, int var3, int var4, int var5, int var6);
     }
 }

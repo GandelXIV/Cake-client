@@ -1250,20 +1250,20 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer, IUpdatePlaye
             {
                 var3 = var2.readItemStackFromBuffer();
 
-                if (var3 != null)
+                if (var3 == null)
                 {
-                    if (!ItemWritableBook.validBookPageTagContents(var3.getTagCompound()))
-                    {
-                        throw new IOException("Invalid book tag!");
-                    }
+                    return;
+                }
 
-                    var4 = this.playerEntity.inventory.getCurrentItem();
+                if (!ItemWritableBook.validBookPageTagContents(var3.getTagCompound()))
+                {
+                    throw new IOException("Invalid book tag!");
+                }
 
-                    if (var4 == null)
-                    {
-                        return;
-                    }
+                var4 = this.playerEntity.inventory.getCurrentItem();
 
+                if (var4 != null)
+                {
                     if (var3.getItem() == Items.writable_book && var3.getItem() == var4.getItem())
                     {
                         var4.setTagInfo("pages", var3.getTagCompound().getTagList("pages", 8));
@@ -1292,20 +1292,20 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer, IUpdatePlaye
             {
                 var3 = var2.readItemStackFromBuffer();
 
-                if (var3 == null)
+                if (var3 != null)
                 {
-                    return;
-                }
+                    if (!ItemEditableBook.validBookTagContents(var3.getTagCompound()))
+                    {
+                        throw new IOException("Invalid book tag!");
+                    }
 
-                if (!ItemEditableBook.validBookTagContents(var3.getTagCompound()))
-                {
-                    throw new IOException("Invalid book tag!");
-                }
+                    var4 = this.playerEntity.inventory.getCurrentItem();
 
-                var4 = this.playerEntity.inventory.getCurrentItem();
+                    if (var4 == null)
+                    {
+                        return;
+                    }
 
-                if (var4 != null)
-                {
                     if (var3.getItem() == Items.written_book && var4.getItem() == Items.writable_book)
                     {
                         var4.setTagInfo("author", new NBTTagString(this.playerEntity.getName()));

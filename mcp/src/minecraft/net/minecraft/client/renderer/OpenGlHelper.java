@@ -4,6 +4,8 @@ import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import net.minecraft.client.Minecraft;
+import optifine.Config;
+
 import org.lwjgl.opengl.ARBFramebufferObject;
 import org.lwjgl.opengl.ARBMultitexture;
 import org.lwjgl.opengl.ARBShaderObjects;
@@ -84,12 +86,15 @@ public class OpenGlHelper
     public static int field_176089_P;
     public static int anisotropicFilteringMax;
     private static final String __OBFID = "CL_00001179";
+    public static float lastBrightnessX = 0.0F;
+    public static float lastBrightnessY = 0.0F;
 
     /**
      * Initializes the texture constants to be used when rendering lightmap values
      */
     public static void initializeTextures()
     {
+        Config.initDisplay();
         ContextCapabilities var0 = GLContext.getCapabilities();
         field_153215_z = var0.GL_ARB_multitexture && !var0.OpenGL13;
         field_176088_V = var0.GL_ARB_texture_env_combine && !var0.OpenGL13;
@@ -597,7 +602,7 @@ public class OpenGlHelper
 
     public static boolean func_176075_f()
     {
-        return field_176083_O && Minecraft.getMinecraft().gameSettings.field_178881_t;
+        return Config.isMultiTexture() ? false : field_176083_O && Minecraft.getMinecraft().gameSettings.field_178881_t;
     }
 
     public static void func_153171_g(int p_153171_0_, int p_153171_1_)
@@ -858,6 +863,12 @@ public class OpenGlHelper
         {
             GL13.glMultiTexCoord2f(p_77475_0_, p_77475_1_, p_77475_2_);
         }
+
+        if (p_77475_0_ == lightmapTexUnit)
+        {
+            lastBrightnessX = p_77475_1_;
+            lastBrightnessY = p_77475_2_;
+        }
     }
 
     public static void glBlendFunc(int p_148821_0_, int p_148821_1_, int p_148821_2_, int p_148821_3_)
@@ -881,6 +892,6 @@ public class OpenGlHelper
 
     public static boolean isFramebufferEnabled()
     {
-        return framebufferSupported && Minecraft.getMinecraft().gameSettings.fboEnable;
+        return Config.isFastRender() ? false : (Config.isAntialiasing() ? false : framebufferSupported && Minecraft.getMinecraft().gameSettings.fboEnable);
     }
 }

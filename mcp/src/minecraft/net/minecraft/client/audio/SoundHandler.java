@@ -189,7 +189,7 @@ public class SoundHandler implements IResourceManagerReloadListener, IUpdatePlay
                         public SoundPoolEntry getEntry()
                         {
                             SoundEventAccessorComposite var1 = (SoundEventAccessorComposite)SoundHandler.this.sndRegistry.getObject(this.field_148726_a);
-                            return var1 == null ? SoundHandler.missing_sound : var1.cloneEntry();
+                            return (SoundPoolEntry) (var1 == null ? SoundHandler.missing_sound : var1.cloneEntry());
                         }
                         public Object cloneEntry()
                         {

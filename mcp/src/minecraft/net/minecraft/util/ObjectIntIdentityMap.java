@@ -40,4 +40,9 @@ public class ObjectIntIdentityMap implements IObjectIntIterable
     {
         return Iterators.filter(this.field_148748_b.iterator(), Predicates.notNull());
     }
+
+    public List getObjectList()
+    {
+        return this.field_148748_b;
+    }
 }

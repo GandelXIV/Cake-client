@@ -650,5 +650,6 @@ public class ChatStyle
         {
             return this.serialize((ChatStyle)p_serialize_1_, p_serialize_2_, p_serialize_3_);
         }
+
     }
 }

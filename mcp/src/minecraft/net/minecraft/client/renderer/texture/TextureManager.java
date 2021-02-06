@@ -14,8 +14,12 @@ import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.util.ReportedException;
 import net.minecraft.util.ResourceLocation;
+import optifine.Config;
+import optifine.RandomMobs;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import shadersmod.client.ShadersTex;
 
 public class TextureManager implements ITickable, IResourceManagerReloadListener
 {
@@ -33,6 +37,11 @@ public class TextureManager implements ITickable, IResourceManagerReloadListener
 
     public void bindTexture(ResourceLocation resource)
     {
+        if (Config.isRandomMobs())
+        {
+            resource = RandomMobs.getTextureLocation(resource);
+        }
+
         Object var2 = (ITextureObject)this.mapTextureObjects.get(resource);
 
         if (var2 == null)
@@ -41,7 +50,14 @@ public class TextureManager implements ITickable, IResourceManagerReloadListener
             this.loadTexture(resource, (ITextureObject)var2);
         }
 
-        TextureUtil.bindTexture(((ITextureObject)var2).getGlTextureId());
+        if (Config.isShaders())
+        {
+            ShadersTex.bindTexture((ITextureObject)var2);
+        }
+        else
+        {
+            TextureUtil.bindTexture(((ITextureObject)var2).getGlTextureId());
+        }
     }
 
     public boolean loadTickableTexture(ResourceLocation p_110580_1_, ITickableTextureObject p_110580_2_)
@@ -60,11 +76,11 @@ public class TextureManager implements ITickable, IResourceManagerReloadListener
     public boolean loadTexture(ResourceLocation p_110579_1_, final ITextureObject p_110579_2_)
     {
         boolean var3 = true;
-        ITextureObject p_110579_2_2 = p_110579_2_;
+        Object p_110579_2_2 = p_110579_2_;
 
         try
         {
-            ((ITextureObject)p_110579_2_).loadTexture(this.theResourceManager);
+            p_110579_2_.loadTexture(this.theResourceManager);
         }
         catch (IOException var8)
         {
@@ -100,6 +116,11 @@ public class TextureManager implements ITickable, IResourceManagerReloadListener
 
     public ResourceLocation getDynamicTextureLocation(String p_110578_1_, DynamicTexture p_110578_2_)
     {
+        if (p_110578_1_.equals("logo"))
+        {
+            p_110578_2_ = Config.getMojangLogoTexture(p_110578_2_);
+        }
+
         Integer var3 = (Integer)this.mapTextureCounters.get(p_110578_1_);
 
         if (var3 == null)
@@ -138,14 +159,36 @@ public class TextureManager implements ITickable, IResourceManagerReloadListener
         }
     }
 
-    public void onResourceManagerReload(IResourceManager p_110549_1_)
+    public void onResourceManagerReload(IResourceManager resourceManager)
     {
-        Iterator var2 = this.mapTextureObjects.entrySet().iterator();
+        Config.dbg("*** Reloading textures ***");
+        Config.log("Resource packs: " + Config.getResourcePackNames());
+        Iterator it = this.mapTextureObjects.keySet().iterator();
 
-        while (var2.hasNext())
+        while (it.hasNext())
         {
-            Entry var3 = (Entry)var2.next();
-            this.loadTexture((ResourceLocation)var3.getKey(), (ITextureObject)var3.getValue());
+            ResourceLocation var2 = (ResourceLocation)it.next();
+
+            if (var2.getResourcePath().startsWith("mcpatcher/"))
+            {
+                ITextureObject var3 = (ITextureObject)this.mapTextureObjects.get(var2);
+
+                if (var3 instanceof AbstractTexture)
+                {
+                    AbstractTexture at = (AbstractTexture)var3;
+                    at.deleteGlTexture();
+                }
+
+                it.remove();
+            }
+        }
+
+        Iterator var21 = this.mapTextureObjects.entrySet().iterator();
+
+        while (var21.hasNext())
+        {
+            Entry var31 = (Entry)var21.next();
+            this.loadTexture((ResourceLocation)var31.getKey(), (ITextureObject)var31.getValue());
         }
     }
 }

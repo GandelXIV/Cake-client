@@ -35,5 +35,5 @@ public abstract class ChunkRenderContainer
         this.field_178009_a.add(p_178002_1_);
     }
 
-    public abstract void func_178001_a(EnumWorldBlockLayer p_178001_1_);
+    public abstract void func_178001_a(EnumWorldBlockLayer var1);
 }

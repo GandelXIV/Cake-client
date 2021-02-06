@@ -12,7 +12,7 @@ public interface IResource
 
     boolean hasMetadata();
 
-    IMetadataSection getMetadata(String p_110526_1_);
+    IMetadataSection getMetadata(String var1);
 
     String func_177240_d();
 }

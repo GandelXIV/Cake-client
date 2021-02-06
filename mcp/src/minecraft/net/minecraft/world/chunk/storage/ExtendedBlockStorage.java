@@ -1,9 +1,11 @@
 package net.minecraft.world.chunk.storage;
 
+import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.chunk.NibbleArray;
+import optifine.Reflector;
 
 public class ExtendedBlockStorage
 {
@@ -51,6 +53,11 @@ public class ExtendedBlockStorage
 
     public void set(int x, int y, int z, IBlockState state)
     {
+        if (Reflector.IExtendedBlockState.isInstance(state))
+        {
+            state = (IBlockState)Reflector.call(state, Reflector.IExtendedBlockState_getClean, new Object[0]);
+        }
+
         IBlockState var5 = this.get(x, y, z);
         Block var6 = var5.getBlock();
         Block var7 = state.getBlock();
@@ -155,29 +162,48 @@ public class ExtendedBlockStorage
 
     public void removeInvalidBlocks()
     {
-        this.blockRefCount = 0;
-        this.tickRefCount = 0;
+        List blockStates = Block.BLOCK_STATE_IDS.getObjectList();
+        int maxStateId = blockStates.size();
+        int localBlockRefCount = 0;
+        int localTickRefCount = 0;
 
-        for (int var1 = 0; var1 < 16; ++var1)
+        for (int y = 0; y < 16; ++y)
         {
-            for (int var2 = 0; var2 < 16; ++var2)
+            int by = y << 8;
+
+            for (int z = 0; z < 16; ++z)
             {
-                for (int var3 = 0; var3 < 16; ++var3)
+                int byz = by | z << 4;
+
+                for (int x = 0; x < 16; ++x)
                 {
-                    Block var4 = this.getBlockByExtId(var1, var2, var3);
+                    char stateId = this.data[byz | x];
 
-                    if (var4 != Blocks.air)
+                    if (stateId > 0)
                     {
-                        ++this.blockRefCount;
+                        ++localBlockRefCount;
 
-                        if (var4.getTickRandomly())
+                        if (stateId < maxStateId)
                         {
-                            ++this.tickRefCount;
+                            IBlockState bs = (IBlockState)blockStates.get(stateId);
+
+                            if (bs != null)
+                            {
+                                Block var4 = bs.getBlock();
+
+                                if (var4.getTickRandomly())
+                                {
+                                    ++localTickRefCount;
+                                }
+                            }
                         }
                     }
                 }
             }
         }
+
+        this.blockRefCount = localBlockRefCount;
+        this.tickRefCount = localTickRefCount;
     }
 
     public char[] getData()

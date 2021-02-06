@@ -1468,9 +1468,9 @@ public class StructureOceanMonumentPieces
 
     interface MonumentRoomFitHelper
     {
-        boolean func_175969_a(StructureOceanMonumentPieces.RoomDefinition p_175969_1_);
+        boolean func_175969_a(StructureOceanMonumentPieces.RoomDefinition var1);
 
-        StructureOceanMonumentPieces.Piece func_175968_a(EnumFacing p_175968_1_, StructureOceanMonumentPieces.RoomDefinition p_175968_2_, Random p_175968_3_);
+        StructureOceanMonumentPieces.Piece func_175968_a(EnumFacing var1, StructureOceanMonumentPieces.RoomDefinition var2, Random var3);
     }
 
     public static class Penthouse extends StructureOceanMonumentPieces.Piece

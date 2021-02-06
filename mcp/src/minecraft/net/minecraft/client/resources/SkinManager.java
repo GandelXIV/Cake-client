@@ -162,6 +162,6 @@ public class SkinManager
 
     public interface SkinAvailableCallback
     {
-        void func_180521_a(Type p_180521_1_, ResourceLocation p_180521_2_, MinecraftProfileTexture p_180521_3_);
+        void func_180521_a(Type var1, ResourceLocation var2, MinecraftProfileTexture var3);
     }
 }

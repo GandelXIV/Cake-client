@@ -87,7 +87,7 @@ public class ServerStatusResponse
         {
             private static final String __OBFID = "CL_00001390";
 
-            public ServerStatusResponse.MinecraftProtocolVersionIdentifier deserialize(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_)
+            public ServerStatusResponse.MinecraftProtocolVersionIdentifier deserialize1(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_)
             {
                 JsonObject var4 = JsonUtils.getElementAsJsonObject(p_deserialize_1_, "version");
                 return new ServerStatusResponse.MinecraftProtocolVersionIdentifier(JsonUtils.getJsonObjectStringFieldValue(var4, "name"), JsonUtils.getJsonObjectIntegerFieldValue(var4, "protocol"));
@@ -104,6 +104,11 @@ public class ServerStatusResponse
             public JsonElement serialize(Object p_serialize_1_, Type p_serialize_2_, JsonSerializationContext p_serialize_3_)
             {
                 return this.serialize((ServerStatusResponse.MinecraftProtocolVersionIdentifier)p_serialize_1_, p_serialize_2_, p_serialize_3_);
+            }
+
+            public Object deserialize(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_)
+            {
+                return this.deserialize1(p_deserialize_1_, p_deserialize_2_, p_deserialize_3_);
             }
         }
     }
@@ -145,7 +150,7 @@ public class ServerStatusResponse
         {
             private static final String __OBFID = "CL_00001387";
 
-            public ServerStatusResponse.PlayerCountData deserialize(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_)
+            public ServerStatusResponse.PlayerCountData deserialize1(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_)
             {
                 JsonObject var4 = JsonUtils.getElementAsJsonObject(p_deserialize_1_, "players");
                 ServerStatusResponse.PlayerCountData var5 = new ServerStatusResponse.PlayerCountData(JsonUtils.getJsonObjectIntegerFieldValue(var4, "max"), JsonUtils.getJsonObjectIntegerFieldValue(var4, "online"));
@@ -201,6 +206,11 @@ public class ServerStatusResponse
             {
                 return this.serialize((ServerStatusResponse.PlayerCountData)p_serialize_1_, p_serialize_2_, p_serialize_3_);
             }
+
+            public Object deserialize(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_)
+            {
+                return this.deserialize1(p_deserialize_1_, p_deserialize_2_, p_deserialize_3_);
+            }
         }
     }
 
@@ -208,7 +218,7 @@ public class ServerStatusResponse
     {
         private static final String __OBFID = "CL_00001388";
 
-        public ServerStatusResponse deserialize(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_)
+        public ServerStatusResponse deserialize1(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_)
         {
             JsonObject var4 = JsonUtils.getElementAsJsonObject(p_deserialize_1_, "status");
             ServerStatusResponse var5 = new ServerStatusResponse();
@@ -266,6 +276,11 @@ public class ServerStatusResponse
         public JsonElement serialize(Object p_serialize_1_, Type p_serialize_2_, JsonSerializationContext p_serialize_3_)
         {
             return this.serialize((ServerStatusResponse)p_serialize_1_, p_serialize_2_, p_serialize_3_);
+        }
+
+        public Object deserialize(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_)
+        {
+            return this.deserialize1(p_deserialize_1_, p_deserialize_2_, p_deserialize_3_);
         }
     }
 }

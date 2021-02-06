@@ -1,7 +1,12 @@
 package net.minecraft.client.renderer;
 
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
+
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
+
+import optifine.Config;
 
 public class GlStateManager
 {
@@ -20,13 +25,14 @@ public class GlStateManager
     private static GlStateManager.StencilState stencilState = new GlStateManager.StencilState((GlStateManager.SwitchTexGen)null);
     private static GlStateManager.BooleanState normalizeState = new GlStateManager.BooleanState(2977);
     private static int field_179162_o = 0;
-    private static GlStateManager.TextureState[] field_179174_p = new GlStateManager.TextureState[8];
+    private static GlStateManager.TextureState[] field_179174_p = new GlStateManager.TextureState[32];
     private static int field_179173_q = 7425;
     private static GlStateManager.BooleanState rescaleNormalState = new GlStateManager.BooleanState(32826);
     private static GlStateManager.ColorMask colorMaskState = new GlStateManager.ColorMask((GlStateManager.SwitchTexGen)null);
     private static GlStateManager.Color colorState = new GlStateManager.Color();
     private static GlStateManager.Viewport field_179169_u = new GlStateManager.Viewport((GlStateManager.SwitchTexGen)null);
     private static final String __OBFID = "CL_00002558";
+    public static boolean clearEnabled = true;
 
     public static void pushAttrib()
     {
@@ -335,17 +341,20 @@ public class GlStateManager
 
     public static void func_179150_h(int p_179150_0_)
     {
-        GL11.glDeleteTextures(p_179150_0_);
-        GlStateManager.TextureState[] var1 = field_179174_p;
-        int var2 = var1.length;
-
-        for (int var3 = 0; var3 < var2; ++var3)
+        if (p_179150_0_ != 0)
         {
-            GlStateManager.TextureState var4 = var1[var3];
+            GL11.glDeleteTextures(p_179150_0_);
+            GlStateManager.TextureState[] var1 = field_179174_p;
+            int var2 = var1.length;
 
-            if (var4.field_179059_b == p_179150_0_)
+            for (int var3 = 0; var3 < var2; ++var3)
             {
-                var4.field_179059_b = -1;
+                GlStateManager.TextureState var4 = var1[var3];
+
+                if (var4.field_179059_b == p_179150_0_)
+                {
+                    var4.field_179059_b = 0;
+                }
             }
         }
     }
@@ -357,6 +366,11 @@ public class GlStateManager
             field_179174_p[field_179162_o].field_179059_b = p_179144_0_;
             GL11.glBindTexture(GL11.GL_TEXTURE_2D, p_179144_0_);
         }
+    }
+
+    public static void bindCurrentTexture()
+    {
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, field_179174_p[field_179162_o].field_179059_b);
     }
 
     public static void enableNormalize()
@@ -435,7 +449,10 @@ public class GlStateManager
 
     public static void clear(int p_179086_0_)
     {
-        GL11.glClear(p_179086_0_);
+        if (clearEnabled)
+        {
+            GL11.glClear(p_179086_0_);
+        }
     }
 
     public static void matrixMode(int p_179128_0_)
@@ -525,6 +542,48 @@ public class GlStateManager
         GL11.glCallList(p_179148_0_);
     }
 
+    public static int getActiveTextureUnit()
+    {
+        return OpenGlHelper.defaultTexUnit + field_179162_o;
+    }
+
+    public static int getBoundTexture()
+    {
+        return field_179174_p[field_179162_o].field_179059_b;
+    }
+
+    public static void checkBoundTexture()
+    {
+        if (Config.isMinecraftThread())
+        {
+            int glAct = GL11.glGetInteger(GL13.GL_ACTIVE_TEXTURE);
+            int glTex = GL11.glGetInteger(GL11.GL_TEXTURE_BINDING_2D);
+            int act = getActiveTextureUnit();
+            int tex = getBoundTexture();
+
+            if (tex > 0)
+            {
+                if (glAct != act || glTex != tex)
+                {
+                    Config.dbg("checkTexture: act: " + act + ", glAct: " + glAct + ", tex: " + tex + ", glTex: " + glTex);
+                }
+            }
+        }
+    }
+
+    public static void deleteTextures(IntBuffer buf)
+    {
+        buf.rewind();
+
+        while (buf.position() < buf.limit())
+        {
+            int texId = buf.get();
+            func_179150_h(texId);
+        }
+
+        buf.rewind();
+    }
+
     static
     {
         int var0;
@@ -534,7 +593,7 @@ public class GlStateManager
             field_179159_c[var0] = new GlStateManager.BooleanState(16384 + var0);
         }
 
-        for (var0 = 0; var0 < 8; ++var0)
+        for (var0 = 0; var0 < field_179174_p.length; ++var0)
         {
             field_179174_p[var0] = new GlStateManager.TextureState((GlStateManager.SwitchTexGen)null);
         }
@@ -567,7 +626,6 @@ public class GlStateManager
         public int field_179212_c;
         public int field_179209_d;
         public int field_179210_e;
-        private static final String __OBFID = "CL_00002555";
 
         private BlendState()
         {
@@ -588,8 +646,6 @@ public class GlStateManager
     {
         private final int capability;
         private boolean currentState = false;
-        private static final String __OBFID = "CL_00002554";
-
         public BooleanState(int p_i46267_1_)
         {
             this.capability = p_i46267_1_;
@@ -628,8 +684,6 @@ public class GlStateManager
         public double field_179205_a;
         public GlStateManager.Color field_179203_b;
         public int field_179204_c;
-        private static final String __OBFID = "CL_00002553";
-
         private ClearState()
         {
             this.field_179205_a = 1.0D;
@@ -649,7 +703,6 @@ public class GlStateManager
         public float green = 1.0F;
         public float blue = 1.0F;
         public float alpha = 1.0F;
-        private static final String __OBFID = "CL_00002552";
 
         public Color() {}
 
@@ -666,7 +719,6 @@ public class GlStateManager
     {
         public GlStateManager.BooleanState field_179197_a;
         public int field_179196_b;
-        private static final String __OBFID = "CL_00002551";
 
         private ColorLogicState()
         {
@@ -686,7 +738,6 @@ public class GlStateManager
         public boolean field_179186_b;
         public boolean field_179187_c;
         public boolean field_179185_d;
-        private static final String __OBFID = "CL_00002550";
 
         private ColorMask()
         {
@@ -707,7 +758,6 @@ public class GlStateManager
         public GlStateManager.BooleanState field_179191_a;
         public int field_179189_b;
         public int field_179190_c;
-        private static final String __OBFID = "CL_00002549";
 
         private ColorMaterialState()
         {
@@ -726,7 +776,6 @@ public class GlStateManager
     {
         public GlStateManager.BooleanState field_179054_a;
         public int field_179053_b;
-        private static final String __OBFID = "CL_00002548";
 
         private CullState()
         {
@@ -745,7 +794,6 @@ public class GlStateManager
         public GlStateManager.BooleanState field_179052_a;
         public boolean field_179050_b;
         public int field_179051_c;
-        private static final String __OBFID = "CL_00002547";
 
         private DepthState()
         {
@@ -767,7 +815,6 @@ public class GlStateManager
         public float field_179048_c;
         public float field_179045_d;
         public float field_179046_e;
-        private static final String __OBFID = "CL_00002546";
 
         private FogState()
         {
@@ -790,7 +837,6 @@ public class GlStateManager
         public GlStateManager.BooleanState field_179042_b;
         public float field_179043_c;
         public float field_179041_d;
-        private static final String __OBFID = "CL_00002545";
 
         private PolygonOffsetState()
         {
@@ -811,7 +857,6 @@ public class GlStateManager
         public int field_179081_a;
         public int field_179079_b;
         public int field_179080_c;
-        private static final String __OBFID = "CL_00002544";
 
         private StencilFunc()
         {
@@ -833,7 +878,6 @@ public class GlStateManager
         public int field_179077_c;
         public int field_179074_d;
         public int field_179075_e;
-        private static final String __OBFID = "CL_00002543";
 
         private StencilState()
         {
@@ -853,7 +897,6 @@ public class GlStateManager
     static final class SwitchTexGen
     {
         static final int[] field_179175_a = new int[GlStateManager.TexGen.values().length];
-        private static final String __OBFID = "CL_00002557";
 
         static
         {
@@ -897,15 +940,14 @@ public class GlStateManager
 
     public static enum TexGen
     {
-        S("S", 0),
-        T("T", 1),
-        R("R", 2),
-        Q("Q", 3);
-
+        S("S", 0, "S", 0),
+        T("T", 1, "T", 1),
+        R("R", 2, "R", 2),
+        Q("Q", 3, "Q", 3);
         private static final GlStateManager.TexGen[] $VALUES = new GlStateManager.TexGen[]{S, T, R, Q};
         private static final String __OBFID = "CL_00002542";
 
-        private TexGen(String p_i46255_1_, int p_i46255_2_) {}
+        private TexGen(String p_i46378_1_, int p_i46378_2_, String p_i46255_1_, int p_i46255_2_) {}
     }
 
     static class TexGenCoord
@@ -913,7 +955,6 @@ public class GlStateManager
         public GlStateManager.BooleanState field_179067_a;
         public int field_179065_b;
         public int field_179066_c = -1;
-        private static final String __OBFID = "CL_00002541";
 
         public TexGenCoord(int p_i46254_1_, int p_i46254_2_)
         {
@@ -928,7 +969,6 @@ public class GlStateManager
         public GlStateManager.TexGenCoord field_179062_b;
         public GlStateManager.TexGenCoord field_179063_c;
         public GlStateManager.TexGenCoord field_179061_d;
-        private static final String __OBFID = "CL_00002540";
 
         private TexGenState()
         {
@@ -948,7 +988,6 @@ public class GlStateManager
     {
         public GlStateManager.BooleanState field_179060_a;
         public int field_179059_b;
-        private static final String __OBFID = "CL_00002539";
 
         private TextureState()
         {
@@ -968,7 +1007,6 @@ public class GlStateManager
         public int field_179056_b;
         public int field_179057_c;
         public int field_179055_d;
-        private static final String __OBFID = "CL_00002538";
 
         private Viewport()
         {

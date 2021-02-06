@@ -44,19 +44,19 @@ public class MapColor
     public static final MapColor netherrackColor = new MapColor(35, 7340544);
 
     /** Holds the color in RGB value that will be rendered on maps. */
-    public final int colorValue;
+    public int colorValue;
 
     /** Holds the index of the color used on map. */
     public final int colorIndex;
     private static final String __OBFID = "CL_00000544";
 
-    private MapColor(int p_i2117_1_, int p_i2117_2_)
+    private MapColor(int index, int color)
     {
-        if (p_i2117_1_ >= 0 && p_i2117_1_ <= 63)
+        if (index >= 0 && index <= 63)
         {
-            this.colorIndex = p_i2117_1_;
-            this.colorValue = p_i2117_2_;
-            mapColorArray[p_i2117_1_] = this;
+            this.colorIndex = index;
+            this.colorValue = color;
+            mapColorArray[index] = this;
         }
         else
         {

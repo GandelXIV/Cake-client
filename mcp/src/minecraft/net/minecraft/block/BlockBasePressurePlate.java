@@ -217,9 +217,9 @@ public abstract class BlockBasePressurePlate extends Block
         return 1;
     }
 
-    protected abstract int computeRedstoneStrength(World worldIn, BlockPos pos);
+    protected abstract int computeRedstoneStrength(World var1, BlockPos var2);
 
-    protected abstract int getRedstoneStrength(IBlockState p_176576_1_);
+    protected abstract int getRedstoneStrength(IBlockState var1);
 
-    protected abstract IBlockState setRedstoneStrength(IBlockState p_176575_1_, int p_176575_2_);
+    protected abstract IBlockState setRedstoneStrength(IBlockState var1, int var2);
 }

@@ -5,22 +5,24 @@ import java.util.Map;
 
 public enum SoundCategory
 {
-    MASTER("master", 0),
-    MUSIC("music", 1),
-    RECORDS("record", 2),
-    WEATHER("weather", 3),
-    BLOCKS("block", 4),
-    MOBS("hostile", 5),
-    ANIMALS("neutral", 6),
-    PLAYERS("player", 7),
-    AMBIENT("ambient", 8);
+    MASTER("MASTER", 0, "master", 0),
+    MUSIC("MUSIC", 1, "music", 1),
+    RECORDS("RECORDS", 2, "record", 2),
+    WEATHER("WEATHER", 3, "weather", 3),
+    BLOCKS("BLOCKS", 4, "block", 4),
+    MOBS("MOBS", 5, "hostile", 5),
+    ANIMALS("ANIMALS", 6, "neutral", 6),
+    PLAYERS("PLAYERS", 7, "player", 7),
+    AMBIENT("AMBIENT", 8, "ambient", 8);
     private static final Map field_147168_j = Maps.newHashMap();
     private static final Map field_147169_k = Maps.newHashMap();
     private final String categoryName;
     private final int categoryId;
+
+    private static final SoundCategory[] $VALUES = new SoundCategory[]{MASTER, MUSIC, RECORDS, WEATHER, BLOCKS, MOBS, ANIMALS, PLAYERS, AMBIENT};
     private static final String __OBFID = "CL_00001686";
 
-    private SoundCategory(String p_i45126_3_, int p_i45126_4_)
+    private SoundCategory(String p_i45126_1_, int p_i45126_2_, String p_i45126_3_, int p_i45126_4_)
     {
         this.categoryName = p_i45126_3_;
         this.categoryId = p_i45126_4_;

@@ -338,7 +338,7 @@ public class GuiStats extends GuiScreen implements IProgressMeter
             return (StatCrafting)this.statsHolder.get(p_148211_1_);
         }
 
-        protected abstract String func_148210_b(int p_148210_1_);
+        protected abstract String func_148210_b(int var1);
 
         protected void func_148209_a(StatBase p_148209_1_, int p_148209_2_, int p_148209_3_, boolean p_148209_4_)
         {

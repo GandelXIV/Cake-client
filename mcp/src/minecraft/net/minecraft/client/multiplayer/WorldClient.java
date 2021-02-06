@@ -35,6 +35,11 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.storage.SaveDataMemoryStorage;
 import net.minecraft.world.storage.SaveHandlerMP;
 import net.minecraft.world.storage.WorldInfo;
+import optifine.BlockPosM;
+import optifine.Config;
+import optifine.DynamicLights;
+import optifine.PlayerControllerOF;
+import optifine.Reflector;
 
 public class WorldClient extends World
 {
@@ -55,18 +60,26 @@ public class WorldClient extends World
     private final Minecraft mc = Minecraft.getMinecraft();
     private final Set previousActiveChunkSet = Sets.newHashSet();
     private static final String __OBFID = "CL_00000882";
+    private BlockPosM randomTickPosM = new BlockPosM(0, 0, 0, 3);
+    private boolean playerUpdate = false;
 
     public WorldClient(NetHandlerPlayClient p_i45063_1_, WorldSettings p_i45063_2_, int p_i45063_3_, EnumDifficulty p_i45063_4_, Profiler p_i45063_5_)
     {
         super(new SaveHandlerMP(), new WorldInfo(p_i45063_2_, "MpServer"), WorldProvider.getProviderForDimension(p_i45063_3_), p_i45063_5_, true);
         this.sendQueue = p_i45063_1_;
         this.getWorldInfo().setDifficulty(p_i45063_4_);
-        this.setSpawnLocation(new BlockPos(8, 64, 8));
         this.provider.registerWorld(this);
+        this.setSpawnLocation(new BlockPos(8, 64, 8));
         this.chunkProvider = this.createChunkProvider();
         this.mapStorage = new SaveDataMemoryStorage();
         this.calculateInitialSkylight();
         this.calculateInitialWeather();
+        Reflector.postForgeBusEvent(Reflector.WorldEvent_Load_Constructor, new Object[] {this});
+
+        if (this.mc.playerController != null && this.mc.playerController.getClass() == PlayerControllerMP.class)
+        {
+            this.mc.playerController = new PlayerControllerOF(this.mc, p_i45063_1_);
+        }
     }
 
     /**
@@ -305,15 +318,16 @@ public class WorldClient extends World
         Random var5 = new Random();
         ItemStack var6 = this.mc.thePlayer.getHeldItem();
         boolean var7 = this.mc.playerController.func_178889_l() == WorldSettings.GameType.CREATIVE && var6 != null && Block.getBlockFromItem(var6.getItem()) == Blocks.barrier;
+        BlockPosM blockPosM = this.randomTickPosM;
 
         for (int var8 = 0; var8 < 1000; ++var8)
         {
             int var9 = p_73029_1_ + this.rand.nextInt(var4) - this.rand.nextInt(var4);
             int var10 = p_73029_2_ + this.rand.nextInt(var4) - this.rand.nextInt(var4);
             int var11 = p_73029_3_ + this.rand.nextInt(var4) - this.rand.nextInt(var4);
-            BlockPos var12 = new BlockPos(var9, var10, var11);
-            IBlockState var13 = this.getBlockState(var12);
-            var13.getBlock().randomDisplayTick(this, var12, var13, var5);
+            blockPosM.setXyz(var9, var10, var11);
+            IBlockState var13 = this.getBlockState(blockPosM);
+            var13.getBlock().randomDisplayTick(this, blockPosM, var13, var5);
 
             if (var7 && var13.getBlock() == Blocks.barrier)
             {
@@ -474,5 +488,43 @@ public class WorldClient extends World
         }
 
         super.setWorldTime(time);
+    }
+
+    public int getCombinedLight(BlockPos pos, int lightValue)
+    {
+        int combinedLight = super.getCombinedLight(pos, lightValue);
+
+        if (Config.isDynamicLights())
+        {
+            combinedLight = DynamicLights.getCombinedLight(pos, combinedLight);
+        }
+
+        return combinedLight;
+    }
+
+    public boolean setBlockState(BlockPos pos, IBlockState newState, int flags)
+    {
+        this.playerUpdate = this.isPlayerActing();
+        boolean res = super.setBlockState(pos, newState, flags);
+        this.playerUpdate = false;
+        return res;
+    }
+
+    private boolean isPlayerActing()
+    {
+        if (this.mc.playerController instanceof PlayerControllerOF)
+        {
+            PlayerControllerOF pcof = (PlayerControllerOF)this.mc.playerController;
+            return pcof.isActing();
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public boolean isPlayerUpdate()
+    {
+        return this.playerUpdate;
     }
 }

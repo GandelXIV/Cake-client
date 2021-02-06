@@ -376,7 +376,7 @@ public abstract class MobSpawnerBaseLogic
         this.randomEntity = p_98277_1_;
     }
 
-    public abstract void func_98267_a(int p_98267_1_);
+    public abstract void func_98267_a(int var1);
 
     public abstract World getSpawnerWorld();
 

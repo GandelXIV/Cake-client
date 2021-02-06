@@ -8,11 +8,11 @@ import net.minecraft.network.login.server.S03PacketEnableCompression;
 
 public interface INetHandlerLoginClient extends INetHandler
 {
-    void handleEncryptionRequest(S01PacketEncryptionRequest packetIn);
+    void handleEncryptionRequest(S01PacketEncryptionRequest var1);
 
-    void handleLoginSuccess(S02PacketLoginSuccess packetIn);
+    void handleLoginSuccess(S02PacketLoginSuccess var1);
 
-    void handleDisconnect(S00PacketDisconnect packetIn);
+    void handleDisconnect(S00PacketDisconnect var1);
 
-    void func_180464_a(S03PacketEnableCompression p_180464_1_);
+    void func_180464_a(S03PacketEnableCompression var1);
 }

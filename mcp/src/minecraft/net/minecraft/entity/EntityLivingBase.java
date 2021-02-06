@@ -1441,14 +1441,14 @@ public abstract class EntityLivingBase extends Entity
     /**
      * 0: Tool in Hand; 1-4: Armor
      */
-    public abstract ItemStack getEquipmentInSlot(int p_71124_1_);
+    public abstract ItemStack getEquipmentInSlot(int var1);
 
-    public abstract ItemStack getCurrentArmor(int p_82169_1_);
+    public abstract ItemStack getCurrentArmor(int var1);
 
     /**
      * Sets the held item, or an armor slot. Slot 0 is held item. Slot 1-4 is armor. Params: Item, slot
      */
-    public abstract void setCurrentItemOrArmor(int slotIn, ItemStack itemStackIn);
+    public abstract void setCurrentItemOrArmor(int var1, ItemStack var2);
 
     /**
      * Set sprinting switch for Entity.

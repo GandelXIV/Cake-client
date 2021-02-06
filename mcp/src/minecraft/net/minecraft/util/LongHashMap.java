@@ -31,18 +31,18 @@ public class LongHashMap
     /**
      * returns the hashed key given the original key
      */
-    private static int getHashedKey(long p_76155_0_)
+    private static int getHashedKey(long originalKey)
     {
-        return hash((int)(p_76155_0_ ^ p_76155_0_ >>> 32));
+        return (int)(originalKey ^ originalKey >>> 27);
     }
 
     /**
      * the hash function
      */
-    private static int hash(int p_76157_0_)
+    private static int hash(int integer)
     {
-        p_76157_0_ ^= p_76157_0_ >>> 20 ^ p_76157_0_ >>> 12;
-        return p_76157_0_ ^ p_76157_0_ >>> 7 ^ p_76157_0_ >>> 4;
+        integer ^= integer >>> 20 ^ integer >>> 12;
+        return integer ^ integer >>> 7 ^ integer >>> 4;
     }
 
     /**
@@ -135,7 +135,9 @@ public class LongHashMap
             this.copyHashTableTo(var4);
             this.hashArray = var4;
             this.field_180201_c = this.hashArray.length - 1;
-            this.capacity = (int)((float)p_76153_1_ * this.percentUseable);
+            float var10001 = (float)p_76153_1_;
+            this.getClass();
+            this.capacity = (int)(var10001 * 0.75F);
         }
     }
 
@@ -228,6 +230,21 @@ public class LongHashMap
         {
             this.resizeTable(2 * this.hashArray.length);
         }
+    }
+
+    public double getKeyDistribution()
+    {
+        int countValid = 0;
+
+        for (int i = 0; i < this.hashArray.length; ++i)
+        {
+            if (this.hashArray[i] != null)
+            {
+                ++countValid;
+            }
+        }
+
+        return 1.0D * (double)countValid / (double)this.numHashElements;
     }
 
     static class Entry

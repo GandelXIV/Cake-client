@@ -50,7 +50,7 @@ public abstract class BaseAttributeMap
         }
     }
 
-    protected abstract IAttributeInstance func_180376_c(IAttribute p_180376_1_);
+    protected abstract IAttributeInstance func_180376_c(IAttribute var1);
 
     public Collection getAllAttributes()
     {

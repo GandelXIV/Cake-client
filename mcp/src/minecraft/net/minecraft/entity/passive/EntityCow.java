@@ -150,4 +150,5 @@ public class EntityCow extends EntityAnimal
     {
         return this.height;
     }
+
 }

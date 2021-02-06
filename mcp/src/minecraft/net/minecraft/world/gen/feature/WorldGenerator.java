@@ -25,7 +25,7 @@ public abstract class WorldGenerator
         this.doBlockNotify = p_i2013_1_;
     }
 
-    public abstract boolean generate(World worldIn, Random p_180709_2_, BlockPos p_180709_3_);
+    public abstract boolean generate(World var1, Random var2, BlockPos var3);
 
     public void func_175904_e() {}
 

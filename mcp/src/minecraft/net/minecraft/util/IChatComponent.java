@@ -18,19 +18,19 @@ import java.util.Map.Entry;
 
 public interface IChatComponent extends Iterable
 {
-    IChatComponent setChatStyle(ChatStyle style);
+    IChatComponent setChatStyle(ChatStyle var1);
 
     ChatStyle getChatStyle();
 
     /**
      * Appends the given text to the end of this component.
      */
-    IChatComponent appendText(String text);
+    IChatComponent appendText(String var1);
 
     /**
      * Appends the given component to the end of this one.
      */
-    IChatComponent appendSibling(IChatComponent component);
+    IChatComponent appendSibling(IChatComponent var1);
 
     /**
      * Gets the text of this component, without any special formatting codes added, for chat.  TODO: why is this two
@@ -302,6 +302,7 @@ public interface IChatComponent extends Iterable
         {
             return this.serialize((IChatComponent)p_serialize_1_, p_serialize_2_, p_serialize_3_);
         }
+
 
         static
         {

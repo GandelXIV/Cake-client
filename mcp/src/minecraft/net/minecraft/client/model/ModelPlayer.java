@@ -129,15 +129,6 @@ public class ModelPlayer extends ModelBiped
         func_178685_a(this.bipedLeftArm, this.field_178734_a);
         func_178685_a(this.bipedRightArm, this.field_178732_b);
         func_178685_a(this.bipedBody, this.field_178730_v);
-
-        if (p_78087_7_.isSneaking())
-        {
-            this.field_178729_w.rotationPointY = 2.0F;
-        }
-        else
-        {
-            this.field_178729_w.rotationPointY = 0.0F;
-        }
     }
 
     public void func_178725_a()

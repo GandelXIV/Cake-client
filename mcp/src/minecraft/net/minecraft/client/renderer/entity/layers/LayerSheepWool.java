@@ -7,6 +7,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.ResourceLocation;
+import optifine.Config;
+import optifine.CustomColors;
 
 public class LayerSheepWool implements LayerRenderer
 {
@@ -28,7 +30,7 @@ public class LayerSheepWool implements LayerRenderer
 
             if (p_177162_1_.hasCustomName() && "jeb_".equals(p_177162_1_.getCustomNameTag()))
             {
-                boolean var17 = true;
+                boolean var91 = true;
                 int var10 = p_177162_1_.ticksExisted / 25 + p_177162_1_.getEntityId();
                 int var11 = EnumDyeColor.values().length;
                 int var12 = var10 % var11;
@@ -36,11 +38,24 @@ public class LayerSheepWool implements LayerRenderer
                 float var14 = ((float)(p_177162_1_.ticksExisted % 25) + p_177162_4_) / 25.0F;
                 float[] var15 = EntitySheep.func_175513_a(EnumDyeColor.func_176764_b(var12));
                 float[] var16 = EntitySheep.func_175513_a(EnumDyeColor.func_176764_b(var13));
+
+                if (Config.isCustomColors())
+                {
+                    var15 = CustomColors.getSheepColors(EnumDyeColor.func_176764_b(var12), var15);
+                    var16 = CustomColors.getSheepColors(EnumDyeColor.func_176764_b(var13), var16);
+                }
+
                 GlStateManager.color(var15[0] * (1.0F - var14) + var16[0] * var14, var15[1] * (1.0F - var14) + var16[1] * var14, var15[2] * (1.0F - var14) + var16[2] * var14);
             }
             else
             {
                 float[] var9 = EntitySheep.func_175513_a(p_177162_1_.func_175509_cj());
+
+                if (Config.isCustomColors())
+                {
+                    var9 = CustomColors.getSheepColors(p_177162_1_.func_175509_cj(), var9);
+                }
+
                 GlStateManager.color(var9[0], var9[1], var9[2]);
             }
 

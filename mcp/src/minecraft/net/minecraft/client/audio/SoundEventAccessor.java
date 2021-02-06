@@ -21,4 +21,9 @@ public class SoundEventAccessor implements ISoundEventAccessor
     {
         return new SoundPoolEntry(this.entry);
     }
+
+    public Object cloneEntry1()
+    {
+        return this.cloneEntry();
+    }
 }

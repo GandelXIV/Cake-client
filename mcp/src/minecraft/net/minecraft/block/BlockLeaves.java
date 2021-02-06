@@ -304,5 +304,5 @@ public abstract class BlockLeaves extends BlockLeavesBase
         return false;
     }
 
-    public abstract BlockPlanks.EnumType func_176233_b(int p_176233_1_);
+    public abstract BlockPlanks.EnumType func_176233_b(int var1);
 }

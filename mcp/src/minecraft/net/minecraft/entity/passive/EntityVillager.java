@@ -922,7 +922,7 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant
 
     interface ITradeList
     {
-        void func_179401_a(MerchantRecipeList p_179401_1_, Random p_179401_2_);
+        void func_179401_a(MerchantRecipeList var1, Random var2);
     }
 
     static class ItemAndEmeraldToItem implements EntityVillager.ITradeList

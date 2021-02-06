@@ -19,7 +19,7 @@ public interface IScoreObjectiveCriteria
 
     String getName();
 
-    int func_96635_a(List p_96635_1_);
+    int func_96635_a(List var1);
 
     boolean isReadOnly();
 

@@ -7,7 +7,7 @@ import net.minecraft.util.EnumFacing;
 
 public interface IBakedModel
 {
-    List func_177551_a(EnumFacing p_177551_1_);
+    List func_177551_a(EnumFacing var1);
 
     List func_177550_a();
 

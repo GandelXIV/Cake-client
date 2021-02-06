@@ -162,28 +162,26 @@ public class ChunkRenderWorker implements Runnable
                 {
                     ChunkRenderWorker.this.func_178473_b(p_178474_1_);
                     p_178474_1_.func_178540_f().lock();
-                    label53:
-                    {
-                        try
-                        {
-                            if (p_178474_1_.func_178546_a() == ChunkCompileTaskGenerator.Status.UPLOADING)
-                            {
-                                p_178474_1_.func_178535_a(ChunkCompileTaskGenerator.Status.DONE);
-                                break label53;
-                            }
 
+                    try
+                    {
+                        if (p_178474_1_.func_178546_a() != ChunkCompileTaskGenerator.Status.UPLOADING)
+                        {
                             if (!p_178474_1_.func_178537_h())
                             {
                                 ChunkRenderWorker.LOGGER.warn("Chunk render task was " + p_178474_1_.func_178546_a() + " when I expected it to be uploading; aborting task");
                             }
-                        }
-                        finally
-                        {
-                            p_178474_1_.func_178540_f().unlock();
+
+                            return;
                         }
 
-                        return;
+                        p_178474_1_.func_178535_a(ChunkCompileTaskGenerator.Status.DONE);
                     }
+                    finally
+                    {
+                        p_178474_1_.func_178540_f().unlock();
+                    }
+
                     p_178474_1_.func_178536_b().func_178580_a(var7);
                 }
                 public void onFailure(Throwable p_onFailure_1_)

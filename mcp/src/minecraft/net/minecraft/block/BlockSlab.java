@@ -146,7 +146,7 @@ public abstract class BlockSlab extends Block
     /**
      * Returns the slab block name with the type associated with it
      */
-    public abstract String getFullSlabName(int p_150002_1_);
+    public abstract String getFullSlabName(int var1);
 
     public int getDamageValue(World worldIn, BlockPos pos)
     {
@@ -157,7 +157,7 @@ public abstract class BlockSlab extends Block
 
     public abstract IProperty func_176551_l();
 
-    public abstract Object func_176553_a(ItemStack p_176553_1_);
+    public abstract Object func_176553_a(ItemStack var1);
 
     public static enum EnumBlockHalf implements IStringSerializable
     {

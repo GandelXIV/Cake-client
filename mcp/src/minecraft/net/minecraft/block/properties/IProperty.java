@@ -16,5 +16,5 @@ public interface IProperty
     /**
      * Get the name for the given value.
      */
-    String getName(Comparable value);
+    String getName(Comparable var1);
 }

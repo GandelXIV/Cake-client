@@ -1,11 +1,14 @@
 package net.minecraft.client.model;
 
 import com.google.common.collect.Lists;
+import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
+import optifine.ModelSprite;
+
 import org.lwjgl.opengl.GL11;
 
 public class ModelRenderer
@@ -44,9 +47,14 @@ public class ModelRenderer
     public float offsetY;
     public float offsetZ;
     private static final String __OBFID = "CL_00000874";
+    public List spriteList;
+    public boolean mirrorV;
+    float savedScale;
 
     public ModelRenderer(ModelBase p_i1172_1_, String p_i1172_2_)
     {
+        this.spriteList = new ArrayList();
+        this.mirrorV = false;
         this.textureWidth = 64.0F;
         this.textureHeight = 32.0F;
         this.showModel = true;
@@ -126,68 +134,33 @@ public class ModelRenderer
 
     public void render(float p_78785_1_)
     {
-        if (!this.isHidden)
+        if (!this.isHidden && this.showModel)
         {
-            if (this.showModel)
+            if (!this.compiled)
             {
-                if (!this.compiled)
+                this.compileDisplayList(p_78785_1_);
+            }
+
+            GlStateManager.translate(this.offsetX, this.offsetY, this.offsetZ);
+            int var2;
+
+            if (this.rotateAngleX == 0.0F && this.rotateAngleY == 0.0F && this.rotateAngleZ == 0.0F)
+            {
+                if (this.rotationPointX == 0.0F && this.rotationPointY == 0.0F && this.rotationPointZ == 0.0F)
                 {
-                    this.compileDisplayList(p_78785_1_);
-                }
+                    GlStateManager.callList(this.displayList);
 
-                GlStateManager.translate(this.offsetX, this.offsetY, this.offsetZ);
-                int var2;
-
-                if (this.rotateAngleX == 0.0F && this.rotateAngleY == 0.0F && this.rotateAngleZ == 0.0F)
-                {
-                    if (this.rotationPointX == 0.0F && this.rotationPointY == 0.0F && this.rotationPointZ == 0.0F)
+                    if (this.childModels != null)
                     {
-                        GlStateManager.callList(this.displayList);
-
-                        if (this.childModels != null)
+                        for (var2 = 0; var2 < this.childModels.size(); ++var2)
                         {
-                            for (var2 = 0; var2 < this.childModels.size(); ++var2)
-                            {
-                                ((ModelRenderer)this.childModels.get(var2)).render(p_78785_1_);
-                            }
+                            ((ModelRenderer)this.childModels.get(var2)).render(p_78785_1_);
                         }
-                    }
-                    else
-                    {
-                        GlStateManager.translate(this.rotationPointX * p_78785_1_, this.rotationPointY * p_78785_1_, this.rotationPointZ * p_78785_1_);
-                        GlStateManager.callList(this.displayList);
-
-                        if (this.childModels != null)
-                        {
-                            for (var2 = 0; var2 < this.childModels.size(); ++var2)
-                            {
-                                ((ModelRenderer)this.childModels.get(var2)).render(p_78785_1_);
-                            }
-                        }
-
-                        GlStateManager.translate(-this.rotationPointX * p_78785_1_, -this.rotationPointY * p_78785_1_, -this.rotationPointZ * p_78785_1_);
                     }
                 }
                 else
                 {
-                    GlStateManager.pushMatrix();
                     GlStateManager.translate(this.rotationPointX * p_78785_1_, this.rotationPointY * p_78785_1_, this.rotationPointZ * p_78785_1_);
-
-                    if (this.rotateAngleZ != 0.0F)
-                    {
-                        GlStateManager.rotate(this.rotateAngleZ * (180F / (float)Math.PI), 0.0F, 0.0F, 1.0F);
-                    }
-
-                    if (this.rotateAngleY != 0.0F)
-                    {
-                        GlStateManager.rotate(this.rotateAngleY * (180F / (float)Math.PI), 0.0F, 1.0F, 0.0F);
-                    }
-
-                    if (this.rotateAngleX != 0.0F)
-                    {
-                        GlStateManager.rotate(this.rotateAngleX * (180F / (float)Math.PI), 1.0F, 0.0F, 0.0F);
-                    }
-
                     GlStateManager.callList(this.displayList);
 
                     if (this.childModels != null)
@@ -198,27 +171,18 @@ public class ModelRenderer
                         }
                     }
 
-                    GlStateManager.popMatrix();
+                    GlStateManager.translate(-this.rotationPointX * p_78785_1_, -this.rotationPointY * p_78785_1_, -this.rotationPointZ * p_78785_1_);
                 }
-
-                GlStateManager.translate(-this.offsetX, -this.offsetY, -this.offsetZ);
             }
-        }
-    }
-
-    public void renderWithRotation(float p_78791_1_)
-    {
-        if (!this.isHidden)
-        {
-            if (this.showModel)
+            else
             {
-                if (!this.compiled)
-                {
-                    this.compileDisplayList(p_78791_1_);
-                }
-
                 GlStateManager.pushMatrix();
-                GlStateManager.translate(this.rotationPointX * p_78791_1_, this.rotationPointY * p_78791_1_, this.rotationPointZ * p_78791_1_);
+                GlStateManager.translate(this.rotationPointX * p_78785_1_, this.rotationPointY * p_78785_1_, this.rotationPointZ * p_78785_1_);
+
+                if (this.rotateAngleZ != 0.0F)
+                {
+                    GlStateManager.rotate(this.rotateAngleZ * (180F / (float)Math.PI), 0.0F, 0.0F, 1.0F);
+                }
 
                 if (this.rotateAngleY != 0.0F)
                 {
@@ -230,14 +194,52 @@ public class ModelRenderer
                     GlStateManager.rotate(this.rotateAngleX * (180F / (float)Math.PI), 1.0F, 0.0F, 0.0F);
                 }
 
-                if (this.rotateAngleZ != 0.0F)
+                GlStateManager.callList(this.displayList);
+
+                if (this.childModels != null)
                 {
-                    GlStateManager.rotate(this.rotateAngleZ * (180F / (float)Math.PI), 0.0F, 0.0F, 1.0F);
+                    for (var2 = 0; var2 < this.childModels.size(); ++var2)
+                    {
+                        ((ModelRenderer)this.childModels.get(var2)).render(p_78785_1_);
+                    }
                 }
 
-                GlStateManager.callList(this.displayList);
                 GlStateManager.popMatrix();
             }
+
+            GlStateManager.translate(-this.offsetX, -this.offsetY, -this.offsetZ);
+        }
+    }
+
+    public void renderWithRotation(float p_78791_1_)
+    {
+        if (!this.isHidden && this.showModel)
+        {
+            if (!this.compiled)
+            {
+                this.compileDisplayList(p_78791_1_);
+            }
+
+            GlStateManager.pushMatrix();
+            GlStateManager.translate(this.rotationPointX * p_78791_1_, this.rotationPointY * p_78791_1_, this.rotationPointZ * p_78791_1_);
+
+            if (this.rotateAngleY != 0.0F)
+            {
+                GlStateManager.rotate(this.rotateAngleY * (180F / (float)Math.PI), 0.0F, 1.0F, 0.0F);
+            }
+
+            if (this.rotateAngleX != 0.0F)
+            {
+                GlStateManager.rotate(this.rotateAngleX * (180F / (float)Math.PI), 1.0F, 0.0F, 0.0F);
+            }
+
+            if (this.rotateAngleZ != 0.0F)
+            {
+                GlStateManager.rotate(this.rotateAngleZ * (180F / (float)Math.PI), 0.0F, 0.0F, 1.0F);
+            }
+
+            GlStateManager.callList(this.displayList);
+            GlStateManager.popMatrix();
         }
     }
 
@@ -246,40 +248,37 @@ public class ModelRenderer
      */
     public void postRender(float p_78794_1_)
     {
-        if (!this.isHidden)
+        if (!this.isHidden && this.showModel)
         {
-            if (this.showModel)
+            if (!this.compiled)
             {
-                if (!this.compiled)
-                {
-                    this.compileDisplayList(p_78794_1_);
-                }
+                this.compileDisplayList(p_78794_1_);
+            }
 
-                if (this.rotateAngleX == 0.0F && this.rotateAngleY == 0.0F && this.rotateAngleZ == 0.0F)
-                {
-                    if (this.rotationPointX != 0.0F || this.rotationPointY != 0.0F || this.rotationPointZ != 0.0F)
-                    {
-                        GlStateManager.translate(this.rotationPointX * p_78794_1_, this.rotationPointY * p_78794_1_, this.rotationPointZ * p_78794_1_);
-                    }
-                }
-                else
+            if (this.rotateAngleX == 0.0F && this.rotateAngleY == 0.0F && this.rotateAngleZ == 0.0F)
+            {
+                if (this.rotationPointX != 0.0F || this.rotationPointY != 0.0F || this.rotationPointZ != 0.0F)
                 {
                     GlStateManager.translate(this.rotationPointX * p_78794_1_, this.rotationPointY * p_78794_1_, this.rotationPointZ * p_78794_1_);
+                }
+            }
+            else
+            {
+                GlStateManager.translate(this.rotationPointX * p_78794_1_, this.rotationPointY * p_78794_1_, this.rotationPointZ * p_78794_1_);
 
-                    if (this.rotateAngleZ != 0.0F)
-                    {
-                        GlStateManager.rotate(this.rotateAngleZ * (180F / (float)Math.PI), 0.0F, 0.0F, 1.0F);
-                    }
+                if (this.rotateAngleZ != 0.0F)
+                {
+                    GlStateManager.rotate(this.rotateAngleZ * (180F / (float)Math.PI), 0.0F, 0.0F, 1.0F);
+                }
 
-                    if (this.rotateAngleY != 0.0F)
-                    {
-                        GlStateManager.rotate(this.rotateAngleY * (180F / (float)Math.PI), 0.0F, 1.0F, 0.0F);
-                    }
+                if (this.rotateAngleY != 0.0F)
+                {
+                    GlStateManager.rotate(this.rotateAngleY * (180F / (float)Math.PI), 0.0F, 1.0F, 0.0F);
+                }
 
-                    if (this.rotateAngleX != 0.0F)
-                    {
-                        GlStateManager.rotate(this.rotateAngleX * (180F / (float)Math.PI), 1.0F, 0.0F, 0.0F);
-                    }
+                if (this.rotateAngleX != 0.0F)
+                {
+                    GlStateManager.rotate(this.rotateAngleX * (180F / (float)Math.PI), 1.0F, 0.0F, 0.0F);
                 }
             }
         }
@@ -290,13 +289,25 @@ public class ModelRenderer
      */
     private void compileDisplayList(float p_78788_1_)
     {
-        this.displayList = GLAllocation.generateDisplayLists(1);
+        if (this.displayList == 0)
+        {
+            this.savedScale = p_78788_1_;
+            this.displayList = GLAllocation.generateDisplayLists(1);
+        }
+
         GL11.glNewList(this.displayList, GL11.GL_COMPILE);
         WorldRenderer var2 = Tessellator.getInstance().getWorldRenderer();
+        int i;
 
-        for (int var3 = 0; var3 < this.cubeList.size(); ++var3)
+        for (i = 0; i < this.cubeList.size(); ++i)
         {
-            ((ModelBox)this.cubeList.get(var3)).render(var2, p_78788_1_);
+            ((ModelBox)this.cubeList.get(i)).render(var2, p_78788_1_);
+        }
+
+        for (i = 0; i < this.spriteList.size(); ++i)
+        {
+            ModelSprite sprite = (ModelSprite)this.spriteList.get(i);
+            sprite.render(Tessellator.getInstance(), p_78788_1_);
         }
 
         GL11.glEndList();
@@ -311,5 +322,29 @@ public class ModelRenderer
         this.textureWidth = (float)p_78787_1_;
         this.textureHeight = (float)p_78787_2_;
         return this;
+    }
+
+    public void addSprite(float posX, float posY, float posZ, int sizeX, int sizeY, int sizeZ, float sizeAdd)
+    {
+        this.spriteList.add(new ModelSprite(this, this.textureOffsetX, this.textureOffsetY, posX, posY, posZ, sizeX, sizeY, sizeZ, sizeAdd));
+    }
+
+    public boolean getCompiled()
+    {
+        return this.compiled;
+    }
+
+    public int getDisplayList()
+    {
+        return this.displayList;
+    }
+
+    public void resetDisplayList()
+    {
+        if (this.compiled)
+        {
+            this.compiled = false;
+            this.compileDisplayList(this.savedScale);
+        }
     }
 }

@@ -1,4 +1,5 @@
 package CakeClient.modules.render;
+
 import CakeClient.modules.Module;
 
 public class FullBright extends Module

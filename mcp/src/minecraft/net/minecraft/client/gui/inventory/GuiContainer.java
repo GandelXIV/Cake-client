@@ -223,7 +223,7 @@ public abstract class GuiContainer extends GuiScreen
     /**
      * Args : renderPartialTicks, mouseX, mouseY
      */
-    protected abstract void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY);
+    protected abstract void drawGuiContainerBackgroundLayer(float var1, int var2, int var3);
 
     private void drawSlot(Slot slotIn)
     {

@@ -18,7 +18,10 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import optifine.Config;
+
 import org.lwjgl.opengl.GL11;
+import shadersmod.client.Shaders;
 
 public abstract class Render
 {
@@ -30,7 +33,6 @@ public abstract class Render
      * Determines the darkness of the object's shadow. Higher value makes a darker shadow.
      */
     protected float shadowOpaque = 1.0F;
-    private static final String __OBFID = "CL_00000992";
 
     protected Render(RenderManager p_i46179_1_)
     {
@@ -74,7 +76,7 @@ public abstract class Render
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected abstract ResourceLocation getEntityTexture(Entity p_110775_1_);
+    protected abstract ResourceLocation getEntityTexture(Entity var1);
 
     protected boolean bindEntityTexture(Entity p_180548_1_)
     {
@@ -160,56 +162,59 @@ public abstract class Render
      */
     private void renderShadow(Entity p_76975_1_, double p_76975_2_, double p_76975_4_, double p_76975_6_, float p_76975_8_, float p_76975_9_)
     {
-        GlStateManager.enableBlend();
-        GlStateManager.blendFunc(770, 771);
-        this.renderManager.renderEngine.bindTexture(shadowTextures);
-        World var10 = this.getWorldFromRenderManager();
-        GlStateManager.depthMask(false);
-        float var11 = this.shadowSize;
-
-        if (p_76975_1_ instanceof EntityLiving)
+        if (!Config.isShaders() || !Shaders.shouldSkipDefaultShadow)
         {
-            EntityLiving var12 = (EntityLiving)p_76975_1_;
-            var11 *= var12.getRenderSizeModifier();
+            GlStateManager.enableBlend();
+            GlStateManager.blendFunc(770, 771);
+            this.renderManager.renderEngine.bindTexture(shadowTextures);
+            World var10 = this.getWorldFromRenderManager();
+            GlStateManager.depthMask(false);
+            float var11 = this.shadowSize;
 
-            if (var12.isChild())
+            if (p_76975_1_ instanceof EntityLiving)
             {
-                var11 *= 0.5F;
+                EntityLiving var35 = (EntityLiving)p_76975_1_;
+                var11 *= var35.getRenderSizeModifier();
+
+                if (var35.isChild())
+                {
+                    var11 *= 0.5F;
+                }
             }
-        }
 
-        double var35 = p_76975_1_.lastTickPosX + (p_76975_1_.posX - p_76975_1_.lastTickPosX) * (double)p_76975_9_;
-        double var14 = p_76975_1_.lastTickPosY + (p_76975_1_.posY - p_76975_1_.lastTickPosY) * (double)p_76975_9_;
-        double var16 = p_76975_1_.lastTickPosZ + (p_76975_1_.posZ - p_76975_1_.lastTickPosZ) * (double)p_76975_9_;
-        int var18 = MathHelper.floor_double(var35 - (double)var11);
-        int var19 = MathHelper.floor_double(var35 + (double)var11);
-        int var20 = MathHelper.floor_double(var14 - (double)var11);
-        int var21 = MathHelper.floor_double(var14);
-        int var22 = MathHelper.floor_double(var16 - (double)var11);
-        int var23 = MathHelper.floor_double(var16 + (double)var11);
-        double var24 = p_76975_2_ - var35;
-        double var26 = p_76975_4_ - var14;
-        double var28 = p_76975_6_ - var16;
-        Tessellator var30 = Tessellator.getInstance();
-        WorldRenderer var31 = var30.getWorldRenderer();
-        var31.startDrawingQuads();
-        Iterator var32 = BlockPos.getAllInBox(new BlockPos(var18, var20, var22), new BlockPos(var19, var21, var23)).iterator();
+            double var351 = p_76975_1_.lastTickPosX + (p_76975_1_.posX - p_76975_1_.lastTickPosX) * (double)p_76975_9_;
+            double var14 = p_76975_1_.lastTickPosY + (p_76975_1_.posY - p_76975_1_.lastTickPosY) * (double)p_76975_9_;
+            double var16 = p_76975_1_.lastTickPosZ + (p_76975_1_.posZ - p_76975_1_.lastTickPosZ) * (double)p_76975_9_;
+            int var18 = MathHelper.floor_double(var351 - (double)var11);
+            int var19 = MathHelper.floor_double(var351 + (double)var11);
+            int var20 = MathHelper.floor_double(var14 - (double)var11);
+            int var21 = MathHelper.floor_double(var14);
+            int var22 = MathHelper.floor_double(var16 - (double)var11);
+            int var23 = MathHelper.floor_double(var16 + (double)var11);
+            double var24 = p_76975_2_ - var351;
+            double var26 = p_76975_4_ - var14;
+            double var28 = p_76975_6_ - var16;
+            Tessellator var30 = Tessellator.getInstance();
+            WorldRenderer var31 = var30.getWorldRenderer();
+            var31.startDrawingQuads();
+            Iterator var32 = BlockPos.getAllInBox(new BlockPos(var18, var20, var22), new BlockPos(var19, var21, var23)).iterator();
 
-        while (var32.hasNext())
-        {
-            BlockPos var33 = (BlockPos)var32.next();
-            Block var34 = var10.getBlockState(var33.offsetDown()).getBlock();
-
-            if (var34.getRenderType() != -1 && var10.getLightFromNeighbors(var33) > 3)
+            while (var32.hasNext())
             {
-                this.func_180549_a(var34, p_76975_2_, p_76975_4_, p_76975_6_, var33, p_76975_8_, var11, var24, var26, var28);
-            }
-        }
+                BlockPos var33 = (BlockPos)var32.next();
+                Block var34 = var10.getBlockState(var33.offsetDown()).getBlock();
 
-        var30.draw();
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        GlStateManager.disableBlend();
-        GlStateManager.depthMask(true);
+                if (var34.getRenderType() != -1 && var10.getLightFromNeighbors(var33) > 3)
+                {
+                    this.func_180549_a(var34, p_76975_2_, p_76975_4_, p_76975_6_, var33, p_76975_8_, var11, var24, var26, var28);
+                }
+            }
+
+            var30.draw();
+            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.disableBlend();
+            GlStateManager.depthMask(true);
+        }
     }
 
     /**

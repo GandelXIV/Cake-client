@@ -41,12 +41,18 @@ public class LayerCape implements LayerRenderer
                 var21 = 0.0F;
             }
 
+            if (var21 > 165.0F)
+            {
+                var21 = 165.0F;
+            }
+
             float var23 = p_177166_1_.prevCameraYaw + (p_177166_1_.cameraYaw - p_177166_1_.prevCameraYaw) * p_177166_4_;
             var20 += MathHelper.sin((p_177166_1_.prevDistanceWalkedModified + (p_177166_1_.distanceWalkedModified - p_177166_1_.prevDistanceWalkedModified) * p_177166_4_) * 6.0F) * 32.0F * var23;
 
             if (p_177166_1_.isSneaking())
             {
                 var20 += 25.0F;
+                GlStateManager.translate(0.0F, 0.142F, -0.0178F);
             }
 
             GlStateManager.rotate(6.0F + var21 / 2.0F + var20, 1.0F, 0.0F, 0.0F);

@@ -891,31 +891,31 @@ public class ChatController
 
     public interface ChatListener
     {
-        void func_176023_d(ErrorCode p_176023_1_);
+        void func_176023_d(ErrorCode var1);
 
-        void func_176022_e(ErrorCode p_176022_1_);
+        void func_176022_e(ErrorCode var1);
 
         void func_176021_d();
 
         void func_176024_e();
 
-        void func_176017_a(ChatController.ChatState p_176017_1_);
+        void func_176017_a(ChatController.ChatState var1);
 
-        void func_176025_a(String p_176025_1_, ChatTokenizedMessage[] p_176025_2_);
+        void func_176025_a(String var1, ChatTokenizedMessage[] var2);
 
-        void func_180605_a(String p_180605_1_, ChatRawMessage[] p_180605_2_);
+        void func_180605_a(String var1, ChatRawMessage[] var2);
 
-        void func_176018_a(String p_176018_1_, ChatUserInfo[] p_176018_2_, ChatUserInfo[] p_176018_3_, ChatUserInfo[] p_176018_4_);
+        void func_176018_a(String var1, ChatUserInfo[] var2, ChatUserInfo[] var3, ChatUserInfo[] var4);
 
-        void func_180606_a(String p_180606_1_);
+        void func_180606_a(String var1);
 
-        void func_180607_b(String p_180607_1_);
+        void func_180607_b(String var1);
 
-        void func_176019_a(String p_176019_1_, String p_176019_2_);
+        void func_176019_a(String var1, String var2);
 
-        void func_176016_c(String p_176016_1_);
+        void func_176016_c(String var1);
 
-        void func_176020_d(String p_176020_1_);
+        void func_176020_d(String var1);
     }
 
     public static enum ChatState

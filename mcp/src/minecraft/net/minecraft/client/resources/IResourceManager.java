@@ -9,7 +9,7 @@ public interface IResourceManager
 {
     Set getResourceDomains();
 
-    IResource getResource(ResourceLocation p_110536_1_) throws IOException;
+    IResource getResource(ResourceLocation var1) throws IOException;
 
-    List getAllResources(ResourceLocation p_135056_1_) throws IOException;
+    List getAllResources(ResourceLocation var1) throws IOException;
 }

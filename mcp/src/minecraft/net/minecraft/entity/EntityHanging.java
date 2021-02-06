@@ -267,7 +267,7 @@ public abstract class EntityHanging extends Entity
     /**
      * Called when this entity is broken. Entity parameter may be null.
      */
-    public abstract void onBroken(Entity p_110128_1_);
+    public abstract void onBroken(Entity var1);
 
     protected boolean shouldSetPosAfterLoading()
     {

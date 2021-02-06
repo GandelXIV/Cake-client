@@ -11,28 +11,28 @@ public interface IChunkProvider
     /**
      * Checks to see if a chunk exists at x, y
      */
-    boolean chunkExists(int p_73149_1_, int p_73149_2_);
+    boolean chunkExists(int var1, int var2);
 
     /**
      * Will return back a chunk, if it doesn't exist and its not a MP client it will generates all the blocks for the
      * specified chunk from the map seed and chunk seed
      */
-    Chunk provideChunk(int p_73154_1_, int p_73154_2_);
+    Chunk provideChunk(int var1, int var2);
 
-    Chunk func_177459_a(BlockPos p_177459_1_);
+    Chunk func_177459_a(BlockPos var1);
 
     /**
      * Populates chunk with ores etc etc
      */
-    void populate(IChunkProvider p_73153_1_, int p_73153_2_, int p_73153_3_);
+    void populate(IChunkProvider var1, int var2, int var3);
 
-    boolean func_177460_a(IChunkProvider p_177460_1_, Chunk p_177460_2_, int p_177460_3_, int p_177460_4_);
+    boolean func_177460_a(IChunkProvider var1, Chunk var2, int var3, int var4);
 
     /**
      * Two modes of operation: if passed true, save all Chunks in one go.  If passed false, save up to two chunks.
      * Return true if all chunks have been saved.
      */
-    boolean saveChunks(boolean p_73151_1_, IProgressUpdate p_73151_2_);
+    boolean saveChunks(boolean var1, IProgressUpdate var2);
 
     /**
      * Unloads chunks that are marked to be unloaded. This is not guaranteed to unload every such chunk.
@@ -49,13 +49,13 @@ public interface IChunkProvider
      */
     String makeString();
 
-    List func_177458_a(EnumCreatureType p_177458_1_, BlockPos p_177458_2_);
+    List func_177458_a(EnumCreatureType var1, BlockPos var2);
 
-    BlockPos func_180513_a(World worldIn, String p_180513_2_, BlockPos p_180513_3_);
+    BlockPos func_180513_a(World var1, String var2, BlockPos var3);
 
     int getLoadedChunkCount();
 
-    void func_180514_a(Chunk p_180514_1_, int p_180514_2_, int p_180514_3_);
+    void func_180514_a(Chunk var1, int var2, int var3);
 
     /**
      * Save extra data not associated with any Chunk.  Not saved during autosave, only during world unload.  Currently

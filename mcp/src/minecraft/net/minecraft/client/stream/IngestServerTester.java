@@ -485,7 +485,7 @@ public class IngestServerTester
 
     public interface IngestTestListener
     {
-        void func_152907_a(IngestServerTester p_152907_1_, IngestServerTester.IngestTestState p_152907_2_);
+        void func_152907_a(IngestServerTester var1, IngestServerTester.IngestTestState var2);
     }
 
     public static enum IngestTestState

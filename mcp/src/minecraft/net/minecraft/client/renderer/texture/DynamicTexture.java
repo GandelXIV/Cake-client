@@ -3,6 +3,8 @@ package net.minecraft.client.renderer.texture;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import net.minecraft.client.resources.IResourceManager;
+import optifine.Config;
+import shadersmod.client.ShadersTex;
 
 public class DynamicTexture extends AbstractTexture
 {
@@ -14,6 +16,7 @@ public class DynamicTexture extends AbstractTexture
     /** height of this icon in pixels */
     private final int height;
     private static final String __OBFID = "CL_00001048";
+    private boolean shadersInitialized;
 
     public DynamicTexture(BufferedImage p_i1270_1_)
     {
@@ -24,17 +27,40 @@ public class DynamicTexture extends AbstractTexture
 
     public DynamicTexture(int p_i1271_1_, int p_i1271_2_)
     {
+        this.shadersInitialized = false;
         this.width = p_i1271_1_;
         this.height = p_i1271_2_;
-        this.dynamicTextureData = new int[p_i1271_1_ * p_i1271_2_];
-        TextureUtil.allocateTexture(this.getGlTextureId(), p_i1271_1_, p_i1271_2_);
+        this.dynamicTextureData = new int[p_i1271_1_ * p_i1271_2_ * 3];
+
+        if (Config.isShaders())
+        {
+            ShadersTex.initDynamicTexture(this.getGlTextureId(), p_i1271_1_, p_i1271_2_, this);
+            this.shadersInitialized = true;
+        }
+        else
+        {
+            TextureUtil.allocateTexture(this.getGlTextureId(), p_i1271_1_, p_i1271_2_);
+        }
     }
 
     public void loadTexture(IResourceManager p_110551_1_) throws IOException {}
 
     public void updateDynamicTexture()
     {
-        TextureUtil.uploadTexture(this.getGlTextureId(), this.dynamicTextureData, this.width, this.height);
+        if (Config.isShaders())
+        {
+            if (!this.shadersInitialized)
+            {
+                ShadersTex.initDynamicTexture(this.getGlTextureId(), this.width, this.height, this);
+                this.shadersInitialized = true;
+            }
+
+            ShadersTex.updateDynamicTexture(this.getGlTextureId(), this.dynamicTextureData, this.width, this.height, this);
+        }
+        else
+        {
+            TextureUtil.uploadTexture(this.getGlTextureId(), this.dynamicTextureData, this.width, this.height);
+        }
     }
 
     public int[] getTextureData()

@@ -8,6 +8,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import optifine.Config;
+import optifine.CustomColors;
 
 public class RenderXPOrb extends Render
 {
@@ -58,6 +60,17 @@ public class RenderXPOrb extends Render
         Tessellator var25 = Tessellator.getInstance();
         WorldRenderer var26 = var25.getWorldRenderer();
         var26.startDrawingQuads();
+
+        if (Config.isCustomColors())
+        {
+            int col = CustomColors.getXpOrbColor(var27);
+
+            if (col >= 0)
+            {
+                var23 = col;
+            }
+        }
+
         var26.func_178974_a(var23, 128);
         var26.func_178980_d(0.0F, 1.0F, 0.0F);
         var26.addVertexWithUV((double)(0.0F - var16), (double)(0.0F - var17), 0.0D, (double)var11, (double)var14);

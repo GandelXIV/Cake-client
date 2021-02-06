@@ -141,6 +141,6 @@ public class GuiSlider extends GuiButton
 
     public interface FormatHelper
     {
-        String func_175318_a(int p_175318_1_, String p_175318_2_, float p_175318_3_);
+        String func_175318_a(int var1, String var2, float var3);
     }
 }

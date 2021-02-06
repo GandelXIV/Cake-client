@@ -17,15 +17,30 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSettings;
+import optifine.CapeUtils;
+import optifine.Config;
+import optifine.PlayerConfigurations;
+import optifine.Reflector;
 
 public abstract class AbstractClientPlayer extends EntityPlayer
 {
     private NetworkPlayerInfo field_175157_a;
+    private ResourceLocation locationOfCape = null;
+    private String nameClear = null;
     private static final String __OBFID = "CL_00000935";
 
     public AbstractClientPlayer(World worldIn, GameProfile p_i45074_2_)
     {
         super(worldIn, p_i45074_2_);
+        this.nameClear = p_i45074_2_.getName();
+
+        if (this.nameClear != null && !this.nameClear.isEmpty())
+        {
+            this.nameClear = StringUtils.stripControlCodes(this.nameClear);
+        }
+
+        CapeUtils.downloadCape(this);
+        PlayerConfigurations.getPlayerConfiguration(this);
     }
 
     public boolean func_175149_v()
@@ -63,8 +78,19 @@ public abstract class AbstractClientPlayer extends EntityPlayer
 
     public ResourceLocation getLocationCape()
     {
-        NetworkPlayerInfo var1 = this.func_175155_b();
-        return var1 == null ? null : var1.func_178861_h();
+        if (!Config.isShowCapes())
+        {
+            return null;
+        }
+        else if (this.locationOfCape != null)
+        {
+            return this.locationOfCape;
+        }
+        else
+        {
+            NetworkPlayerInfo var1 = this.func_175155_b();
+            return var1 == null ? null : var1.func_178861_h();
+        }
     }
 
     public static ThreadDownloadImageData getDownloadImageSkin(ResourceLocation resourceLocationIn, String username)
@@ -126,6 +152,21 @@ public abstract class AbstractClientPlayer extends EntityPlayer
             var1 *= 1.0F - var4 * 0.15F;
         }
 
-        return var1;
+        return Reflector.ForgeHooksClient_getOffsetFOV.exists() ? Reflector.callFloat(Reflector.ForgeHooksClient_getOffsetFOV, new Object[] {this, Float.valueOf(var1)}): var1;
+    }
+
+    public String getNameClear()
+    {
+        return this.nameClear;
+    }
+
+    public ResourceLocation getLocationOfCape()
+    {
+        return this.locationOfCape;
+    }
+
+    public void setLocationOfCape(ResourceLocation locationOfCape)
+    {
+        this.locationOfCape = locationOfCape;
     }
 }

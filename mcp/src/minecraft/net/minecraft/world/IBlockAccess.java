@@ -8,22 +8,22 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 public interface IBlockAccess
 {
-    TileEntity getTileEntity(BlockPos pos);
+    TileEntity getTileEntity(BlockPos var1);
 
-    int getCombinedLight(BlockPos p_175626_1_, int p_175626_2_);
+    int getCombinedLight(BlockPos var1, int var2);
 
-    IBlockState getBlockState(BlockPos pos);
+    IBlockState getBlockState(BlockPos var1);
 
-    boolean isAirBlock(BlockPos pos);
+    boolean isAirBlock(BlockPos var1);
 
-    BiomeGenBase getBiomeGenForCoords(BlockPos pos);
+    BiomeGenBase getBiomeGenForCoords(BlockPos var1);
 
     /**
      * set by !chunk.getAreLevelsEmpty
      */
     boolean extendedLevelsInChunkCache();
 
-    int getStrongPower(BlockPos pos, EnumFacing direction);
+    int getStrongPower(BlockPos var1, EnumFacing var2);
 
     WorldType getWorldType();
 }

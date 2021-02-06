@@ -265,11 +265,11 @@ public abstract class BlockRedstoneDiode extends BlockDirectional
         return this.func_176403_d(p_176399_1_);
     }
 
-    protected abstract int func_176403_d(IBlockState p_176403_1_);
+    protected abstract int func_176403_d(IBlockState var1);
 
-    protected abstract IBlockState func_180674_e(IBlockState p_180674_1_);
+    protected abstract IBlockState func_180674_e(IBlockState var1);
 
-    protected abstract IBlockState func_180675_k(IBlockState p_180675_1_);
+    protected abstract IBlockState func_180675_k(IBlockState var1);
 
     public boolean isAssociatedBlock(Block other)
     {

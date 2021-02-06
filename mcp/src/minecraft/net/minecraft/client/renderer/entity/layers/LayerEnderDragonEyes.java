@@ -6,6 +6,8 @@ import net.minecraft.client.renderer.entity.RenderDragon;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.util.ResourceLocation;
+import optifine.Config;
+import shadersmod.client.Shaders;
 
 public class LayerEnderDragonEyes implements LayerRenderer
 {
@@ -32,6 +34,12 @@ public class LayerEnderDragonEyes implements LayerRenderer
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)var10 / 1.0F, (float)var11 / 1.0F);
         GlStateManager.enableLighting();
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+
+        if (Config.isShaders())
+        {
+            Shaders.beginSpiderEyes();
+        }
+
         this.dragonRenderer.getMainModel().render(p_177210_1_, p_177210_2_, p_177210_3_, p_177210_5_, p_177210_6_, p_177210_7_, p_177210_8_);
         this.dragonRenderer.func_177105_a(p_177210_1_, p_177210_4_);
         GlStateManager.disableBlend();

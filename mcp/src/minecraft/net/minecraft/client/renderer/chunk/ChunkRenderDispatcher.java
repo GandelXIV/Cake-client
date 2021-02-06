@@ -71,6 +71,7 @@ public class ChunkRenderDispatcher
         {
             boolean var4 = false;
             Queue var5 = this.field_178524_h;
+            Queue var81 = this.field_178524_h;
 
             synchronized (this.field_178524_h)
             {
@@ -140,7 +141,7 @@ public class ChunkRenderDispatcher
             {
                 this.field_178525_i.func_178474_a(var2);
             }
-            catch (InterruptedException var7)
+            catch (InterruptedException var8)
             {
                 ;
             }
@@ -186,12 +187,12 @@ public class ChunkRenderDispatcher
         this.field_178520_e.add(p_178512_1_);
     }
 
-    public RegionRenderCacheBuilder func_178515_c() throws InterruptedException
+    public RegionRenderCacheBuilder func_178515_c() throws InterruptedException, InterruptedException
     {
         return (RegionRenderCacheBuilder)this.field_178520_e.take();
     }
 
-    public ChunkCompileTaskGenerator func_178511_d() throws InterruptedException
+    public ChunkCompileTaskGenerator func_178511_d() throws InterruptedException, InterruptedException
     {
         return (ChunkCompileTaskGenerator)this.field_178519_d.take();
     }
@@ -199,11 +200,12 @@ public class ChunkRenderDispatcher
     public boolean func_178509_c(RenderChunk p_178509_1_)
     {
         p_178509_1_.func_178579_c().lock();
-        boolean var3;
+        boolean var4;
 
         try
         {
             final ChunkCompileTaskGenerator var2 = p_178509_1_.func_178582_e();
+            boolean var3;
 
             if (var2 == null)
             {
@@ -220,13 +222,14 @@ public class ChunkRenderDispatcher
                 }
             });
             var3 = this.field_178519_d.offer(var2);
+            var4 = var3;
         }
         finally
         {
             p_178509_1_.func_178579_c().unlock();
         }
 
-        return var3;
+        return var4;
     }
 
     public ListenableFuture func_178503_a(final EnumWorldBlockLayer p_178503_1_, final WorldRenderer p_178503_2_, final RenderChunk p_178503_3_, final CompiledChunk p_178503_4_)
@@ -256,6 +259,7 @@ public class ChunkRenderDispatcher
                 }
             }, (Object)null);
             Queue var6 = this.field_178524_h;
+            Queue var7 = this.field_178524_h;
 
             synchronized (this.field_178524_h)
             {
@@ -283,6 +287,14 @@ public class ChunkRenderDispatcher
 
     public void func_178513_e()
     {
-        this.field_178519_d.clear();
+        while (!this.field_178519_d.isEmpty())
+        {
+            ChunkCompileTaskGenerator task = (ChunkCompileTaskGenerator)this.field_178519_d.poll();
+
+            if (task != null)
+            {
+                task.func_178542_e();
+            }
+        }
     }
 }

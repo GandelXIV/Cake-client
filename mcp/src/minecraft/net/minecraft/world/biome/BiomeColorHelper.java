@@ -67,6 +67,6 @@ public class BiomeColorHelper
 
     interface ColorResolver
     {
-        int func_180283_a(BiomeGenBase p_180283_1_, BlockPos p_180283_2_);
+        int func_180283_a(BiomeGenBase var1, BlockPos var2);
     }
 }

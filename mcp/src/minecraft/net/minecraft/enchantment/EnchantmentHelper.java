@@ -573,7 +573,7 @@ public class EnchantmentHelper
 
     interface IModifier
     {
-        void calculateModifier(Enchantment p_77493_1_, int p_77493_2_);
+        void calculateModifier(Enchantment var1, int var2);
     }
 
     static final class ModifierDamage implements EnchantmentHelper.IModifier

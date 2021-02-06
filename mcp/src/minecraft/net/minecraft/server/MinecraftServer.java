@@ -1343,7 +1343,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IThre
     /**
      * On dedicated does nothing. On integrated, sets commandsAllowedForAll, gameType and allows external connections.
      */
-    public abstract String shareToLAN(WorldSettings.GameType type, boolean allowCheats);
+    public abstract String shareToLAN(WorldSettings.GameType var1, boolean var2);
 
     public int getTickCounter()
     {

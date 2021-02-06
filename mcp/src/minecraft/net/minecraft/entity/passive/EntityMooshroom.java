@@ -82,4 +82,5 @@ public class EntityMooshroom extends EntityCow
     {
         return new EntityMooshroom(this.worldObj);
     }
+
 }

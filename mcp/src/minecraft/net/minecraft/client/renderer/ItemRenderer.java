@@ -17,13 +17,19 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.MapData;
+import optifine.Config;
+import optifine.DynamicLights;
+import optifine.Reflector;
+
 import org.lwjgl.opengl.GL11;
+import shadersmod.client.Shaders;
 
 public class ItemRenderer
 {
@@ -44,7 +50,6 @@ public class ItemRenderer
 
     /** The index of the currently held item (0-8, or -1 if not yet updated) */
     private int equippedItemSlot = -1;
-    private static final String __OBFID = "CL_00000953";
 
     public ItemRenderer(Minecraft mcIn)
     {
@@ -99,6 +104,12 @@ public class ItemRenderer
     private void func_178109_a(AbstractClientPlayer p_178109_1_)
     {
         int var2 = this.mc.theWorld.getCombinedLight(new BlockPos(p_178109_1_.posX, p_178109_1_.posY + (double)p_178109_1_.getEyeHeight(), p_178109_1_.posZ), 0);
+
+        if (Config.isDynamicLights())
+        {
+            var2 = DynamicLights.getCombinedLight(this.mc.func_175606_aa(), var2);
+        }
+
         float var3 = (float)(var2 & 65535);
         float var4 = (float)(var2 >> 16);
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, var3, var4);
@@ -310,13 +321,13 @@ public class ItemRenderer
         float var6 = var3.prevRotationYaw + (var3.rotationYaw - var3.prevRotationYaw) * p_78440_1_;
         this.func_178101_a(var5, var6);
         this.func_178109_a(var3);
-        this.func_178110_a((EntityPlayerSP)var3, p_78440_1_);
+        this.func_178110_a(var3, p_78440_1_);
         GlStateManager.enableRescaleNormal();
         GlStateManager.pushMatrix();
 
         if (this.itemToRender != null)
         {
-            if (this.itemToRender.getItem() == Items.filled_map)
+            if (this.itemToRender.getItem() instanceof ItemMap)
             {
                 this.func_178097_a(var3, var5, var2, var4);
             }
@@ -373,16 +384,17 @@ public class ItemRenderer
 
         if (this.mc.thePlayer.isEntityInsideOpaqueBlock())
         {
-            IBlockState var2 = this.mc.theWorld.getBlockState(new BlockPos(this.mc.thePlayer));
+            BlockPos blockPos = new BlockPos(this.mc.thePlayer);
+            IBlockState var2 = this.mc.theWorld.getBlockState(blockPos);
             EntityPlayerSP var3 = this.mc.thePlayer;
 
-            for (int var4 = 0; var4 < 8; ++var4)
+            for (int overlayType = 0; overlayType < 8; ++overlayType)
             {
-                double var5 = var3.posX + (double)(((float)((var4 >> 0) % 2) - 0.5F) * var3.width * 0.8F);
-                double var7 = var3.posY + (double)(((float)((var4 >> 1) % 2) - 0.5F) * 0.1F);
-                double var9 = var3.posZ + (double)(((float)((var4 >> 2) % 2) - 0.5F) * var3.width * 0.8F);
-                BlockPos var11 = new BlockPos(var5, var7 + (double)var3.getEyeHeight(), var9);
-                IBlockState var12 = this.mc.theWorld.getBlockState(var11);
+                double var5 = var3.posX + (double)(((float)((overlayType >> 0) % 2) - 0.5F) * var3.width * 0.8F);
+                double var7 = var3.posY + (double)(((float)((overlayType >> 1) % 2) - 0.5F) * 0.1F);
+                double var9 = var3.posZ + (double)(((float)((overlayType >> 2) % 2) - 0.5F) * var3.width * 0.8F);
+                blockPos = new BlockPos(var5, var7 + (double)var3.getEyeHeight(), var9);
+                IBlockState var12 = this.mc.theWorld.getBlockState(blockPos);
 
                 if (var12.getBlock().isVisuallyOpaque())
                 {
@@ -392,18 +404,23 @@ public class ItemRenderer
 
             if (var2.getBlock().getRenderType() != -1)
             {
-                this.func_178108_a(p_78447_1_, this.mc.getBlockRendererDispatcher().func_175023_a().func_178122_a(var2));
+                Object var13 = Reflector.getFieldValue(Reflector.RenderBlockOverlayEvent_OverlayType_BLOCK);
+
+                if (!Reflector.callBoolean(Reflector.ForgeEventFactory_renderBlockOverlay, new Object[] {this.mc.thePlayer, Float.valueOf(p_78447_1_), var13, var2, blockPos}))
+                {
+                    this.func_178108_a(p_78447_1_, this.mc.getBlockRendererDispatcher().func_175023_a().func_178122_a(var2));
+                }
             }
         }
 
         if (!this.mc.thePlayer.func_175149_v())
         {
-            if (this.mc.thePlayer.isInsideOfMaterial(Material.water))
+            if (this.mc.thePlayer.isInsideOfMaterial(Material.water) && !Reflector.callBoolean(Reflector.ForgeEventFactory_renderWaterOverlay, new Object[] {this.mc.thePlayer, Float.valueOf(p_78447_1_)}))
             {
                 this.renderWaterOverlayTexture(p_78447_1_);
             }
 
-            if (this.mc.thePlayer.isBurning())
+            if (this.mc.thePlayer.isBurning() && !Reflector.callBoolean(Reflector.ForgeEventFactory_renderFireOverlay, new Object[] {this.mc.thePlayer, Float.valueOf(p_78447_1_)}))
             {
                 this.renderFireInFirstPerson(p_78447_1_);
             }
@@ -528,6 +545,18 @@ public class ItemRenderer
         {
             if (!this.itemToRender.getIsItemStackEqual(var2))
             {
+                if (Reflector.ForgeItem_shouldCauseReequipAnimation.exists())
+                {
+                    boolean var4 = Reflector.callBoolean(this.itemToRender.getItem(), Reflector.ForgeItem_shouldCauseReequipAnimation, new Object[] {this.itemToRender, var2, Boolean.valueOf(this.equippedItemSlot != var1.inventory.currentItem)});
+
+                    if (!var4)
+                    {
+                        this.itemToRender = var2;
+                        this.equippedItemSlot = var1.inventory.currentItem;
+                        return;
+                    }
+                }
+
                 var3 = true;
             }
         }
@@ -540,13 +569,18 @@ public class ItemRenderer
             var3 = true;
         }
 
-        float var4 = 0.4F;
+        float var41 = 0.4F;
         float var5 = var3 ? 0.0F : 1.0F;
-        float var6 = MathHelper.clamp_float(var5 - this.equippedProgress, -var4, var4);
+        float var6 = MathHelper.clamp_float(var5 - this.equippedProgress, -var41, var41);
         this.equippedProgress += var6;
 
         if (this.equippedProgress < 0.1F)
         {
+            if (Config.isShaders())
+            {
+                Shaders.itemToRender = var2;
+            }
+
             this.itemToRender = var2;
             this.equippedItemSlot = var1.inventory.currentItem;
         }
@@ -571,7 +605,6 @@ public class ItemRenderer
     static final class SwitchEnumAction
     {
         static final int[] field_178094_a = new int[EnumAction.values().length];
-        private static final String __OBFID = "CL_00002537";
 
         static
         {

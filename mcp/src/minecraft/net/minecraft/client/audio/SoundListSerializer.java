@@ -13,7 +13,7 @@ public class SoundListSerializer implements JsonDeserializer
 {
     private static final String __OBFID = "CL_00001124";
 
-    public SoundList deserialize(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_)
+    public SoundList deserialize1(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_)
     {
         JsonObject var4 = JsonUtils.getElementAsJsonObject(p_deserialize_1_, "entry");
         SoundList var5 = new SoundList();
@@ -81,5 +81,10 @@ public class SoundListSerializer implements JsonDeserializer
         }
 
         return var5;
+    }
+
+    public Object deserialize(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_)
+    {
+        return this.deserialize1(p_deserialize_1_, p_deserialize_2_, p_deserialize_3_);
     }
 }

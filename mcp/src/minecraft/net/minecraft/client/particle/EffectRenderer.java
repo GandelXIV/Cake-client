@@ -24,9 +24,12 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ReportedException;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import optifine.Config;
+import optifine.Reflector;
 
 public class EffectRenderer
 {
@@ -136,25 +139,34 @@ public class EffectRenderer
 
     public void addEffect(EntityFX p_78873_1_)
     {
-        int var2 = p_78873_1_.getFXLayer();
-        int var3 = p_78873_1_.func_174838_j() != 1.0F ? 0 : 1;
-
-        if (this.fxLayers[var2][var3].size() >= 4000)
+        if (p_78873_1_ != null)
         {
-            this.fxLayers[var2][var3].remove(0);
-        }
+            if (!(p_78873_1_ instanceof EntityFireworkSparkFX) || Config.isFireworkParticles())
+            {
+                int var2 = p_78873_1_.getFXLayer();
+                int var3 = p_78873_1_.func_174838_j() != 1.0F ? 0 : 1;
 
-        this.fxLayers[var2][var3].add(p_78873_1_);
+                if (this.fxLayers[var2][var3].size() >= 4000)
+                {
+                    this.fxLayers[var2][var3].remove(0);
+                }
+
+                if (!(p_78873_1_ instanceof Barrier) || !this.reuseBarrierParticle(p_78873_1_, this.fxLayers[var2][var3]))
+                {
+                    this.fxLayers[var2][var3].add(p_78873_1_);
+                }
+            }
+        }
     }
 
     public void updateEffects()
     {
-        for (int var1 = 0; var1 < 4; ++var1)
+        for (int var4 = 0; var4 < 4; ++var4)
         {
-            this.func_178922_a(var1);
+            this.func_178922_a(var4);
         }
 
-        ArrayList var4 = Lists.newArrayList();
+        ArrayList var41 = Lists.newArrayList();
         Iterator var2 = this.field_178933_d.iterator();
 
         while (var2.hasNext())
@@ -164,11 +176,11 @@ public class EffectRenderer
 
             if (var3.isDead)
             {
-                var4.add(var3);
+                var41.add(var3);
             }
         }
 
-        this.field_178933_d.removeAll(var4);
+        this.field_178933_d.removeAll(var41);
     }
 
     private void func_178922_a(int p_178922_1_)
@@ -231,16 +243,16 @@ public class EffectRenderer
     /**
      * Renders all current particles. Args player, partialTickTime
      */
-    public void renderParticles(Entity p_78874_1_, float p_78874_2_)
+    public void renderParticles(Entity p_78874_1_, float partialTicks)
     {
         float var3 = ActiveRenderInfo.func_178808_b();
         float var4 = ActiveRenderInfo.func_178803_d();
         float var5 = ActiveRenderInfo.func_178805_e();
         float var6 = ActiveRenderInfo.func_178807_f();
         float var7 = ActiveRenderInfo.func_178809_c();
-        EntityFX.interpPosX = p_78874_1_.lastTickPosX + (p_78874_1_.posX - p_78874_1_.lastTickPosX) * (double)p_78874_2_;
-        EntityFX.interpPosY = p_78874_1_.lastTickPosY + (p_78874_1_.posY - p_78874_1_.lastTickPosY) * (double)p_78874_2_;
-        EntityFX.interpPosZ = p_78874_1_.lastTickPosZ + (p_78874_1_.posZ - p_78874_1_.lastTickPosZ) * (double)p_78874_2_;
+        EntityFX.interpPosX = p_78874_1_.lastTickPosX + (p_78874_1_.posX - p_78874_1_.lastTickPosX) * (double)partialTicks;
+        EntityFX.interpPosY = p_78874_1_.lastTickPosY + (p_78874_1_.posY - p_78874_1_.lastTickPosY) * (double)partialTicks;
+        EntityFX.interpPosZ = p_78874_1_.lastTickPosZ + (p_78874_1_.posZ - p_78874_1_.lastTickPosZ) * (double)partialTicks;
         GlStateManager.enableBlend();
         GlStateManager.blendFunc(770, 771);
         GlStateManager.alphaFunc(516, 0.003921569F);
@@ -282,11 +294,11 @@ public class EffectRenderer
                     for (int var12 = 0; var12 < this.fxLayers[var8][var9].size(); ++var12)
                     {
                         final EntityFX var13 = (EntityFX)this.fxLayers[var8][var9].get(var12);
-                        var11.func_178963_b(var13.getBrightnessForRender(p_78874_2_));
+                        var11.func_178963_b(var13.getBrightnessForRender(partialTicks));
 
                         try
                         {
-                            var13.func_180434_a(var11, p_78874_1_, p_78874_2_, var3, var7, var4, var5, var6);
+                            var13.func_180434_a(var11, p_78874_1_, partialTicks, var3, var7, var4, var5, var6);
                         }
                         catch (Throwable var18)
                         {
@@ -367,20 +379,33 @@ public class EffectRenderer
 
     public void func_180533_a(BlockPos p_180533_1_, IBlockState p_180533_2_)
     {
-        if (p_180533_2_.getBlock().getMaterial() != Material.air)
+        boolean notAir;
+
+        if (Reflector.ForgeBlock_addDestroyEffects.exists() && Reflector.ForgeBlock_isAir.exists())
+        {
+            Block var3 = p_180533_2_.getBlock();
+            Reflector.callBoolean(var3, Reflector.ForgeBlock_isAir, new Object[] {this.worldObj, p_180533_1_});
+            notAir = !Reflector.callBoolean(var3, Reflector.ForgeBlock_isAir, new Object[] {this.worldObj, p_180533_1_}) && !Reflector.callBoolean(var3, Reflector.ForgeBlock_addDestroyEffects, new Object[] {this.worldObj, p_180533_1_, this});
+        }
+        else
+        {
+            notAir = p_180533_2_.getBlock().getMaterial() != Material.air;
+        }
+
+        if (notAir)
         {
             p_180533_2_ = p_180533_2_.getBlock().getActualState(p_180533_2_, this.worldObj, p_180533_1_);
-            byte var3 = 4;
+            byte var14 = 4;
 
-            for (int var4 = 0; var4 < var3; ++var4)
+            for (int var4 = 0; var4 < var14; ++var4)
             {
-                for (int var5 = 0; var5 < var3; ++var5)
+                for (int var5 = 0; var5 < var14; ++var5)
                 {
-                    for (int var6 = 0; var6 < var3; ++var6)
+                    for (int var6 = 0; var6 < var14; ++var6)
                     {
-                        double var7 = (double)p_180533_1_.getX() + ((double)var4 + 0.5D) / (double)var3;
-                        double var9 = (double)p_180533_1_.getY() + ((double)var5 + 0.5D) / (double)var3;
-                        double var11 = (double)p_180533_1_.getZ() + ((double)var6 + 0.5D) / (double)var3;
+                        double var7 = (double)p_180533_1_.getX() + ((double)var4 + 0.5D) / (double)var14;
+                        double var9 = (double)p_180533_1_.getY() + ((double)var5 + 0.5D) / (double)var14;
+                        double var11 = (double)p_180533_1_.getZ() + ((double)var6 + 0.5D) / (double)var14;
                         this.addEffect((new EntityDiggingFX(this.worldObj, var7, var9, var11, var7 - (double)p_180533_1_.getX() - 0.5D, var9 - (double)p_180533_1_.getY() - 0.5D, var11 - (double)p_180533_1_.getZ() - 0.5D, p_180533_2_)).func_174846_a(p_180533_1_));
                     }
                 }
@@ -472,5 +497,36 @@ public class EffectRenderer
         }
 
         return "" + var1;
+    }
+
+    private boolean reuseBarrierParticle(EntityFX entityfx, List<EntityFX> list)
+    {
+        Iterator it = list.iterator();
+        EntityFX efx;
+
+        do
+        {
+            if (!it.hasNext())
+            {
+                return false;
+            }
+
+            efx = (EntityFX)it.next();
+        }
+        while (!(efx instanceof Barrier) || entityfx.posX != efx.posX || entityfx.posY != efx.posY || entityfx.posZ != efx.posZ);
+
+        efx.particleAge = 0;
+        return true;
+    }
+
+    public void addBlockHitEffects(BlockPos pos, MovingObjectPosition target)
+    {
+        Block block = this.worldObj.getBlockState(pos).getBlock();
+        boolean blockAddHitEffects = Reflector.callBoolean(block, Reflector.ForgeBlock_addHitEffects, new Object[] {this.worldObj, target, this});
+
+        if (block != null && !blockAddHitEffects)
+        {
+            this.func_180532_a(pos, target.field_178784_b);
+        }
     }
 }

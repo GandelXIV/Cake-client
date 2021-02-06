@@ -12,10 +12,14 @@ import net.minecraft.client.settings.GameSettings;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ReportedException;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.WorldType;
+import optifine.Config;
+import optifine.Reflector;
+import shadersmod.client.SVertexBuilder;
 
 public class BlockRendererDispatcher implements IResourceManagerReloadListener
 {
@@ -24,7 +28,6 @@ public class BlockRendererDispatcher implements IResourceManagerReloadListener
     private final BlockModelRenderer blockModelRenderer = new BlockModelRenderer();
     private final ChestRenderer chestRenderer = new ChestRenderer();
     private final BlockFluidRenderer fluidRenderer = new BlockFluidRenderer();
-    private static final String __OBFID = "CL_00002520";
 
     public BlockRendererDispatcher(BlockModelShapes p_i46237_1_, GameSettings p_i46237_2_)
     {
@@ -46,6 +49,29 @@ public class BlockRendererDispatcher implements IResourceManagerReloadListener
         {
             p_175020_1_ = var5.getActualState(p_175020_1_, p_175020_4_, p_175020_2_);
             IBakedModel var7 = this.field_175028_a.func_178125_b(p_175020_1_);
+
+            if (Reflector.ISmartBlockModel.isInstance(var7))
+            {
+                IBlockState var15 = (IBlockState)Reflector.call(var5, Reflector.ForgeBlock_getExtendedState, new Object[] {p_175020_1_, p_175020_4_, p_175020_2_});
+                EnumWorldBlockLayer[] arr$ = EnumWorldBlockLayer.values();
+                int len$ = arr$.length;
+
+                for (int i$ = 0; i$ < len$; ++i$)
+                {
+                    EnumWorldBlockLayer layer = arr$[i$];
+
+                    if (Reflector.callBoolean(var5, Reflector.ForgeBlock_canRenderInLayer, new Object[] {layer}))
+                    {
+                        Reflector.callVoid(Reflector.ForgeHooksClient_setRenderLayer, new Object[] {layer});
+                        IBakedModel targetLayer = (IBakedModel)Reflector.call(var7, Reflector.ISmartBlockModel_handleBlockState, new Object[] {var15});
+                        IBakedModel damageModel = (new SimpleBakedModel.Builder(targetLayer, p_175020_3_)).func_177645_b();
+                        this.blockModelRenderer.func_178259_a(p_175020_4_, damageModel, p_175020_1_, p_175020_2_, Tessellator.getInstance().getWorldRenderer());
+                    }
+                }
+
+                return;
+            }
+
             IBakedModel var8 = (new SimpleBakedModel.Builder(var7, p_175020_3_)).func_177645_b();
             this.blockModelRenderer.func_178259_a(p_175020_4_, var8, p_175020_1_, p_175020_2_, Tessellator.getInstance().getWorldRenderer());
         }
@@ -55,34 +81,59 @@ public class BlockRendererDispatcher implements IResourceManagerReloadListener
     {
         try
         {
-            int var5 = p_175018_1_.getBlock().getRenderType();
+            int var8 = p_175018_1_.getBlock().getRenderType();
 
-            if (var5 == -1)
+            if (var8 == -1)
             {
                 return false;
             }
             else
             {
-                switch (var5)
+                switch (var8)
                 {
                     case 1:
-                        return this.fluidRenderer.func_178270_a(p_175018_3_, p_175018_1_, p_175018_2_, p_175018_4_);
+                        if (Config.isShaders())
+                        {
+                            SVertexBuilder.pushEntity(p_175018_1_, p_175018_2_, p_175018_3_, p_175018_4_);
+                        }
+
+                        boolean var61 = this.fluidRenderer.func_178270_a(p_175018_3_, p_175018_1_, p_175018_2_, p_175018_4_);
+
+                        if (Config.isShaders())
+                        {
+                            SVertexBuilder.popEntity(p_175018_4_);
+                        }
+
+                        return var61;
 
                     case 2:
                         return false;
 
                     case 3:
-                        IBakedModel var9 = this.getModelFromBlockState(p_175018_1_, p_175018_3_, p_175018_2_);
-                        return this.blockModelRenderer.func_178259_a(p_175018_3_, var9, p_175018_1_, p_175018_2_, p_175018_4_);
+                        IBakedModel var71 = this.getModelFromBlockState(p_175018_1_, p_175018_3_, p_175018_2_);
+
+                        if (Config.isShaders())
+                        {
+                            SVertexBuilder.pushEntity(p_175018_1_, p_175018_2_, p_175018_3_, p_175018_4_);
+                        }
+
+                        boolean flag3 = this.blockModelRenderer.func_178259_a(p_175018_3_, var71, p_175018_1_, p_175018_2_, p_175018_4_);
+
+                        if (Config.isShaders())
+                        {
+                            SVertexBuilder.popEntity(p_175018_4_);
+                        }
+
+                        return flag3;
 
                     default:
                         return false;
                 }
             }
         }
-        catch (Throwable var8)
+        catch (Throwable var9)
         {
-            CrashReport var6 = CrashReport.makeCrashReport(var8, "Tesselating block in world");
+            CrashReport var6 = CrashReport.makeCrashReport(var9, "Tesselating block in world");
             CrashReportCategory var7 = var6.makeCategory("Block being tesselated");
             CrashReportCategory.addBlockInfo(var7, p_175018_2_, p_175018_1_.getBlock(), p_175018_1_.getBlock().getMetaFromState(p_175018_1_));
             throw new ReportedException(var6);
@@ -116,7 +167,7 @@ public class BlockRendererDispatcher implements IResourceManagerReloadListener
             {
                 p_175022_1_ = var4.getActualState(p_175022_1_, p_175022_2_, p_175022_3_);
             }
-            catch (Exception var6)
+            catch (Exception var7)
             {
                 ;
             }
@@ -127,6 +178,12 @@ public class BlockRendererDispatcher implements IResourceManagerReloadListener
         if (p_175022_3_ != null && this.field_175026_b.field_178880_u && var5 instanceof WeightedBakedModel)
         {
             var5 = ((WeightedBakedModel)var5).func_177564_a(MathHelper.func_180186_a(p_175022_3_));
+        }
+
+        if (Reflector.ISmartBlockModel.isInstance(var5))
+        {
+            IBlockState extendedState = (IBlockState)Reflector.call(var4, Reflector.ForgeBlock_getExtendedState, new Object[] {p_175022_1_, p_175022_2_, p_175022_3_});
+            var5 = (IBakedModel)Reflector.call(var5, Reflector.ISmartBlockModel_handleBlockState, new Object[] {extendedState});
         }
 
         return var5;
@@ -168,7 +225,7 @@ public class BlockRendererDispatcher implements IResourceManagerReloadListener
         }
     }
 
-    public void onResourceManagerReload(IResourceManager p_110549_1_)
+    public void onResourceManagerReload(IResourceManager resourceManager)
     {
         this.fluidRenderer.func_178268_a();
     }

@@ -56,5 +56,5 @@ public abstract class StateMapperBase implements IStateMapper
         return this.field_178133_b;
     }
 
-    protected abstract ModelResourceLocation func_178132_a(IBlockState p_178132_1_);
+    protected abstract ModelResourceLocation func_178132_a(IBlockState var1);
 }

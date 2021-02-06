@@ -11,6 +11,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ResourceLocation;
+import optifine.Config;
+import optifine.CustomColors;
+
 import org.lwjgl.opengl.GL11;
 
 public class TileEntitySignRenderer extends TileEntitySpecialRenderer
@@ -19,7 +22,6 @@ public class TileEntitySignRenderer extends TileEntitySpecialRenderer
 
     /** The ModelSign instance for use in this renderer */
     private final ModelSign model = new ModelSign();
-    private static final String __OBFID = "CL_00000970";
 
     public void func_180541_a(TileEntitySign p_180541_1_, double p_180541_2_, double p_180541_4_, double p_180541_6_, float p_180541_8_, int p_180541_9_)
     {
@@ -31,8 +33,8 @@ public class TileEntitySignRenderer extends TileEntitySpecialRenderer
         if (var10 == Blocks.standing_sign)
         {
             GlStateManager.translate((float)p_180541_2_ + 0.5F, (float)p_180541_4_ + 0.75F * var11, (float)p_180541_6_ + 0.5F);
-            float var12 = (float)(p_180541_1_.getBlockMetadata() * 360) / 16.0F;
-            GlStateManager.rotate(-var12, 0.0F, 1.0F, 0.0F);
+            float var20 = (float)(p_180541_1_.getBlockMetadata() * 360) / 16.0F;
+            GlStateManager.rotate(-var20, 0.0F, 1.0F, 0.0F);
             this.model.signStick.showModel = true;
         }
         else
@@ -80,13 +82,18 @@ public class TileEntitySignRenderer extends TileEntitySpecialRenderer
         GlStateManager.scale(var11, -var11, -var11);
         this.model.renderSign();
         GlStateManager.popMatrix();
-        FontRenderer var20 = this.getFontRenderer();
+        FontRenderer var201 = this.getFontRenderer();
         var13 = 0.015625F * var11;
         GlStateManager.translate(0.0F, 0.5F * var11, 0.07F * var11);
         GlStateManager.scale(var13, -var13, var13);
         GL11.glNormal3f(0.0F, 0.0F, -1.0F * var13);
         GlStateManager.depthMask(false);
-        byte var14 = 0;
+        int var14 = 0;
+
+        if (Config.isCustomColors())
+        {
+            var14 = CustomColors.getSignTextColor(var14);
+        }
 
         if (p_180541_9_ < 0)
         {
@@ -95,17 +102,17 @@ public class TileEntitySignRenderer extends TileEntitySpecialRenderer
                 if (p_180541_1_.signText[var15] != null)
                 {
                     IChatComponent var16 = p_180541_1_.signText[var15];
-                    List var17 = GuiUtilRenderComponents.func_178908_a(var16, 90, var20, false, true);
+                    List var17 = GuiUtilRenderComponents.func_178908_a(var16, 90, var201, false, true);
                     String var18 = var17 != null && var17.size() > 0 ? ((IChatComponent)var17.get(0)).getFormattedText() : "";
 
                     if (var15 == p_180541_1_.lineBeingEdited)
                     {
                         var18 = "> " + var18 + " <";
-                        var20.drawString(var18, -var20.getStringWidth(var18) / 2, var15 * 10 - p_180541_1_.signText.length * 5, var14);
+                        var201.drawString(var18, -var201.getStringWidth(var18) / 2, var15 * 10 - p_180541_1_.signText.length * 5, var14);
                     }
                     else
                     {
-                        var20.drawString(var18, -var20.getStringWidth(var18) / 2, var15 * 10 - p_180541_1_.signText.length * 5, var14);
+                        var201.drawString(var18, -var201.getStringWidth(var18) / 2, var15 * 10 - p_180541_1_.signText.length * 5, var14);
                     }
                 }
             }

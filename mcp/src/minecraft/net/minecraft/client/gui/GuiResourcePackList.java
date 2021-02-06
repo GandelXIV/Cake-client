@@ -62,4 +62,12 @@ public abstract class GuiResourcePackList extends GuiListExtended
     {
         return this.right - 6;
     }
+
+    /**
+     * Gets the IGuiListEntry object for the given index
+     */
+    public GuiListExtended.IGuiListEntry getListEntry1(int p_148180_1_)
+    {
+        return this.getListEntry(p_148180_1_);
+    }
 }

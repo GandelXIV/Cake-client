@@ -230,7 +230,7 @@ public abstract class EntityFireball extends Entity
     /**
      * Called when this EntityFireball hits a block or entity.
      */
-    protected abstract void onImpact(MovingObjectPosition p_70227_1_);
+    protected abstract void onImpact(MovingObjectPosition var1);
 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.

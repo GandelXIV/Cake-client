@@ -385,7 +385,7 @@ public class SoundManager
                 }
                 else
                 {
-                    SoundPoolEntry var3 = var2.cloneEntry();
+                    SoundPoolEntry var3 = (SoundPoolEntry) var2.cloneEntry();
 
                     if (var3 == SoundHandler.missing_sound)
                     {

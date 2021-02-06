@@ -10,5 +10,5 @@ public interface INetHandlerHandshakeServer extends INetHandler
      * NetworkManager's protocol will be reconfigured according to the specified intention, although a login-intention
      * must pass a versioncheck or receive a disconnect otherwise
      */
-    void processHandshake(C00Handshake packetIn);
+    void processHandshake(C00Handshake var1);
 }

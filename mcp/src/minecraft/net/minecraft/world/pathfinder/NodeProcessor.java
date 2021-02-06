@@ -40,9 +40,9 @@ public abstract class NodeProcessor
         return var5;
     }
 
-    public abstract PathPoint func_176161_a(Entity p_176161_1_);
+    public abstract PathPoint func_176161_a(Entity var1);
 
-    public abstract PathPoint func_176160_a(Entity p_176160_1_, double p_176160_2_, double p_176160_4_, double p_176160_6_);
+    public abstract PathPoint func_176160_a(Entity var1, double var2, double var4, double var6);
 
-    public abstract int func_176164_a(PathPoint[] p_176164_1_, Entity p_176164_2_, PathPoint p_176164_3_, PathPoint p_176164_4_, float p_176164_5_);
+    public abstract int func_176164_a(PathPoint[] var1, Entity var2, PathPoint var3, PathPoint var4, float var5);
 }

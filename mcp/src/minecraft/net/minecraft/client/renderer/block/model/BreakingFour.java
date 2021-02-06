@@ -26,7 +26,8 @@ public class BreakingFour extends BakedQuad
 
     private void func_178216_a(int p_178216_1_)
     {
-        int var2 = 7 * p_178216_1_;
+        int step = this.field_178215_a.length / 4;
+        int var2 = step * p_178216_1_;
         float var3 = Float.intBitsToFloat(this.field_178215_a[var2]);
         float var4 = Float.intBitsToFloat(this.field_178215_a[var2 + 1]);
         float var5 = Float.intBitsToFloat(this.field_178215_a[var2 + 2]);

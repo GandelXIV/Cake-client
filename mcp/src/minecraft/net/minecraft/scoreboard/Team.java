@@ -21,7 +21,7 @@ public abstract class Team
      */
     public abstract String getRegisteredName();
 
-    public abstract String formatString(String input);
+    public abstract String formatString(String var1);
 
     public abstract boolean func_98297_h();
 

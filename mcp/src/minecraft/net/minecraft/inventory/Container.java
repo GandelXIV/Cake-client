@@ -606,7 +606,7 @@ public abstract class Container
         }
     }
 
-    public abstract boolean canInteractWith(EntityPlayer playerIn);
+    public abstract boolean canInteractWith(EntityPlayer var1);
 
     /**
      * Merges provided ItemStack with the first avaliable one in the container/player inventor between minIndex

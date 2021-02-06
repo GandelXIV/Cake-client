@@ -21,9 +21,9 @@ public interface IStream
 
     boolean func_152934_n();
 
-    void func_152911_a(Metadata p_152911_1_, long p_152911_2_);
+    void func_152911_a(Metadata var1, long var2);
 
-    void func_176026_a(Metadata p_176026_1_, long p_176026_2_, long p_176026_4_);
+    void func_176026_a(Metadata var1, long var2, long var4);
 
     boolean isPaused();
 
@@ -53,9 +53,9 @@ public interface IStream
 
     String func_152921_C();
 
-    ChatUserInfo func_152926_a(String p_152926_1_);
+    ChatUserInfo func_152926_a(String var1);
 
-    void func_152917_b(String p_152917_1_);
+    void func_152917_b(String var1);
 
     boolean func_152928_D();
 
@@ -63,7 +63,7 @@ public interface IStream
 
     boolean func_152913_F();
 
-    void func_152910_a(boolean p_152910_1_);
+    void func_152910_a(boolean var1);
 
     boolean func_152929_G();
 

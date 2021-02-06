@@ -6,6 +6,8 @@ import net.minecraft.client.renderer.entity.RenderEnderman;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.util.ResourceLocation;
+import optifine.Config;
+import shadersmod.client.Shaders;
 
 public class LayerEndermanEyes implements LayerRenderer
 {
@@ -41,6 +43,12 @@ public class LayerEndermanEyes implements LayerRenderer
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)var10 / 1.0F, (float)var11 / 1.0F);
         GlStateManager.enableLighting();
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+
+        if (Config.isShaders())
+        {
+            Shaders.beginSpiderEyes();
+        }
+
         this.field_177202_b.getMainModel().render(p_177201_1_, p_177201_2_, p_177201_3_, p_177201_5_, p_177201_6_, p_177201_7_, p_177201_8_);
         this.field_177202_b.func_177105_a(p_177201_1_, p_177201_4_);
         GlStateManager.disableBlend();

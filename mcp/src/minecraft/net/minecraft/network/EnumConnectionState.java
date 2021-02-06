@@ -255,9 +255,11 @@ public enum EnumConnectionState
     private static final Map STATES_BY_CLASS = Maps.newHashMap();
     private final int id;
     private final Map directionMaps;
+
+    private static final EnumConnectionState[] $VALUES = new EnumConnectionState[]{HANDSHAKING, PLAY, STATUS, LOGIN};
     private static final String __OBFID = "CL_00001245";
 
-    private EnumConnectionState(int protocolId)
+    private EnumConnectionState(String p_i45152_1_, int p_i45152_2_, int protocolId)
     {
         this.directionMaps = Maps.newEnumMap(EnumPacketDirection.class);
         this.id = protocolId;
@@ -311,9 +313,9 @@ public enum EnumConnectionState
         return (EnumConnectionState)STATES_BY_CLASS.get(packetIn.getClass());
     }
 
-    EnumConnectionState(String ignore1, int ignore2, int p_i46000_3_, Object p_i46000_4_)
+    EnumConnectionState(String p_i46000_1_, int p_i46000_2_, int p_i46000_3_, Object p_i46000_4_)
     {
-        this(p_i46000_3_);
+        this(p_i46000_1_, p_i46000_2_, p_i46000_3_);
     }
 
     static {

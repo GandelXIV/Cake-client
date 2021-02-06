@@ -14,13 +14,11 @@ public class ViewFrustum
     protected int field_178165_d;
     protected int field_178166_e;
     public RenderChunk[] field_178164_f;
-    private static final String __OBFID = "CL_00002531";
-
-    public ViewFrustum(World worldIn, int p_i46246_2_, RenderGlobal p_i46246_3_, IRenderChunkFactory p_i46246_4_)
+    public ViewFrustum(World worldIn, int renderDistanceChunks, RenderGlobal p_i46246_3_, IRenderChunkFactory p_i46246_4_)
     {
         this.field_178169_a = p_i46246_3_;
         this.field_178167_b = worldIn;
-        this.func_178159_a(p_i46246_2_);
+        this.func_178159_a(renderDistanceChunks);
         this.func_178158_a(p_i46246_4_);
     }
 
@@ -56,18 +54,18 @@ public class ViewFrustum
         }
     }
 
-    protected void func_178159_a(int p_178159_1_)
+    protected void func_178159_a(int renderDistanceChunks)
     {
-        int var2 = p_178159_1_ * 2 + 1;
+        int var2 = renderDistanceChunks * 2 + 1;
         this.field_178165_d = var2;
         this.field_178168_c = 16;
         this.field_178166_e = var2;
     }
 
-    public void func_178163_a(double p_178163_1_, double p_178163_3_)
+    public void func_178163_a(double viewEntityX, double viewEntityZ)
     {
-        int var5 = MathHelper.floor_double(p_178163_1_) - 8;
-        int var6 = MathHelper.floor_double(p_178163_3_) - 8;
+        int var5 = MathHelper.floor_double(viewEntityX) - 8;
+        int var6 = MathHelper.floor_double(viewEntityZ) - 8;
         int var7 = this.field_178165_d * 16;
 
         for (int var8 = 0; var8 < this.field_178165_d; ++var8)
@@ -82,11 +80,16 @@ public class ViewFrustum
                 {
                     int var13 = var12 * 16;
                     RenderChunk var14 = this.field_178164_f[(var10 * this.field_178168_c + var12) * this.field_178165_d + var8];
-                    BlockPos var15 = new BlockPos(var9, var13, var11);
+                    BlockPos posChunk = var14.func_178568_j();
 
-                    if (!var15.equals(var14.func_178568_j()))
+                    if (posChunk.getX() != var9 || posChunk.getY() != var13 || posChunk.getZ() != var11)
                     {
-                        var14.func_178576_a(var15);
+                        BlockPos var15 = new BlockPos(var9, var13, var11);
+
+                        if (!var15.equals(var14.func_178568_j()))
+                        {
+                            var14.func_178576_a(var15);
+                        }
                     }
                 }
             }

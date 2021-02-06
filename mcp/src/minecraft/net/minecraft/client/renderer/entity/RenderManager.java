@@ -1,6 +1,7 @@
 package net.minecraft.client.renderer.entity;
 
 import com.google.common.collect.Maps;
+import java.util.Collections;
 import java.util.Map;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
@@ -99,6 +100,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ReportedException;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import optifine.PlayerItemsLayer;
+import optifine.Reflector;
 
 public class RenderManager
 {
@@ -200,6 +203,12 @@ public class RenderManager
         this.field_178637_m = new RenderPlayer(this);
         this.field_178636_l.put("default", this.field_178637_m);
         this.field_178636_l.put("slim", new RenderPlayer(this, true));
+        PlayerItemsLayer.register(this.field_178636_l);
+
+        if (Reflector.RenderingRegistry_loadEntityRenderers.exists())
+        {
+            Reflector.call(Reflector.RenderingRegistry_loadEntityRenderers, new Object[] {this, this.entityRenderMap});
+        }
     }
 
     public void func_178628_a(double p_178628_1_, double p_178628_3_, double p_178628_5_)
@@ -249,10 +258,17 @@ public class RenderManager
             IBlockState var7 = worldIn.getBlockState(new BlockPos(p_180597_3_));
             Block var8 = var7.getBlock();
 
-            if (var8 == Blocks.bed)
+            if (Reflector.callBoolean(Reflector.ForgeBlock_isBed, new Object[] {worldIn, new BlockPos(p_180597_3_), (EntityLivingBase)p_180597_3_}))
             {
-                int var9 = ((EnumFacing)var7.getValue(BlockBed.AGE)).getHorizontalIndex();
-                this.playerViewY = (float)(var9 * 90 + 180);
+                EnumFacing var9 = (EnumFacing)Reflector.call(var8, Reflector.ForgeBlock_getBedDirection, new Object[] {worldIn, new BlockPos(p_180597_3_)});
+                int var91 = var9.getHorizontalIndex();
+                this.playerViewY = (float)(var91 * 90 + 180);
+                this.playerViewX = 0.0F;
+            }
+            else if (var8 == Blocks.bed)
+            {
+                int var92 = ((EnumFacing)var7.getValue(BlockBed.AGE)).getHorizontalIndex();
+                this.playerViewY = (float)(var92 * 90 + 180);
                 this.playerViewX = 0.0F;
             }
         }
@@ -444,18 +460,18 @@ public class RenderManager
 
         if (p_85094_1_ instanceof EntityLivingBase)
         {
-            float var13 = 0.01F;
+            float var16 = 0.01F;
             RenderGlobal.drawOutlinedBoundingBox(new AxisAlignedBB(p_85094_2_ - (double)var10, p_85094_4_ + (double)p_85094_1_.getEyeHeight() - 0.009999999776482582D, p_85094_6_ - (double)var10, p_85094_2_ + (double)var10, p_85094_4_ + (double)p_85094_1_.getEyeHeight() + 0.009999999776482582D, p_85094_6_ + (double)var10), 16711680);
         }
 
-        Tessellator var16 = Tessellator.getInstance();
-        WorldRenderer var14 = var16.getWorldRenderer();
+        Tessellator var161 = Tessellator.getInstance();
+        WorldRenderer var14 = var161.getWorldRenderer();
         Vec3 var15 = p_85094_1_.getLook(p_85094_9_);
         var14.startDrawing(3);
         var14.func_178991_c(255);
         var14.addVertex(p_85094_2_, p_85094_4_ + (double)p_85094_1_.getEyeHeight(), p_85094_6_);
         var14.addVertex(p_85094_2_ + var15.xCoord * 2.0D, p_85094_4_ + (double)p_85094_1_.getEyeHeight() + var15.yCoord * 2.0D, p_85094_6_ + var15.zCoord * 2.0D);
-        var16.draw();
+        var161.draw();
         GlStateManager.func_179098_w();
         GlStateManager.enableLighting();
         GlStateManager.enableCull();
@@ -490,5 +506,20 @@ public class RenderManager
     public void func_178632_c(boolean p_178632_1_)
     {
         this.field_178639_r = p_178632_1_;
+    }
+
+    public Map getEntityRenderMap()
+    {
+        return this.entityRenderMap;
+    }
+
+    public void setEntityRenderMap(Map entityRenderMap)
+    {
+        this.entityRenderMap = entityRenderMap;
+    }
+
+    public Map<String, RenderPlayer> getSkinMap()
+    {
+        return Collections.unmodifiableMap(this.field_178636_l);
     }
 }

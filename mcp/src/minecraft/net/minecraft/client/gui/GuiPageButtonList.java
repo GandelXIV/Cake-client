@@ -593,11 +593,11 @@ public class GuiPageButtonList extends GuiListExtended
 
     public interface GuiResponder
     {
-        void func_175321_a(int p_175321_1_, boolean p_175321_2_);
+        void func_175321_a(int var1, boolean var2);
 
-        void func_175320_a(int p_175320_1_, float p_175320_2_);
+        void func_175320_a(int var1, float var2);
 
-        void func_175319_a(int p_175319_1_, String p_175319_2_);
+        void func_175319_a(int var1, String var2);
     }
 
     public static class GuiSlideEntry extends GuiPageButtonList.GuiListEntry

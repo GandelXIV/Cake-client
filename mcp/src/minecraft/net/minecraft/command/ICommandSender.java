@@ -21,12 +21,12 @@ public interface ICommandSender
      * (like "I fetched this block for you by ID, but I'd like you to know that every time you do this, I die a little
      * inside"), and errors (like "it's not called iron_pixacke, silly").
      */
-    void addChatMessage(IChatComponent message);
+    void addChatMessage(IChatComponent var1);
 
     /**
      * Returns true if the command sender is allowed to use the given command.
      */
-    boolean canCommandSenderUseCommand(int permissionLevel, String command);
+    boolean canCommandSenderUseCommand(int var1, String var2);
 
     BlockPos getPosition();
 
@@ -38,5 +38,5 @@ public interface ICommandSender
 
     boolean sendCommandFeedback();
 
-    void func_174794_a(CommandResultStats.Type p_174794_1_, int p_174794_2_);
+    void func_174794_a(CommandResultStats.Type var1, int var2);
 }

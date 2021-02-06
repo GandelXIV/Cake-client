@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.data.IMetadataSection;
 import net.minecraft.client.resources.data.IMetadataSerializer;
 import net.minecraft.util.ResourceLocation;
+import optifine.ReflectorForge;
 
 public class DefaultResourcePack implements IResourcePack
 {
@@ -56,7 +57,9 @@ public class DefaultResourcePack implements IResourcePack
 
     private InputStream getResourceStream(ResourceLocation p_110605_1_)
     {
-        return DefaultResourcePack.class.getResourceAsStream("/assets/" + p_110605_1_.getResourceDomain() + "/" + p_110605_1_.getResourcePath());
+        String path = "/assets/" + p_110605_1_.getResourceDomain() + "/" + p_110605_1_.getResourcePath();
+        InputStream is = ReflectorForge.getOptiFineResourceStream(path);
+        return is != null ? is : DefaultResourcePack.class.getResourceAsStream("/assets/" + p_110605_1_.getResourceDomain() + "/" + p_110605_1_.getResourcePath());
     }
 
     public boolean resourceExists(ResourceLocation p_110589_1_)
@@ -73,14 +76,14 @@ public class DefaultResourcePack implements IResourcePack
     {
         try
         {
-            FileInputStream var3 = new FileInputStream((File)this.field_152781_b.get("pack.mcmeta"));
-            return AbstractResourcePack.readMetadata(p_135058_1_, var3, p_135058_2_);
+            FileInputStream var5 = new FileInputStream((File)this.field_152781_b.get("pack.mcmeta"));
+            return AbstractResourcePack.readMetadata(p_135058_1_, var5, p_135058_2_);
         }
         catch (RuntimeException var4)
         {
             return null;
         }
-        catch (FileNotFoundException var5)
+        catch (FileNotFoundException var51)
         {
             return null;
         }

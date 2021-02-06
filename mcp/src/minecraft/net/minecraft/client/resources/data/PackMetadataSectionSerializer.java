@@ -46,6 +46,7 @@ public class PackMetadataSectionSerializer extends BaseMetadataSectionSerializer
         return "pack";
     }
 
+
     public JsonElement serialize(Object p_serialize_1_, Type p_serialize_2_, JsonSerializationContext p_serialize_3_)
     {
         return this.serialize((PackMetadataSection)p_serialize_1_, p_serialize_2_, p_serialize_3_);

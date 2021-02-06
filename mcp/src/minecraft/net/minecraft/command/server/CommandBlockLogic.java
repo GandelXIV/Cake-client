@@ -225,7 +225,7 @@ public abstract class CommandBlockLogic implements ICommandSender
 
     public abstract int func_145751_f();
 
-    public abstract void func_145757_a(ByteBuf p_145757_1_);
+    public abstract void func_145757_a(ByteBuf var1);
 
     public void func_145750_b(IChatComponent p_145750_1_)
     {

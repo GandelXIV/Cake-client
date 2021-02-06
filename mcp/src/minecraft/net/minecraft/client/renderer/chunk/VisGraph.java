@@ -1,12 +1,13 @@
 package net.minecraft.client.renderer.chunk;
 
-import com.google.common.collect.Lists;
+import java.util.ArrayDeque;
 import java.util.BitSet;
 import java.util.EnumSet;
-import java.util.LinkedList;
 import java.util.Set;
+
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import optifine.IntegerCache;
 
 public class VisGraph
 {
@@ -73,15 +74,15 @@ public class VisGraph
     private Set func_178604_a(int p_178604_1_)
     {
         EnumSet var2 = EnumSet.noneOf(EnumFacing.class);
-        LinkedList var3 = Lists.newLinkedList();
-        var3.add(Integer.valueOf(p_178604_1_));
+        ArrayDeque var3 = new ArrayDeque(384);
+        var3.add(IntegerCache.valueOf(p_178604_1_));
         this.field_178612_d.set(p_178604_1_, true);
 
         while (!var3.isEmpty())
         {
             int var4 = ((Integer)var3.poll()).intValue();
             this.func_178610_a(var4, var2);
-            EnumFacing[] var5 = EnumFacing.values();
+            EnumFacing[] var5 = EnumFacing.VALUES;
             int var6 = var5.length;
 
             for (int var7 = 0; var7 < var6; ++var7)
@@ -92,7 +93,7 @@ public class VisGraph
                 if (var9 >= 0 && !this.field_178612_d.get(var9))
                 {
                     this.field_178612_d.set(var9, true);
-                    var3.add(Integer.valueOf(var9));
+                    var3.add(IntegerCache.valueOf(var9));
                 }
             }
         }

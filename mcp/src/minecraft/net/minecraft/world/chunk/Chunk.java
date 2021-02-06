@@ -593,7 +593,7 @@ public class Chunk
                 public String call()
                 {
                     return CrashReportCategory.getCoordinateInfo(new BlockPos(Chunk.this.xPosition * 16 + x, y, Chunk.this.zPosition * 16 + z));
-                }
+                } 
             });
             throw var6;
         }

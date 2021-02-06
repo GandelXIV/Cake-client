@@ -9,28 +9,28 @@ import java.util.regex.Pattern;
 
 public enum EnumChatFormatting
 {
-    BLACK("BLACK", '0', 0),
-    DARK_BLUE("DARK_BLUE", '1', 1),
-    DARK_GREEN("DARK_GREEN", '2', 2),
-    DARK_AQUA("DARK_AQUA", '3', 3),
-    DARK_RED("DARK_RED", '4', 4),
-    DARK_PURPLE("DARK_PURPLE", '5', 5),
-    GOLD("GOLD", '6', 6),
-    GRAY("GRAY", '7', 7),
-    DARK_GRAY("DARK_GRAY", '8', 8),
-    BLUE("BLUE", '9', 9),
-    GREEN("GREEN", 'a', 10),
-    AQUA("AQUA", 'b', 11),
-    RED("RED", 'c', 12),
-    LIGHT_PURPLE("LIGHT_PURPLE", 'd', 13),
-    YELLOW("YELLOW", 'e', 14),
-    WHITE("WHITE", 'f', 15),
-    OBFUSCATED("OBFUSCATED", 'k', true),
-    BOLD("BOLD", 'l', true),
-    STRIKETHROUGH("STRIKETHROUGH", 'm', true),
-    UNDERLINE("UNDERLINE", 'n', true),
-    ITALIC("ITALIC", 'o', true),
-    RESET("RESET", 'r', -1);
+    BLACK("BLACK", 0, "BLACK", '0', 0),
+    DARK_BLUE("DARK_BLUE", 1, "DARK_BLUE", '1', 1),
+    DARK_GREEN("DARK_GREEN", 2, "DARK_GREEN", '2', 2),
+    DARK_AQUA("DARK_AQUA", 3, "DARK_AQUA", '3', 3),
+    DARK_RED("DARK_RED", 4, "DARK_RED", '4', 4),
+    DARK_PURPLE("DARK_PURPLE", 5, "DARK_PURPLE", '5', 5),
+    GOLD("GOLD", 6, "GOLD", '6', 6),
+    GRAY("GRAY", 7, "GRAY", '7', 7),
+    DARK_GRAY("DARK_GRAY", 8, "DARK_GRAY", '8', 8),
+    BLUE("BLUE", 9, "BLUE", '9', 9),
+    GREEN("GREEN", 10, "GREEN", 'a', 10),
+    AQUA("AQUA", 11, "AQUA", 'b', 11),
+    RED("RED", 12, "RED", 'c', 12),
+    LIGHT_PURPLE("LIGHT_PURPLE", 13, "LIGHT_PURPLE", 'd', 13),
+    YELLOW("YELLOW", 14, "YELLOW", 'e', 14),
+    WHITE("WHITE", 15, "WHITE", 'f', 15),
+    OBFUSCATED("OBFUSCATED", 16, "OBFUSCATED", 'k', true),
+    BOLD("BOLD", 17, "BOLD", 'l', true),
+    STRIKETHROUGH("STRIKETHROUGH", 18, "STRIKETHROUGH", 'm', true),
+    UNDERLINE("UNDERLINE", 19, "UNDERLINE", 'n', true),
+    ITALIC("ITALIC", 20, "ITALIC", 'o', true),
+    RESET("RESET", 21, "RESET", 'r', -1);
 
     /**
      * Maps a name (e.g., 'underline') to its corresponding enum value (e.g., UNDERLINE).
@@ -54,6 +54,8 @@ public enum EnumChatFormatting
      */
     private final String controlString;
     private final int field_175747_C;
+
+    private static final EnumChatFormatting[] $VALUES = new EnumChatFormatting[]{BLACK, DARK_BLUE, DARK_GREEN, DARK_AQUA, DARK_RED, DARK_PURPLE, GOLD, GRAY, DARK_GRAY, BLUE, GREEN, AQUA, RED, LIGHT_PURPLE, YELLOW, WHITE, OBFUSCATED, BOLD, STRIKETHROUGH, UNDERLINE, ITALIC, RESET};
     private static final String __OBFID = "CL_00000342";
 
     private static String func_175745_c(String p_175745_0_)
@@ -61,17 +63,17 @@ public enum EnumChatFormatting
         return p_175745_0_.toLowerCase().replaceAll("[^a-z]", "");
     }
 
-    private EnumChatFormatting(String p_i46291_3_, char p_i46291_4_, int p_i46291_5_)
+    private EnumChatFormatting(String p_i46291_1_, int p_i46291_2_, String p_i46291_3_, char p_i46291_4_, int p_i46291_5_)
     {
-        this(p_i46291_3_, p_i46291_4_, false, p_i46291_5_);
+        this(p_i46291_1_, p_i46291_2_, p_i46291_3_, p_i46291_4_, false, p_i46291_5_);
     }
 
-    private EnumChatFormatting(String p_i46292_3_, char p_i46292_4_, boolean p_i46292_5_)
+    private EnumChatFormatting(String p_i46292_1_, int p_i46292_2_, String p_i46292_3_, char p_i46292_4_, boolean p_i46292_5_)
     {
-        this(p_i46292_3_, p_i46292_4_, p_i46292_5_, -1);
+        this(p_i46292_1_, p_i46292_2_, p_i46292_3_, p_i46292_4_, p_i46292_5_, -1);
     }
 
-    private EnumChatFormatting(String p_i46293_3_, char p_i46293_4_, boolean p_i46293_5_, int p_i46293_6_)
+    private EnumChatFormatting(String p_i46293_1_, int p_i46293_2_, String p_i46293_3_, char p_i46293_4_, boolean p_i46293_5_, int p_i46293_6_)
     {
         this.field_175748_y = p_i46293_3_;
         this.formattingCode = p_i46293_4_;

@@ -298,4 +298,6 @@ public class ChatComponentTranslation extends ChatComponentStyle
     {
         return this.formatArgs;
     }
+
+
 }

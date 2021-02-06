@@ -642,4 +642,6 @@ public class EntityWolf extends EntityTameable
     {
         return !this.isAngry() && super.allowLeashing();
     }
+
+    
 }

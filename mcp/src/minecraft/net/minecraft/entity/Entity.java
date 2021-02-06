@@ -1736,12 +1736,12 @@ public abstract class Entity implements ICommandSender
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    protected abstract void readEntityFromNBT(NBTTagCompound tagCompund);
+    protected abstract void readEntityFromNBT(NBTTagCompound var1);
 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    protected abstract void writeEntityToNBT(NBTTagCompound tagCompound);
+    protected abstract void writeEntityToNBT(NBTTagCompound var1);
 
     public void onChunkLoad() {}
 

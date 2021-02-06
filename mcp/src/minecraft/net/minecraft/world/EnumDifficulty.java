@@ -2,16 +2,18 @@ package net.minecraft.world;
 
 public enum EnumDifficulty
 {
-    PEACEFUL(0, "options.difficulty.peaceful"),
-    EASY(1, "options.difficulty.easy"),
-    NORMAL(2, "options.difficulty.normal"),
-    HARD(3, "options.difficulty.hard");
+    PEACEFUL("PEACEFUL", 0, 0, "options.difficulty.peaceful"),
+    EASY("EASY", 1, 1, "options.difficulty.easy"),
+    NORMAL("NORMAL", 2, 2, "options.difficulty.normal"),
+    HARD("HARD", 3, 3, "options.difficulty.hard");
     private static final EnumDifficulty[] difficultyEnums = new EnumDifficulty[values().length];
     private final int difficultyId;
     private final String difficultyResourceKey;
+
+    private static final EnumDifficulty[] $VALUES = new EnumDifficulty[]{PEACEFUL, EASY, NORMAL, HARD};
     private static final String __OBFID = "CL_00001510";
 
-    private EnumDifficulty(int p_i45312_3_, String p_i45312_4_)
+    private EnumDifficulty(String p_i45312_1_, int p_i45312_2_, int p_i45312_3_, String p_i45312_4_)
     {
         this.difficultyId = p_i45312_3_;
         this.difficultyResourceKey = p_i45312_4_;

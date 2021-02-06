@@ -51,7 +51,7 @@ public abstract class StructureComponent
     /**
      * (abstract) Helper method to write subclass data to NBT
      */
-    protected abstract void writeStructureToNBT(NBTTagCompound p_143012_1_);
+    protected abstract void writeStructureToNBT(NBTTagCompound var1);
 
     public void func_143009_a(World worldIn, NBTTagCompound p_143009_2_)
     {
@@ -69,7 +69,7 @@ public abstract class StructureComponent
     /**
      * (abstract) Helper method to read subclass data from NBT
      */
-    protected abstract void readStructureFromNBT(NBTTagCompound p_143011_1_);
+    protected abstract void readStructureFromNBT(NBTTagCompound var1);
 
     /**
      * Initiates construction of the Structure Component picked, at the current Location of StructGen
@@ -80,7 +80,7 @@ public abstract class StructureComponent
      * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at
      * the end, it adds Fences...
      */
-    public abstract boolean addComponentParts(World worldIn, Random p_74875_2_, StructureBoundingBox p_74875_3_);
+    public abstract boolean addComponentParts(World var1, Random var2, StructureBoundingBox var3);
 
     public StructureBoundingBox getBoundingBox()
     {
@@ -828,7 +828,7 @@ public abstract class StructureComponent
             this.field_151562_a = Blocks.air.getDefaultState();
         }
 
-        public abstract void selectBlocks(Random p_75062_1_, int p_75062_2_, int p_75062_3_, int p_75062_4_, boolean p_75062_5_);
+        public abstract void selectBlocks(Random var1, int var2, int var3, int var4, boolean var5);
 
         public IBlockState func_180780_a()
         {

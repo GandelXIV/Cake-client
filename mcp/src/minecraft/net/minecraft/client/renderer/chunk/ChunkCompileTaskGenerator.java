@@ -75,6 +75,11 @@ public class ChunkCompileTaskGenerator
 
         try
         {
+            if (this.field_178549_d == ChunkCompileTaskGenerator.Type.REBUILD_CHUNK && this.field_178548_g != ChunkCompileTaskGenerator.Status.DONE)
+            {
+                this.field_178553_a.func_178575_a(true);
+            }
+
             this.field_178554_h = true;
             this.field_178548_g = ChunkCompileTaskGenerator.Status.DONE;
             Iterator var1 = this.field_178552_c.iterator();
@@ -127,25 +132,26 @@ public class ChunkCompileTaskGenerator
 
     public static enum Status
     {
-        PENDING("PENDING", 0),
-        COMPILING("COMPILING", 1),
-        UPLOADING("UPLOADING", 2),
-        DONE("DONE", 3);
-
+        PENDING("PENDING", 0, "PENDING", 0),
+        COMPILING("COMPILING", 1, "COMPILING", 1),
+        UPLOADING("UPLOADING", 2, "UPLOADING", 2),
+        DONE("DONE", 3, "DONE", 3);
         private static final ChunkCompileTaskGenerator.Status[] $VALUES = new ChunkCompileTaskGenerator.Status[]{PENDING, COMPILING, UPLOADING, DONE};
         private static final String __OBFID = "CL_00002465";
 
-        private Status(String p_i46207_1_, int p_i46207_2_) {}
+
+        private Status(String p_i46385_1_, int p_i46385_2_, String p_i46207_1_, int p_i46207_2_) {}
     }
 
     public static enum Type
     {
-        REBUILD_CHUNK("REBUILD_CHUNK", 0),
-        RESORT_TRANSPARENCY("RESORT_TRANSPARENCY", 1);
-
+        REBUILD_CHUNK("REBUILD_CHUNK", 0, "REBUILD_CHUNK", 0),
+        RESORT_TRANSPARENCY("RESORT_TRANSPARENCY", 1, "RESORT_TRANSPARENCY", 1);
         private static final ChunkCompileTaskGenerator.Type[] $VALUES = new ChunkCompileTaskGenerator.Type[]{REBUILD_CHUNK, RESORT_TRANSPARENCY};
         private static final String __OBFID = "CL_00002464";
 
-        private Type(String p_i46206_1_, int p_i46206_2_) {}
+
+
+        private Type(String p_i46386_1_, int p_i46386_2_, String p_i46206_1_, int p_i46206_2_) {}
     }
 }

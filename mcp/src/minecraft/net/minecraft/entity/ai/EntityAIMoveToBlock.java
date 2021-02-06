@@ -121,5 +121,5 @@ public abstract class EntityAIMoveToBlock extends EntityAIBase
         return false;
     }
 
-    protected abstract boolean func_179488_a(World worldIn, BlockPos p_179488_2_);
+    protected abstract boolean func_179488_a(World var1, BlockPos var2);
 }

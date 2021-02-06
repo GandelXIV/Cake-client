@@ -38,7 +38,7 @@ public class SoundEventAccessorComposite implements ISoundEventAccessor
         return var1;
     }
 
-    public SoundPoolEntry cloneEntry()
+    public SoundPoolEntry cloneEntry1()
     {
         int var1 = this.getWeight();
 
@@ -84,5 +84,10 @@ public class SoundEventAccessorComposite implements ISoundEventAccessor
     public SoundCategory getSoundCategory()
     {
         return this.category;
+    }
+
+    public Object cloneEntry()
+    {
+        return this.cloneEntry1();
     }
 }

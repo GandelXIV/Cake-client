@@ -108,12 +108,12 @@ public abstract class GuiSlot
     /**
      * The element in the slot that was clicked, boolean for whether it was double clicked or not
      */
-    protected abstract void elementClicked(int slotIndex, boolean isDoubleClick, int mouseX, int mouseY);
+    protected abstract void elementClicked(int var1, boolean var2, int var3, int var4);
 
     /**
      * Returns true if the element passed in is currently selected
      */
-    protected abstract boolean isSelected(int slotIndex);
+    protected abstract boolean isSelected(int var1);
 
     /**
      * Return the height of the content being scrolled
@@ -127,7 +127,7 @@ public abstract class GuiSlot
 
     protected void func_178040_a(int p_178040_1_, int p_178040_2_, int p_178040_3_) {}
 
-    protected abstract void drawSlot(int p_180791_1_, int p_180791_2_, int p_180791_3_, int p_180791_4_, int p_180791_5_, int p_180791_6_);
+    protected abstract void drawSlot(int var1, int var2, int var3, int var4, int var5, int var6);
 
     /**
      * Handles drawing a list's header row.

@@ -21,13 +21,18 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityItemFrame;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemMap;
 import net.minecraft.item.ItemSkull;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.MapData;
+import optifine.Config;
+import optifine.Reflector;
+
 import org.lwjgl.opengl.GL11;
+import shadersmod.client.ShadersTex;
 
 public class RenderItemFrame extends Render
 {
@@ -105,75 +110,90 @@ public class RenderItemFrame extends Render
             GlStateManager.disableLighting();
             int var5 = p_82402_1_.getRotation();
 
-            if (var4 == Items.filled_map)
+            if (var4 instanceof ItemMap)
             {
                 var5 = var5 % 4 * 2;
             }
 
             GlStateManager.rotate((float)var5 * 360.0F / 8.0F, 0.0F, 0.0F, 1.0F);
 
-            if (var4 == Items.filled_map)
+            if (!Reflector.postForgeBusEvent(Reflector.RenderItemInFrameEvent_Constructor, new Object[] {p_82402_1_, this}))
             {
-                this.renderManager.renderEngine.bindTexture(mapBackgroundTextures);
-                GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
-                float var6 = 0.0078125F;
-                GlStateManager.scale(var6, var6, var6);
-                GlStateManager.translate(-64.0F, -64.0F, 0.0F);
-                MapData var7 = Items.filled_map.getMapData(var3.getEntityItem(), p_82402_1_.worldObj);
-                GlStateManager.translate(0.0F, 0.0F, -1.0F);
-
-                if (var7 != null)
+                if (var4 instanceof ItemMap)
                 {
-                    this.field_147917_g.entityRenderer.getMapItemRenderer().func_148250_a(var7, true);
-                }
-            }
-            else
-            {
-                TextureAtlasSprite var12 = null;
+                    this.renderManager.renderEngine.bindTexture(mapBackgroundTextures);
+                    GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
+                    float var12 = 0.0078125F;
+                    GlStateManager.scale(var12, var12, var12);
+                    GlStateManager.translate(-64.0F, -64.0F, 0.0F);
+                    MapData var13 = Items.filled_map.getMapData(var3.getEntityItem(), p_82402_1_.worldObj);
+                    GlStateManager.translate(0.0F, 0.0F, -1.0F);
 
-                if (var4 == Items.compass)
-                {
-                    var12 = this.field_147917_g.getTextureMapBlocks().getAtlasSprite(TextureCompass.field_176608_l);
-                    this.field_147917_g.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
-
-                    if (var12 instanceof TextureCompass)
+                    if (var13 != null)
                     {
-                        TextureCompass var13 = (TextureCompass)var12;
-                        double var8 = var13.currentAngle;
-                        double var10 = var13.angleDelta;
-                        var13.currentAngle = 0.0D;
-                        var13.angleDelta = 0.0D;
-                        var13.updateCompass(p_82402_1_.worldObj, p_82402_1_.posX, p_82402_1_.posZ, (double)MathHelper.wrapAngleTo180_float((float)(180 + p_82402_1_.field_174860_b.getHorizontalIndex() * 90)), false, true);
-                        var13.currentAngle = var8;
-                        var13.angleDelta = var10;
-                    }
-                    else
-                    {
-                        var12 = null;
+                        this.field_147917_g.entityRenderer.getMapItemRenderer().func_148250_a(var13, true);
                     }
                 }
-
-                GlStateManager.scale(0.5F, 0.5F, 0.5F);
-
-                if (!this.field_177074_h.func_175050_a(var3.getEntityItem()) || var4 instanceof ItemSkull)
+                else
                 {
-                    GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
-                }
+                    TextureAtlasSprite var121 = null;
 
-                GlStateManager.pushAttrib();
-                RenderHelper.enableStandardItemLighting();
-                this.field_177074_h.func_175043_b(var3.getEntityItem());
-                RenderHelper.disableStandardItemLighting();
-                GlStateManager.popAttrib();
+                    if (var4 == Items.compass)
+                    {
+                        var121 = this.field_147917_g.getTextureMapBlocks().getAtlasSprite(TextureCompass.field_176608_l);
 
-                if (var12 != null && var12.getFrameCount() > 0)
-                {
-                    var12.updateAnimation();
+                        if (Config.isShaders())
+                        {
+                            ShadersTex.bindTextureMapForUpdateAndRender(this.field_147917_g.getTextureManager(), TextureMap.locationBlocksTexture);
+                        }
+                        else
+                        {
+                            this.field_147917_g.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
+                        }
+
+                        if (var121 instanceof TextureCompass)
+                        {
+                            TextureCompass var131 = (TextureCompass)var121;
+                            double var8 = var131.currentAngle;
+                            double var10 = var131.angleDelta;
+                            var131.currentAngle = 0.0D;
+                            var131.angleDelta = 0.0D;
+                            var131.updateCompass(p_82402_1_.worldObj, p_82402_1_.posX, p_82402_1_.posZ, (double)MathHelper.wrapAngleTo180_float((float)(180 + p_82402_1_.field_174860_b.getHorizontalIndex() * 90)), false, true);
+                            var131.currentAngle = var8;
+                            var131.angleDelta = var10;
+                        }
+                        else
+                        {
+                            var121 = null;
+                        }
+                    }
+
+                    GlStateManager.scale(0.5F, 0.5F, 0.5F);
+
+                    if (!this.field_177074_h.func_175050_a(var3.getEntityItem()) || var4 instanceof ItemSkull)
+                    {
+                        GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
+                    }
+
+                    GlStateManager.pushAttrib();
+                    RenderHelper.enableStandardItemLighting();
+                    this.field_177074_h.func_175043_b(var3.getEntityItem());
+                    RenderHelper.disableStandardItemLighting();
+                    GlStateManager.popAttrib();
+
+                    if (var121 != null && var121.getFrameCount() > 0)
+                    {
+                        var121.updateAnimation();
+                    }
                 }
             }
-
             GlStateManager.enableLighting();
             GlStateManager.popMatrix();
+        }
+
+        if (Config.isShaders())
+        {
+            ShadersTex.updatingTex = null;
         }
     }
 

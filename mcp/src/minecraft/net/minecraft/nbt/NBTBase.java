@@ -12,9 +12,9 @@ public abstract class NBTBase
     /**
      * Write the actual data contents of the tag, implemented in NBT extension classes
      */
-    abstract void write(DataOutput output) throws IOException;
+    abstract void write(DataOutput var1) throws IOException;
 
-    abstract void read(DataInput input, int depth, NBTSizeTracker sizeTracker) throws IOException;
+    abstract void read(DataInput var1, int var2, NBTSizeTracker var3) throws IOException;
 
     public abstract String toString();
 

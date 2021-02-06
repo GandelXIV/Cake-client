@@ -22,7 +22,7 @@ public abstract class EntityAgeable extends EntityCreature
         super(worldIn);
     }
 
-    public abstract EntityAgeable createChild(EntityAgeable p_90011_1_);
+    public abstract EntityAgeable createChild(EntityAgeable var1);
 
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
