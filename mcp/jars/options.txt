@@ -1,7 +1,7 @@
 invertYMouse:false
 mouseSensitivity:0.5
 fov:0.5
-gamma:0.0
+gamma:72000.0
 saturation:0.0
 renderDistance:2
 guiScale:2
@@ -37,7 +37,7 @@ chatHeightFocused:1.0
 chatHeightUnfocused:0.44366196
 chatScale:1.0
 chatWidth:1.0
-showInventoryAchievementHint:true
+showInventoryAchievementHint:false
 mipmapLevels:4
 streamBytesPerPixel:0.5
 streamMicVolume:1.0

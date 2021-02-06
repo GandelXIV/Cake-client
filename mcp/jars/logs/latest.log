@@ -1,51 +1,27 @@
-[12:38:57] [Client thread/INFO]: Setting user: Player773
-[12:38:57] [Client thread/INFO]: (Session ID is token:0:Player773)
-[12:39:06] [Client thread/INFO]: LWJGL Version: 2.9.1
-[12:39:08] [Client thread/INFO]: Reloading ResourceManager: Default
-[12:39:10] [Client thread/ERROR]: Couldn't initialize twitch stream
-[12:39:10] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[12:39:10] [Thread-7/INFO]: Initializing LWJGL OpenAL
-[12:39:10] [Thread-7/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[12:39:11] [Thread-7/INFO]: OpenAL initialized.
-[12:39:11] [Sound Library Loader/INFO]: Sound engine started
-[12:39:23] [Client thread/INFO]: Created: 1024x512 textures-atlas
-[12:39:58] [Server thread/INFO]: Starting integrated minecraft server version 1.8
-[12:39:58] [Server thread/INFO]: Generating keypair
-[12:40:00] [Server thread/INFO]: Converting map!
-[12:40:00] [Server thread/INFO]: Scanning folders...
-[12:40:00] [Server thread/INFO]: Total conversion count is 0
-[12:40:05] [Server thread/INFO]: Preparing start region for level 0
-[12:40:06] [Server thread/INFO]: Preparing spawn area: 22%
-[12:40:08] [Server thread/INFO]: Preparing spawn area: 23%
-[12:40:09] [Server thread/INFO]: Preparing spawn area: 39%
-[12:40:10] [Server thread/INFO]: Preparing spawn area: 70%
-[12:40:11] [Server thread/INFO]: Changing view distance to 2, from 10
-[12:40:13] [Server thread/INFO]: Player773[local:E:f2e1060c] logged in with entity id 20 at (103.5, 4.0, -234.5)
-[12:40:14] [Server thread/INFO]: Player773 joined the game
-[12:40:19] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 4503ms behind, skipping 90 tick(s)
-[12:41:02] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 27277ms behind, skipping 545 tick(s)
-[12:41:08] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 5569ms behind, skipping 111 tick(s)
-[12:41:10] [Server thread/INFO]: Saving and pausing game...
-[12:41:10] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[12:41:13] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[12:41:13] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[12:41:56] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 3826ms behind, skipping 76 tick(s)
-[12:42:04] [Thread-7/ERROR]: Error in class 'SourceLWJGL OpenAL'
-[12:42:04] [Thread-7/ERROR]: Channel null in method 'pause'
-[12:42:05] [Server thread/INFO]: Saving and pausing game...
-[12:42:05] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[12:42:06] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[12:42:06] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[12:42:59] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 2194ms behind, skipping 43 tick(s)
-[12:43:19] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 7530ms behind, skipping 150 tick(s)
-[12:43:30] [Client thread/WARN]: Unable to play unknown soundEvent: minecraft:mob.attack
-[12:43:31] [Client thread/WARN]: Unable to play unknown soundEvent: minecraft:mob.attack
-[12:43:34] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 6509ms behind, skipping 130 tick(s)
-[12:43:51] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 5130ms behind, skipping 102 tick(s)
-[12:44:05] [Client thread/INFO]: Stopping!
-[12:44:05] [Client thread/INFO]: SoundSystem shutting down...
-[12:44:05] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
-[12:44:05] [Server thread/INFO]: Stopping server
-[12:44:05] [Server thread/INFO]: Saving players
-[12:44:05] [Server thread/INFO]: Saving worlds
-[12:44:05] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[13:18:56] [Client thread/INFO]: Setting user: Player421
+[13:18:56] [Client thread/INFO]: (Session ID is token:0:Player421)
+[13:18:58] [Client thread/INFO]: LWJGL Version: 2.9.1
+[13:18:58] [Client thread/INFO]: Reloading ResourceManager: Default
+[13:18:58] [Client thread/ERROR]: Couldn't initialize twitch stream
+[13:18:58] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[13:18:59] [Thread-7/INFO]: Initializing LWJGL OpenAL
+[13:18:59] [Thread-7/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[13:18:59] [Thread-7/INFO]: OpenAL initialized.
+[13:18:59] [Sound Library Loader/INFO]: Sound engine started
+[13:19:00] [Client thread/INFO]: Created: 1024x512 textures-atlas
+[13:19:04] [Server thread/INFO]: Starting integrated minecraft server version 1.8
+[13:19:04] [Server thread/INFO]: Generating keypair
+[13:19:05] [Server thread/INFO]: Preparing start region for level 0
+[13:19:05] [Server thread/INFO]: Changing view distance to 2, from 10
+[13:19:05] [Server thread/INFO]: Player421[local:E:5435c52d] logged in with entity id 197 at (585.5, 68.0, 174.5)
+[13:19:05] [Server thread/INFO]: Player421 joined the game
+[13:20:43] [Server thread/INFO]: Player421 has just earned the achievement [Taking Inventory]
+[13:20:43] [Client thread/INFO]: [CHAT] Player421 has just earned the achievement [Taking Inventory]
+[13:20:52] [Server thread/INFO]: [Player421: Set own game mode to Survival Mode]
+[13:20:52] [Client thread/INFO]: [CHAT] Your game mode has been updated
+[13:21:17] [Server thread/WARN]: Player421 moved wrongly!
+[13:23:56] [Server thread/WARN]: Player421 moved wrongly!
+[13:24:59] [Server thread/INFO]: Saving and pausing game...
+[13:24:59] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Overworld
+[13:24:59] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Nether
+[13:24:59] [Server thread/INFO]: Saving chunks for level 'mcpworld'/The End
