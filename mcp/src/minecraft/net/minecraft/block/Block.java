@@ -1,6 +1,9 @@
 package net.minecraft.block;
 
 import java.util.Iterator;
+import CakeClient.modules.Module;
+import ModuleSources.XraySource;
+
 import java.util.List;
 import java.util.Random;
 import net.minecraft.block.material.MapColor;
@@ -33,6 +36,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import CakeClient.Client;
 
 public class Block
 {
@@ -436,6 +440,10 @@ public class Block
 
     public int getMixedBrightnessForBlock(IBlockAccess worldIn, BlockPos pos)
     {
+    	if (Client.modules[4].enabled) {
+    		return 1000000000;
+    	}
+    	
         Block var3 = worldIn.getBlockState(pos).getBlock();
         int var4 = worldIn.getCombinedLight(pos, var3.getLightValue());
 
@@ -453,6 +461,9 @@ public class Block
 
     public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
     {
+    	if (Client.modules[5].enabled) {
+    		return XraySource.isXrayBlock(this);
+    	}
         return side == EnumFacing.DOWN && this.minY > 0.0D ? true : (side == EnumFacing.UP && this.maxY < 1.0D ? true : (side == EnumFacing.NORTH && this.minZ > 0.0D ? true : (side == EnumFacing.SOUTH && this.maxZ < 1.0D ? true : (side == EnumFacing.WEST && this.minX > 0.0D ? true : (side == EnumFacing.EAST && this.maxX < 1.0D ? true : !worldIn.getBlockState(pos).getBlock().isOpaqueCube())))));
     }
 

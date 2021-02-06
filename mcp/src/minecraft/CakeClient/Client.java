@@ -9,9 +9,12 @@ import CakeClient.modules.combat.KillAura;
 import CakeClient.modules.movement.NoFall;
 import CakeClient.modules.movement.Fly;
 import CakeClient.modules.render.FullBright;
+import CakeClient.modules.render.Xray;
 import CakeClient.modules.movement.PermaSprint;
 import CakeClient.modules.Module;
 import CakeClient.ui.HUD;
+import ModuleSources.XraySource;
+import net.minecraft.util.ObjectIntIdentityMap;
 
 public class Client
 {
@@ -20,6 +23,7 @@ public class Client
     public static Module[] modules;
     
     static {
+    	XraySource.initXRayBlocks();
         Client.name = "Cake Client 1.8";
         Client.hud = new HUD(35, 200, 208, 205);
         Client.modules = new Module[] { 
@@ -27,7 +31,8 @@ public class Client
         		(Module)new FullBright(), 
         		(Module)new Fly(), 
         		(Module)new NoFall(),  
-        		(Module)new KillAura() 
+        		(Module)new KillAura(),
+        		(Module)new Xray()
         		};
     }
     
@@ -65,4 +70,7 @@ public class Client
             m.keyUpdate(key);
         }
     }
+
+
+
 }

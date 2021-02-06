@@ -1,0 +1,22 @@
+package CakeClient.modules.render;
+import CakeClient.modules.Module;
+
+
+public class xray extends Module
+{
+    private Float defaultGamma;
+    
+    public FullBright() {
+        super("xray");
+    }
+    
+    @Override
+    public void onEnable() {
+        
+    }
+    
+    @Override
+    public void onDisable() {
+        
+    }
+}
