@@ -1,9 +1,6 @@
-// 
-// Decompiled by Procyon v0.5.36
-// 
-
 package CakeClient;
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import CakeClient.modules.combat.KillAura;
 import CakeClient.modules.movement.NoFall;
@@ -23,6 +20,7 @@ public class Client
     public static String name;
     public static HUD hud;
     public static Module[] modules;
+    public static Integer safetyKey = Keyboard.KEY_O;
     
     static {
     	XraySource.initXRayBlocks();
@@ -66,12 +64,23 @@ public class Client
     }
     
     public static void onKeyPress(final int key) {
-        Client.hud.keyUpdate(key);
-        Module[] modules;
-        for (int length = (modules = Client.modules).length, i = 0; i < length; ++i) {
-            final Module m = modules[i];
-            m.keyUpdate(key);
-        }
+    	if (key == safetyKey)
+    	{
+    		for (Module module: modules)
+    		{
+    			module.enabled = false;
+    			module.onDisable();
+    		}
+    	}
+    	else
+    	{
+    		Client.hud.keyUpdate(key);
+            Module[] modules;
+            for (int length = (modules = Client.modules).length, i = 0; i < length; ++i) {
+                final Module m = modules[i];
+                m.keyUpdate(key);
+            }
+    	}
     }
 
 
