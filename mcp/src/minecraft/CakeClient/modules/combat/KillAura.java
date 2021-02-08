@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.client.C02PacketUseEntity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityArmorStand;
 import net.minecraft.entity.Entity;
 import CakeClient.modules.Module;
 
@@ -25,8 +26,9 @@ public class KillAura extends Module
         EntityLivingBase closestTarget = null;
         final List<Entity> targets = (List<Entity>)this.mc.theWorld.getLoadedEntityList();
         for (final Entity target : targets) {
-            if (target instanceof EntityLivingBase && target != this.mc.thePlayer && target.getDistanceToEntity((Entity)this.mc.thePlayer) < closestDistance) {
-                closestDistance = target.getDistanceToEntity((Entity)this.mc.thePlayer);
+            if (target instanceof EntityLivingBase && !(target instanceof EntityArmorStand) && target != this.mc.thePlayer && target.getDistanceToEntity((Entity)this.mc.thePlayer) < closestDistance) {
+                
+            	closestDistance = target.getDistanceToEntity((Entity)this.mc.thePlayer);
                 closestTarget = (EntityLivingBase)target;
             }
         }
