@@ -2,11 +2,11 @@
 A minecraft 1.8 custom client
 
 # Installation
-Move the mcp/exports/cakeclient into:
-windows: %APPDATA%\.Roaming\.minecraft\.versions
-linux: ~/.minecraft/versions
-mac: ~/Library/Application Support/minecraft/versions
-Then run the launcher of your choice and add a new launch setup with cakeclient
+Move the mcp/exports/cakeclient into
+on windows: %APPDATA%\.Roaming\.minecraft\.versions
+on linux: ~/.minecraft/versions
+on mac: ~/Library/Application Support/minecraft/versions
+Then run the launcher of your choice and add a new launch setup with cakeclient.
 
 # Usage
 Use "H" to turn on/off hack menu.
