@@ -2,6 +2,7 @@ package net.minecraft.client.entity;
 
 import net.minecraft.client.Minecraft;
 import CakeClient.Client;
+import CakeClient.modules.Module;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.GuiCommandBlock;
@@ -743,9 +744,17 @@ public class EntityPlayerSP extends AbstractClientPlayer
 
         if (this.isUsingItem() && !this.isRiding())
         {
-            this.movementInput.moveStrafe *= 0.2F;
-            this.movementInput.moveForward *= 0.2F;
-            this.sprintToggleTimer = 0;
+        	if(Client.modules[7].enabled) {
+                this.movementInput.moveStrafe *= 1F;
+                this.movementInput.moveForward *=1F;
+        	}
+        	else {
+                this.movementInput.moveStrafe *= 0.2F;
+                this.movementInput.moveForward *= 0.2F;
+                
+        	}
+        	this.sprintToggleTimer = 0;
+
         }
 
         this.pushOutOfBlocks(this.posX - (double)this.width * 0.35D, this.getEntityBoundingBox().minY + 0.5D, this.posZ + (double)this.width * 0.35D);

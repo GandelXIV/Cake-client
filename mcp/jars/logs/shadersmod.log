@@ -1,8 +1,8 @@
 [Shaders] ShadersMod version: 2.4.12
-[Shaders] OpenGL Version: 4.6 (Compatibility Profile) Mesa 20.3.2
-[Shaders] Vendor:  AMD
-[Shaders] Renderer: AMD RAVEN (DRM 3.38.0, 5.8.0-7642-generic, LLVM 11.0.0)
-[Shaders] Capabilities:  2.0  2.1  3.0  3.2  4.0 
+[Shaders] OpenGL Version: 3.1 Mesa 20.0.8
+[Shaders] Vendor:  VMware, Inc.
+[Shaders] Renderer: llvmpipe (LLVM 10.0.0, 256 bits)
+[Shaders] Capabilities:  2.0  2.1  3.0  -  - 
 [Shaders] GL_MAX_DRAW_BUFFERS: 8
 [Shaders] GL_MAX_COLOR_ATTACHMENTS_EXT: 8
 [Shaders] GL_MAX_TEXTURE_IMAGE_UNITS: 32

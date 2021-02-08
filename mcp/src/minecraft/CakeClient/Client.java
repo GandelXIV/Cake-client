@@ -10,6 +10,8 @@ import CakeClient.modules.render.Xray;
 import CakeClient.modules.movement.PermaSprint;
 import CakeClient.modules.Module;
 import CakeClient.modules.combat.AutoWtap;
+import CakeClient.modules.movement.NoSlowDown;
+
 
 import CakeClient.ui.HUD;
 import ModuleSources.XraySource;
@@ -34,6 +36,7 @@ public class Client
         		(Module)new KillAura(),
         		(Module)new Xray(),
         		(Module)new AutoWtap(),
+        		(Module)new NoSlowDown()
         		};
     }
     
