@@ -1,0 +1,87 @@
+package CakeClient.ui;
+
+import CakeClient.modules.Module;
+import net.minecraft.client.gui.Gui;
+
+import org.apache.http.conn.ClientConnectionRequest;
+
+import CakeClient.Client;
+import net.minecraft.client.Minecraft;
+
+public class HUD
+{
+    public Boolean shown;
+    public Integer activationKey;
+    public Integer upKey;
+    public Integer downKey;
+    public Integer selectKey;
+    public Minecraft mc;
+    private Integer fontSizeY;
+    private Integer boxSizeX;
+    private Integer leftBorder;
+    private Integer selectorPos;
+    
+    public HUD(final int activationKey, final int upKey, final int downKey, final int selectKey) {
+        this.shown = true;
+        this.mc = Minecraft.getMinecraft();
+        this.fontSizeY = 8;
+        this.boxSizeX = 69;
+        this.leftBorder = 5;
+        this.selectorPos = 0;
+        this.activationKey = activationKey;
+        this.upKey = upKey;
+        this.downKey = downKey;
+        this.selectKey = selectKey;
+    }
+    
+    public void onDraw() {
+    	mc.fontRendererObj.drawString("CakeClient", 0, 0, 0);
+        if (this.shown) {
+            Integer y = 0;
+            Integer i = 0;
+            Module[] modules;
+            for (int length = (modules = Client.modules).length, j = 0; j < length; ++j) {
+                final Module m = modules[j];
+                Gui.drawRect((int)this.leftBorder, (int)y, (int)this.boxSizeX, y + this.fontSizeY, -1879048192);
+                if (this.selectorPos == i) {
+                    Gui.drawRect((int)this.leftBorder, (int)y, (int)this.boxSizeX, y + this.fontSizeY, -1);
+                }
+                if (m.enabled) {
+                    this.mc.fontRendererObj.drawString(m.name, (int)this.leftBorder, (int)y, 43520);
+                }
+                else {
+                    this.mc.fontRendererObj.drawString(m.name, (int)this.leftBorder, (int)y, 11141120);
+                }
+                ++i;
+                y += this.fontSizeY;
+            }
+        }
+    }
+    
+    public void keyUpdate(final int key) {
+        if (this.activationKey == key) {
+            this.shown = !this.shown;
+        }
+        else if (key == this.upKey) {
+            --this.selectorPos;
+        }
+        else if (key == this.downKey) {
+            ++this.selectorPos;
+        }
+        else if (key == this.selectKey) {
+            try {
+                Client.modules[this.selectorPos].enabled = !Client.modules[this.selectorPos].enabled;
+                if (Client.modules[this.selectorPos].enabled) {
+                    Client.modules[this.selectorPos].onEnable();
+                }
+                else {
+                    Client.modules[this.selectorPos].onDisable();
+                }
+            }
+            catch (Exception e) {
+                System.out.println("Module selector error: " + e);
+                this.selectorPos = 0;
+            }
+        }
+    }
+}

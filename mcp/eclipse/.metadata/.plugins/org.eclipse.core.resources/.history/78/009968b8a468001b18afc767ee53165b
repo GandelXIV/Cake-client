@@ -1,0 +1,23 @@
+package CakeClient.modules.movement;
+
+import CakeClient.modules.Module;
+
+public class Speed extends Module
+{
+    public Speed() {
+		super("Speed");
+	}
+
+    public float speedAmplifier = 1f;
+
+    
+    @Override
+    public void onDisable() {
+        
+    }
+    
+    @Override
+    public void onUpdate() {
+        this.mc.thePlayer.capabilities.walkSpeed = 0.2f * speedAmplifier;
+    }
+}

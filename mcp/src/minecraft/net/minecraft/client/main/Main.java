@@ -38,7 +38,7 @@ public class Main
         ArgumentAcceptingOptionSpec var8 = var1.accepts("proxyPort").withRequiredArg().defaultsTo("8080", new String[0]).ofType(Integer.class);
         ArgumentAcceptingOptionSpec var9 = var1.accepts("proxyUser").withRequiredArg();
         ArgumentAcceptingOptionSpec var10 = var1.accepts("proxyPass").withRequiredArg();
-        ArgumentAcceptingOptionSpec var11 = var1.accepts("username").withRequiredArg().defaultsTo("Player" + Minecraft.getSystemTime() % 1000L, new String[0]);
+        ArgumentAcceptingOptionSpec var11 = var1.accepts("username").withRequiredArg().defaultsTo("dortikjenejlepsi", new String[0]);
         ArgumentAcceptingOptionSpec var12 = var1.accepts("uuid").withRequiredArg();
         ArgumentAcceptingOptionSpec var13 = var1.accepts("accessToken").withRequiredArg().required();
         ArgumentAcceptingOptionSpec var14 = var1.accepts("version").withRequiredArg().required();

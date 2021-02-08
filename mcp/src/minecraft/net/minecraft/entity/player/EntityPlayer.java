@@ -457,6 +457,7 @@ public abstract class EntityPlayer extends EntityLivingBase
         {
             for (int var3 = 0; var3 < p_71010_2_; ++var3)
             {
+            	
                 Vec3 var4 = new Vec3(((double)this.rand.nextFloat() - 0.5D) * 0.1D, Math.random() * 0.1D + 0.1D, 0.0D);
                 var4 = var4.rotatePitch(-this.rotationPitch * (float)Math.PI / 180.0F);
                 var4 = var4.rotateYaw(-this.rotationYaw * (float)Math.PI / 180.0F);
@@ -465,6 +466,7 @@ public abstract class EntityPlayer extends EntityLivingBase
                 var7 = var7.rotatePitch(-this.rotationPitch * (float)Math.PI / 180.0F);
                 var7 = var7.rotateYaw(-this.rotationYaw * (float)Math.PI / 180.0F);
                 var7 = var7.addVector(this.posX, this.posY + (double)this.getEyeHeight(), this.posZ);
+                
 
                 if (itemStackIn.getHasSubtypes())
                 {
@@ -474,6 +476,7 @@ public abstract class EntityPlayer extends EntityLivingBase
                 {
                     this.worldObj.spawnParticle(EnumParticleTypes.ITEM_CRACK, var7.xCoord, var7.yCoord, var7.zCoord, var4.xCoord, var4.yCoord + 0.05D, var4.zCoord, new int[] {Item.getIdFromItem(itemStackIn.getItem())});
                 }
+                
             }
 
             this.playSound("random.eat", 0.5F + 0.5F * (float)this.rand.nextInt(2), (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
@@ -866,14 +869,17 @@ public abstract class EntityPlayer extends EntityLivingBase
 
             if (p_146097_2_)
             {
+            	
                 var7 = this.rand.nextFloat() * 0.5F;
                 var8 = this.rand.nextFloat() * (float)Math.PI * 2.0F;
                 var6.motionX = (double)(-MathHelper.sin(var8) * var7);
                 var6.motionZ = (double)(MathHelper.cos(var8) * var7);
                 var6.motionY = 0.20000000298023224D;
+                
             }
             else
             {
+            	
                 var7 = 0.3F;
                 var6.motionX = (double)(-MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI) * var7);
                 var6.motionZ = (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI) * var7);
@@ -883,6 +889,7 @@ public abstract class EntityPlayer extends EntityLivingBase
                 var6.motionX += Math.cos((double)var8) * (double)var7;
                 var6.motionY += (double)((this.rand.nextFloat() - this.rand.nextFloat()) * 0.1F);
                 var6.motionZ += Math.sin((double)var8) * (double)var7;
+                
             }
 
             this.joinEntityItemWithWorld(var6);

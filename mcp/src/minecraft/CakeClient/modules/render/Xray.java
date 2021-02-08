@@ -19,7 +19,6 @@ public class Xray extends Module
     @Override
     public void onEnable() {
     	mc.renderGlobal.loadRenderers();
-        
     }
     
     @Override

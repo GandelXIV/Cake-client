@@ -12,6 +12,8 @@ import CakeClient.modules.render.FullBright;
 import CakeClient.modules.render.Xray;
 import CakeClient.modules.movement.PermaSprint;
 import CakeClient.modules.Module;
+import CakeClient.modules.combat.AutoWtap;
+
 import CakeClient.ui.HUD;
 import ModuleSources.XraySource;
 import net.minecraft.util.ObjectIntIdentityMap;
@@ -32,7 +34,8 @@ public class Client
         		(Module)new Fly(), 
         		(Module)new NoFall(),  
         		(Module)new KillAura(),
-        		(Module)new Xray()
+        		(Module)new Xray(),
+        		(Module)new AutoWtap(),
         		};
     }
     

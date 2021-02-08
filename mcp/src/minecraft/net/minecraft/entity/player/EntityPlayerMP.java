@@ -374,7 +374,9 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
 
                 if (this.isSneaking())
                 {
+                	/*
                     this.func_175399_e(this);
+                    */
                 }
             }
         }

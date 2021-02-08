@@ -1,0 +1,24 @@
+package CakeClient.modules.combat;
+
+import CakeClient.modules.Module;
+
+public class AutoWtap extends Module
+{
+    private Float defaultGamma;
+    
+    public FullBright() {
+        super("AutoWtap");
+    }
+    
+    @Override
+    public void onEnable() {
+        this.mc.gameSettings.gammaSetting = 72000.0f;
+    }
+    
+    @Override
+    public void onDisable() {
+        this.mc.gameSettings.gammaSetting = 1.0f;
+    }
+}
+
+

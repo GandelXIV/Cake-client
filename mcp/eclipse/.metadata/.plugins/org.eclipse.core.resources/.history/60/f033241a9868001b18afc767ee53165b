@@ -1,0 +1,31 @@
+package CakeClient.modules.combat;
+
+import CakeClient.modules.Module;
+
+public class AutoWtap extends Module
+{
+	
+    public AutoWtap() {
+		super("AutoWtap");
+	}
+	private Float defaultGamma;
+    
+    @Override
+    public void onEnable() {
+       
+    }
+    
+    @Override
+    public void onDisable() {
+        
+    }
+    @Override
+    public void onUpdate() {
+    	mc.thePlayer.setSprinting(true);
+        if (mc.thePlayer.isSwingInProgress)
+        	mc.thePlayer.setSprinting(false);
+    }
+    
+}
+
+

@@ -1,0 +1,32 @@
+package CakeClient.ui;
+
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.util.ResourceLocation;
+
+public class MainMenu extends GuiScreen {
+	
+	
+	public MainMenu()
+	{
+		
+	}
+	public void initGui()
+	{
+		
+	}
+	public void drawGui(int mouseX,int mouseY)
+	{
+		mc.getTextureManager().bindTexture(new ResourceLocation("cake-client/background.png"));
+		this.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, this.width, this.height,this.width , this.height);
+	}
+	public void mouseClicked(int mouseX,int mouseY,int clicked)
+	{
+		
+	}
+	public void onGuiClosed()
+	{
+		
+	}
+	
+
+}

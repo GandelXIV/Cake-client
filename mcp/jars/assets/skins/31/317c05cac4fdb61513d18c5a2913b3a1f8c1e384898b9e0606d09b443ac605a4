@@ -1,0 +1,415 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<meta HTTP-EQUIV="Expires" CONTENT="-1">
+<link rel="shortcut icon" href="images/favicon.png">
+<link rel="icon" href="images/favicon.png">
+<title>ASUS Wireless Router RT-AC1200G+ - Blocking Page</title>
+<script type="text/JavaScript" src="/js/jquery.js"></script>
+<style>
+body{
+color:#FFF;
+font-family: Arial;
+}
+.wrapper{
+background:url(images/New_ui/login_bg.png) #283437 no-repeat;
+background-size: 1280px 1076px;
+background-position: center 0%;
+margin: 0px;
+}
+.title_name {
+font-size: 32px;
+color:#93D2D9;
+}
+.title_text{
+width:520px;
+}
+.prod_madelName{
+font-size: 26px;
+color:#fff;
+margin-left:78px;
+margin-top: 10px;
+}
+.login_img{
+width:43px;
+height:43px;
+background-image: url('images/New_ui/icon_titleName.png');
+background-repeat: no-repeat;
+}
+.p1{
+font-size: 16px;
+color:#fff;
+width: 480px;
+}
+.button{
+background-color:#279FD9;
+/*background:rgba(255,255,255,0.1);
+border: solid 1px #6e8385;*/
+border-radius: 4px ;
+transition: visibility 0s linear 0.218s,opacity 0.218s,background-color 0.218s;
+height: 68px;
+width: 300px;
+font-size: 28px;
+color:#fff;
+color:#000\9; /* IE6 IE7 IE8 */
+text-align: center;
+float:right;
+margin:25px 0 0 78px;
+line-height:68px;
+}
+.form_input{
+background-color:rgba(255,255,255,0.2);
+border-radius: 4px;
+padding:26px 22px;
+width: 480px;
+border: 0;
+height:25px;
+color:#fff;
+color:#000\9; /* IE6 IE7 IE8 */
+font-size:28px
+}
+.nologin{
+margin:10px 0px 0px 78px;
+background-color:rgba(255,255,255,0.2);
+padding:20px;
+line-height:36px;
+border-radius: 5px;
+width: 600px;
+border: 0;
+color:#fff;
+color:#000\9; /* IE6 IE7 IE8 */
+font-size: 18px;
+}
+.div_table{
+display:table;
+}
+.div_tr{
+display:table-row;
+}
+.div_td{
+display:table-cell;
+}
+.title_gap{
+margin:10px 0px 0px 78px;
+}
+.img_gap{
+padding-right:30px;
+vertical-align:middle;
+}
+.password_gap{
+margin:30px 0px 0px 78px;
+}
+.error_hint{
+color: rgb(255, 204, 0);
+margin:10px 0px -10px 78px;
+font-size: 18px;
+font-weight: bolder;
+}
+.main_field_gap{
+margin:100px auto 0;
+}
+ul{
+margin: 0;
+}
+li{
+margin: 10px 0;
+}
+#wanLink{
+cursor: pointer;
+}
+.button_background{
+background-color: transparent;
+}
+.tm_logo{
+background:url('images/New_ui/tm_logo_1.png') no-repeat;
+width:487px;
+height:90px;
+background-size: 80%;
+margin-left: -20px;
+}
+.desc_info{
+font-weight:bold;
+}
+#tm_block{
+margin: 0 20px;
+}
+a{
+color: #FC0;
+}
+/*for mobile device*/
+@media screen and (max-width: 1000px){
+.title_name {
+font-size: 1.2em;
+color:#93d2d9;
+margin-left:15px;
+}
+.prod_madelName{
+font-size: 1.2em;
+margin-left: 15px;
+}
+.p1{
+font-size: 16px;
+width:100%;
+}
+.login_img{
+background-size: 75%;
+}
+.title_text{
+width: 100%;
+}
+.form_input{
+padding:13px 11px;
+width: 100%;
+height:25px;
+font-size:16px
+}
+.button{
+height: 50px;
+width: 100%;
+font-size: 16px;
+text-align: center;
+float:right;
+margin: 25px -30px 0 0;
+line-height:50px;
+padding: 0 10px;
+}
+.nologin{
+margin-left:10px;
+padding:5px;
+line-height:18px;
+width: 100%;
+font-size:14px;
+}
+.error_hint{
+margin-left:10px;
+}
+.main_field_gap{
+width:80%;
+margin:30px 0 0 15px;
+/*margin:30px auto 0;*/
+}
+.title_gap{
+margin-left:15px;
+}
+.password_gap{
+margin-left:15px;
+}
+.img_gap{
+padding-right:0;
+vertical-align:middle;
+}
+ul{
+margin-left:-20px;
+}
+li{
+margin: 10px 0;
+}
+.tm_logo{
+width: 400px;
+background-repeat: no-repeat;
+background-size: 100%;
+}
+}
+</style>
+<script type="text/javascript">
+var bwdpi_support = ('mssid 2.4G 5G usbX1 switchctrl manual_stb WIFI_LOGO update meoVoda movistarTriple reboot_schedule ipv6 ipv6pt PARENTAL2  yadns  yadns pptpd utf8_ssid printer modem media diskutility HTTPS ssh vpnc psta wl6 optimize_xbox user_low_rssi tcode usericon cfg_wps_btn realip bcmwifi'.search('bwdpi') == -1) ? false : true;
+var casenum = '';
+var flag = '';
+var block_info = '';
+if(block_info != "")
+block_info = JSON.parse(block_info);
+var category_info = [ ["Parental Controls", "1", "Adult", "Pornography", "Sites with profane or vulgar content generally considered inappropriate for minors; includes sites that offer erotic content or ads for sexual services, but excludes sites with sexually explicit images."],
+["Parental Controls", "2", "Adult", "Pornography", "Sites that provide information about software intended for sharing and transferring files related to child pornography."],
+["Parental Controls", "3", "Adult", "Pornography", "Sites with sexually explicit imagery designed for sexual arousal, including sites that offer sexual services."],
+["Parental Controls", "4", "Adult", "Pornography", "Sites with or without explicit images that discuss reproduction, sexuality, birth control, sexually transmitted disease, safe sex, or coping with sexual trauma."],
+["Parental Controls", "5", "Adult", "Pornography", "Sites that sell swimsuits or intimate apparel with images of models wearing them."],
+["Parental Controls", "6", "Adult", "Pornography", "Sites showing nude or partially nude images that are generally considered artistic, not vulgar or pornographic."],
+["Parental Controls", "8", "Adult", "Pornography", "Sites that promote, sell, or provide information about alcohol or tobacco products."],
+["Parental Controls", "9", "Adult", "Illegal and Violence", "Sites that promote and discuss how to perpetrate nonviolent crimes, including burglary, fraud, intellectual property theft, and plagiarism; includes sites that sell plagiarized or stolen materials."],
+["Parental Controls", "10", "Adult", "Illegal and Violence", "Sites with content that is gratuitously offensive and shocking; includes sites that show extreme forms of body modification, mutilation, or animal cruelty."],
+["Parental Controls", "14", "Adult", "Illegal and Violence", "Sites that promote hate and violence; this includes sites that espouse prejudice against a social group, extreme violence and dangerous activities, mutilation, gore, or the creation of destructive devices."],
+["Parental Controls", "15", "Adult", "Illegal and Violence", "Sites about weapons, including their accessories and use; this excludes sites about military institutions or sites that discuss weapons as sporting or recreational equipment."],
+["Parental Controls", "16", "Adult", "Illegal and Violence", "Sites that promote, encourage, or discuss abortion, including sites that cover moral or political views on abortion."],
+["Parental Controls", "25", "Adult", "Illegal and Violence", "Sites that promote, glamorize, supply, sell, or explain how to use illicit or illegal intoxicants."],
+["Parental Controls", "26", "Adult", "Illegal and Violence", "Sites that discuss the cultivation, use, or preparation of marijuana, or sell related paraphernalia."],
+["Parental Controls", "11", "Adult", "Gambling", "Sites that promote or provide information on gambling, including online gambling sites."],
+["Parental Controls", "24", "Instant Message and Communication", "Internet Telephony", "Sites that provide web-based services or downloadable software for Voice over Internet Protocol (VoIP) calls."],
+["Parental Controls", "51", "Instant Message and Communication", "Instant Messaging", "Sites that send malicious tracking cookies to visiting web browsers."],
+["Parental Controls", "53", "Instant Message and Communication", "Virtual Community", "Sites that provide software for bypassing computer security systems."],
+["Parental Controls", "89", "Instant Message and Communication", "Virtual Community", "Malicious Domain or website, Domains that host malicious payloads."],
+["Parental Controls", "42", "Instant Message and Communication", "Blog", "Content servers, image servers, or sites used to gather, process, and present data and data analysis, including web analytics tools and network monitors."],
+["Parental Controls", "56", "P2P and File Transfer", "File transfer", "Sites that provide downloadable 'joke' software, including applications that can unsettle users."],
+["Parental Controls", "70", "P2P and File Transfer", "File transfer", "Sites that use scraped or copied content to pollute search engines with redundant and generally unwanted results."],
+["Parental Controls", "71", "P2P and File Transfer", "File transfer", "Sites dedicated to displaying advertisements, including sites used to display banner or pop-up advertisement."],
+["Parental Controls", "57", "P2P and File Transfer", "Peer to Peer", "Sites that distribute password cracking software."],
+["Parental Controls", "69", "Streaming and Entertainment", "Media Streaming", "Sites that provide tools for remotely monitoring and controlling computers."],
+["Parental Controls", "23", "Streaming and Entertainment", "Internet Radio and TV", "Sites that primarily stream radio or TV programming; this excludes sites that provide other kinds of streaming content."],
+["Home Protection", "91", "Anti-Trojan detecting and blocked", "", "Trojan detected and blocked."],
+["Home Protection", "39", "Malicious site blocked", "", "Sites about bypassing proxy servers or web filtering systems, including sites that provide tools for that purpose."],
+["Home Protection", "73", "Malicious site blocked", "", "Sites that contain potentially harmful downloads."],
+["Home Protection", "74", "Malicious site blocked", "", "Sites with downloads that gather and transmit data from computers owned by unsuspecting users."],
+["Home Protection", "75", "Malicious site blocked", "", "Fraudulent sites that mimic legitimate sites to gather sensitive information, such as usernames and passwords."],
+["Home Protection", "76", "Malicious site blocked", "", "Sites whose addresses have been found in spam messages."],
+["Home Protection", "77", "Malicious site blocked", "", "Sites with downloads that display advertisements or other promotional content; this includes sites that install browser helper objects."],
+["Home Protection", "78", "Malicious site blocked", "", "Sites used by malicious programs, including sites used to host upgrades or store stolen information."],
+["Home Protection", "79", "Malicious site blocked", "", "Sites that directly or indirectly facilitate the distribution of malicious software or source code."],
+["Home Protection", "80", "Malicious site blocked", "", "Sites that send malicious tracking cookies to visiting web browsers."],
+["Home Protection", "81", "Malicious site blocked", "", "Sites with downloads that connect to other networks without user consent."],
+["Home Protection", "82", "Malicious site blocked", "", "Sites that provide software for bypassing computer security systems."],
+["Home Protection", "83", "Malicious site blocked", "", "Sites that provide downloadable 'joke' software, including applications that can unsettle users."],
+["Home Protection", "84", "Malicious site blocked", "", "Sites that distribute password cracking software."],
+["Home Protection", "85", "Malicious site blocked", "", "Sites that provide tools for remotely monitoring and controlling computers."],
+["Home Protection", "86", "Malicious site blocked", "", "Sites that use scraped or copied content to pollute search engines with redundant and generally unwanted results."],
+["Home Protection", "88", "Malicious site blocked", "", "Sites dedicated to displaying advertisements, including sites used to display banner or pop-up advertisement."],
+["Home Protection", "92", "Malicious site blocked", "", "Malicious Domains or websites / Domains that host malicious payloads."],
+["Home Protection", "94", "Malicious site blocked", "", "Sites that attempt to defraud a person or group after first gaining their confidence, used in the classical sense of trust."],
+["Home Protection", "95", "Malicious site blocked", "", "Sites that directly or indirectly facilitate the distribution of ransomware."]
+];
+var target_info = {
+url: "",
+category_id: "",
+category_type: "",
+content_category: "",
+desc: ""
+}
+function initial(){
+get_target_info();
+show_information();
+}
+function get_target_info(){
+if(casenum != ""){ //for AiProtection
+target_info.url = block_info[1];
+target_info.category_id = block_info[2];
+get_category_info();
+}
+else{ //for Parental Controls (Time Scheduling)
+target_info.desc = "This device has been blocked from accessing the Internet.";
+}
+}
+function get_category_info(){
+var cat_id = target_info.category_id;
+var category_string = "";
+for(i=0;i< category_info.length;i++){
+if(category_info[i][1] == cat_id){
+category_string = category_info[i][2];
+if(category_info[i][3] != ""){
+category_string += " - " + category_info[i][3];
+}
+target_info.category_type = category_info[i][0];
+target_info.content_category = category_string;
+target_info.desc = category_info[i][4];
+}
+}
+}
+function show_information(){
+var code = "";
+var code_suggestion = "";
+var code_title = "";
+var parental_string = "";
+code = "<ul>";
+code += "<li><div><span class='desc_info'>Description:</span><br>" + target_info.desc + "</div></li>";
+if(casenum != "")
+code += "<li><div><span class='desc_info'>URL: </span>" + target_info.url +"</div></li>";
+if(target_info.category_type == "Parental Controls")
+code += "<li><div><span class='desc_info'>Content Category :</span>" + target_info.content_category + "</div></li>";
+code += "</ul>";
+document.getElementById('detail_info').innerHTML = code;
+if(target_info.category_type == "Parental Controls"){ //Webs Apps filter
+code_title = "<div class='er_title' style='height:auto;'>This web page has been filtered.</div>";
+code_suggestion = "<ul>";
+code_suggestion += "<li><span>If you are a manager and want to visit a blocked website, go to Parental Controls and change your configuration.</span></li>";
+code_suggestion += "<li><span>If you are a client and are having any issues, please contact your manager.</span></li>";
+code_suggestion += '<li>Consider the website as the other category?<a href="https://global.sitesafety.trendmicro.com/index.php" target="_blank">Reclassify request to Trend Micro</a></li>';
+code_suggestion += "</ul>";
+document.getElementById('tm_block').style.display = "none";
+$("#go_btn").click(function(){
+location.href = "AiProtection_WebProtector.asp";
+});
+document.getElementById('go_btn').style.display = "";
+}
+else if(target_info.category_type == "Home Protection"){
+code_title = "<div class='er_title' style='height:auto;'>Warning! This website contains malware. Visiting this website may harm your computer!</div>";
+code_suggestion = "<ul>";
+code_suggestion += '<li>If you are not sure of this webiste, visit <a href="https://global.sitesafety.trendmicro.com/index.php" target="_blank">TrendMicro\'s Site Safety Caneter</a> for more information. You can check the safety level of a particular URL that might seem suspicious.</li>';
+code_suggestion += "<li>If you trust this website, click <a href='http://router.asus.com/AiProtection_MaliciousSitesBlocking.asp'>here</a> to unblock (administrator credential required)</li>";
+code_suggestion += "</ul>";
+document.getElementById('tm_block').style.display = "";
+/*$("#go_btn").click(function(){
+location.href = "AiProtection_HomeProtection.asp";
+});
+document.getElementById('go_btn').style.display = "";*/
+}
+else if(flag != ""){
+code_title = "<div class='er_title' style='height:auto;'>The web page you wanted to view failed to load.</div>";
+document.getElementById('main_reason').innerHTML = "Reason for failed connection";
+code = "";
+code += "<div>Your total traffic limit was reached and your Internet connection was temporarily disabled.</div>";
+document.getElementById('detail_info').innerHTML = code;
+code_suggestion = "<ul>";
+code_suggestion += "<li><span>Go to Traffic Limiter and disable Internet cut-off to restore your Internet connection.</span></li>";
+code_suggestion += "<li><span>Raise your Internet cut-off max value.</span></li>";
+code_suggestion += "</ul>";
+$("#go_btn").click(function(){
+location.href = "AdaptiveQoS_TrafficLimiter.asp";
+});
+document.getElementById('go_btn').style.display = "";
+}
+else{ //for Parental Control(Time Scheduling)
+code_title = "<div class='er_title' style='height:auto;'>Warning! This device is now unable to access the Internet.</div>"
+code_suggestion = "<ul>";
+if(bwdpi_support)
+parental_string = "Time Scheduling";
+else
+parental_string = "Parental Controls";
+code_suggestion += "<li>If you are a manager and want to access the Internet, go to "+ parental_string +" and change your configuration.</li>";
+code_suggestion += "<li>If you are a client and are having any issues, please contact your manager.</li>";
+code_suggestion += "</ul>";
+$("#go_btn").click(function(){
+location.href = "ParentalControl.asp";
+});
+document.getElementById('go_btn').style.display = "";
+document.getElementById('tm_block').style.display = "none";
+}
+document.getElementById('page_title').innerHTML = code_title;
+document.getElementById('suggestion').innerHTML = code_suggestion;
+}
+</script>
+</head>
+<body class="wrapper" onload="initial();">
+<div class="div_table main_field_gap">
+<div class="title_name">
+<div class="div_td img_gap">
+<div class="login_img"></div>
+</div>
+<div id="page_title" class="div_td title_text"></div>
+</div>
+<div class="prod_madelName">RT-AC1200G+</div>
+<div id="main_reason" class="p1 title_gap">Detailed informations:</div>
+<div ></div>
+<div>
+<div class="p1 title_gap"></div>
+<div class="nologin">
+<div id="detail_info"></div>
+</div>
+</div>
+<div class="p1 title_gap">We suggest you</div>
+<div>
+<div class="p1 title_gap"></div>
+<div class="nologin">
+<div id="case_content"></div>
+<div id="suggestion"></div>
+<div id="tm_block" style="display:none">
+<!--div>Trend Micro offers you a more robust and advanced security solution. Click the <a href="http://bit.do/bcLqZ" target="_blank">download</a> link to start your free trial or <a href="http://www.trendmicro.com" target="_blank">visit the Trend Micro website</a> and use their online scan service.</div-->
+<div class="tm_logo"></div>
+</div>
+</div>
+</div>
+<div id="go_btn" class='button' style="display:none;">GO</div>
+</div>
+</body>
+</html>
+

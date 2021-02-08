@@ -2,6 +2,9 @@ package CakeClient.ui;
 
 import CakeClient.modules.Module;
 import net.minecraft.client.gui.Gui;
+
+import org.apache.http.conn.ClientConnectionRequest;
+
 import CakeClient.Client;
 import net.minecraft.client.Minecraft;
 
@@ -32,6 +35,7 @@ public class HUD
     }
     
     public void onDraw() {
+    	mc.fontRendererObj.drawString("CakeClient",200 , 5, -1);
         if (this.shown) {
             Integer y = 0;
             Integer i = 0;

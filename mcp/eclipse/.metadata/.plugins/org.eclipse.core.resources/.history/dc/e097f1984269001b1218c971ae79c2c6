@@ -1,0 +1,30 @@
+package CakeClient.ui;
+
+import net.minecraft.client.gui.GuiScreen;
+
+public class MainMenu extends GuiScreen {
+	
+	
+	public MainMenu()
+	{
+		
+	}
+	public void initGui()
+	{
+		
+	}
+	public void drawGui(int mouseX,int mouseY)
+	{
+		
+	}
+	public void mouseClicked(int mouseX,int mouseY,int clicked)
+	{
+		
+	}
+	public void onGuiClosed()
+	{
+		
+	}
+	
+
+}
