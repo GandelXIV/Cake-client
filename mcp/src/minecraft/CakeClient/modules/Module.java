@@ -8,13 +8,11 @@ public class Module
     public String name;
     public Integer activationKey;
     public Boolean enabled;
-    
     public Module(final String name) {
         this.mc = Minecraft.getMinecraft();
         this.enabled = false;
         this.name = name;
     }
-    
     public void toggle() {
         this.enabled = !this.enabled;
     }
