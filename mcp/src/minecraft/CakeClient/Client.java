@@ -27,14 +27,14 @@ public class Client
     static {
     	XraySource.initXRayBlocks();
         Client.name = "Cake Client 1.8";
-        Client.hud = new HUD(35, 200, 208, 205);
+        Client.hud = new HUD(35, 200, 208, Keyboard.KEY_NUMPAD0, Keyboard.KEY_LEFT, Keyboard.KEY_RIGHT);
         Client.modules = new Module[] { 
-        		(Module)new PermaSprint(), 
-        		(Module)new FullBright(), 
-        		(Module)new Fly(), 
+        		(Module)new FullBright(),
+        		(Module)new Xray(),
+        		(Module)new Fly(),
+        		(Module)new PermaSprint(),
         		(Module)new NoFall(),  
         		(Module)new KillAura(),
-        		(Module)new Xray(),
         		(Module)new AutoWtap(),
         		(Module)new NoSlowDown()
         		};

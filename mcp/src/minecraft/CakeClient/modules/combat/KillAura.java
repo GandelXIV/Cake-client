@@ -21,6 +21,14 @@ public class KillAura extends Module
         this.attackRange = 4.0f;
     }
     
+    public void onLeftConfig() {attackStorm = false; }
+    public void onRightConfig() {attackStorm = true; }
+    public String getConfigStatus()
+    {
+    	if (attackStorm) return "attack storm ON";
+    	else return "attack storm OFF";
+    }
+    
     public void attack(Entity target)
     {
     	if (target != null)
