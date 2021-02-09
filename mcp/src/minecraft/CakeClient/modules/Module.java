@@ -17,17 +17,12 @@ public class Module
         this.enabled = !this.enabled;
     }
     
-    public void onEnable() {
-    }
-    
-    public void onDisable() {
-    }
-    
-    public void onUpdate() {
-    }
-    
-    public void onDraw() {
-    }
+    public void onEnable() {}
+    public void onDisable() {} 
+    public void onUpdate() {}
+    public void onDraw() {}
+    public void leftConfig() {}
+    public void rightConfig() {}
     
     public void keyUpdate(final int key) {
     }
