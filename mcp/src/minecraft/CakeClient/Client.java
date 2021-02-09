@@ -11,6 +11,7 @@ import CakeClient.modules.movement.PermaSprint;
 import CakeClient.modules.Module;
 import CakeClient.modules.combat.AutoWtap;
 import CakeClient.modules.movement.NoSlowDown;
+import CakeClient.modules.movement.Speed;
 
 
 import CakeClient.ui.HUD;
@@ -36,7 +37,8 @@ public class Client
         		(Module)new KillAura(),
         		(Module)new Xray(),
         		(Module)new AutoWtap(),
-        		(Module)new NoSlowDown()
+        		(Module)new NoSlowDown(),
+        		(Module)new Speed()
         		};
     }
     

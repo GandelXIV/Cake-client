@@ -1,15 +1,15 @@
-[17:36:56] [Client thread/INFO]: Setting user: fbiagent1
-[17:36:56] [Client thread/INFO]: (Session ID is token:0:fbiagent1)
-[17:37:09] [Client thread/INFO]: LWJGL Version: 2.9.1
-[17:37:10] [Client thread/INFO]: Reloading ResourceManager: Default
-[17:37:11] [Client thread/ERROR]: Couldn't initialize twitch stream
-[17:37:11] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[17:37:12] [Thread-7/INFO]: Initializing LWJGL OpenAL
-[17:37:12] [Thread-7/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[17:37:12] [Thread-7/INFO]: OpenAL initialized.
-[17:37:12] [Sound Library Loader/INFO]: Sound engine started
-[17:37:24] [Client thread/INFO]: Created: 1024x512 textures-atlas
-[17:37:38] [Client thread/ERROR]: Exception reading ./saves/New Worldhgkjug/level.dat
+[19:45:47] [Client thread/INFO]: Setting user: fbiagent1
+[19:45:47] [Client thread/INFO]: (Session ID is token:0:fbiagent1)
+[19:45:57] [Client thread/INFO]: LWJGL Version: 2.9.1
+[19:45:59] [Client thread/INFO]: Reloading ResourceManager: Default
+[19:46:02] [Client thread/ERROR]: Couldn't initialize twitch stream
+[19:46:02] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[19:46:02] [Thread-7/INFO]: Initializing LWJGL OpenAL
+[19:46:02] [Thread-7/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[19:46:02] [Thread-7/INFO]: OpenAL initialized.
+[19:46:02] [Sound Library Loader/INFO]: Sound engine started
+[19:46:16] [Client thread/INFO]: Created: 1024x512 textures-atlas
+[19:46:39] [Client thread/ERROR]: Exception reading ./saves/New Worldhgkjug/level.dat
 java.io.EOFException
 	at java.util.zip.GZIPInputStream.readUByte(GZIPInputStream.java:268) ~[?:1.8.0_275]
 	at java.util.zip.GZIPInputStream.readUShort(GZIPInputStream.java:258) ~[?:1.8.0_275]
@@ -33,81 +33,35 @@ java.io.EOFException
 	at net.minecraft.client.Minecraft.run(Minecraft.java:411) [bin/:?]
 	at net.minecraft.client.main.Main.main(Main.java:117) [bin/:?]
 	at Start.main(Start.java:11) [bin/:?]
-[17:37:44] [Server thread/INFO]: Starting integrated minecraft server version 1.8
-[17:37:44] [Server thread/INFO]: Generating keypair
-[17:37:45] [Server thread/INFO]: Preparing start region for level 0
-[17:37:46] [Server thread/INFO]: Preparing spawn area: 2%
-[17:37:47] [Server thread/INFO]: Preparing spawn area: 12%
-[17:37:48] [Server thread/INFO]: Preparing spawn area: 26%
-[17:37:49] [Server thread/INFO]: Preparing spawn area: 38%
-[17:37:50] [Server thread/INFO]: Preparing spawn area: 49%
-[17:37:51] [Server thread/INFO]: Preparing spawn area: 74%
-[17:37:52] [Server thread/INFO]: Preparing spawn area: 97%
-[17:37:53] [Server thread/INFO]: Changing view distance to 2, from 10
-[17:37:54] [Server thread/INFO]: fbiagent1[local:E:e8eed50e] logged in with entity id 228 at (623.1461086629032, 63.0, 94.58872620391011)
-[17:37:54] [Server thread/INFO]: fbiagent1 joined the game
-[17:37:56] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 2974ms behind, skipping 59 tick(s)
-[17:38:45] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 5356ms behind, skipping 107 tick(s)
-[17:39:53] [Server thread/INFO]: [fbiagent1: Set the time to 13000]
-[17:39:53] [Client thread/INFO]: [CHAT] Set the time to 13000
-[17:40:10] [Server thread/INFO]: Saving and pausing game...
-[17:40:10] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Overworld
-[17:40:10] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Nether
-[17:40:10] [Server thread/INFO]: Saving chunks for level 'mcpworld'/The End
-[17:40:13] [Server thread/INFO]: Changing difficulty to HARD, from NORMAL
-[17:40:20] [Server thread/INFO]: [fbiagent1: Set own game mode to Survival Mode]
-[17:40:20] [Client thread/INFO]: [CHAT] Your game mode has been updated
-[17:42:56] [Server thread/INFO]: fbiagent1 was blown up by Creeper
-[17:42:56] [Client thread/INFO]: [CHAT] fbiagent1 was blown up by Creeper
-[17:43:41] [Server thread/INFO]: Saving and pausing game...
-[17:43:41] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Overworld
-[17:43:41] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Nether
-[17:43:41] [Server thread/INFO]: Saving chunks for level 'mcpworld'/The End
-[17:44:01] [Client thread/INFO]: [CHAT] There is no such item with name minecraft:steak
-[17:44:09] [Server thread/INFO]: [fbiagent1: Given [Apple] * 64 to fbiagent1]
-[17:44:09] [Client thread/INFO]: [CHAT] Given [Apple] * 64 to fbiagent1
-[17:44:31] [Server thread/INFO]: fbiagent1 was blown up by Creeper
-[17:44:31] [Client thread/INFO]: [CHAT] fbiagent1 was blown up by Creeper
-[17:44:35] [Server thread/INFO]: [fbiagent1: Given [Apple] * 64 to fbiagent1]
-[17:44:35] [Client thread/INFO]: [CHAT] Given [Apple] * 64 to fbiagent1
-[17:46:19] [Server thread/INFO]: fbiagent1 was slain by Zombie
-[17:46:19] [Client thread/INFO]: [CHAT] fbiagent1 was slain by Zombie
-[17:46:23] [Server thread/INFO]: [fbiagent1: Given [Apple] * 64 to fbiagent1]
-[17:46:23] [Client thread/INFO]: [CHAT] Given [Apple] * 64 to fbiagent1
-[17:47:41] [Server thread/INFO]: fbiagent1 was blown up by Creeper
-[17:47:41] [Client thread/INFO]: [CHAT] fbiagent1 was blown up by Creeper
-[17:48:04] [Server thread/INFO]: [fbiagent1: Given [Apple] * 64 to fbiagent1]
-[17:48:04] [Client thread/INFO]: [CHAT] Given [Apple] * 64 to fbiagent1
-[17:48:12] [Client thread/INFO]: [CHAT] /gamemode, /gamerule
-[17:48:15] [Server thread/INFO]: [fbiagent1: Set own game mode to Creative Mode]
-[17:48:15] [Client thread/INFO]: [CHAT] Your game mode has been updated
-[17:48:28] [Server thread/INFO]: [fbiagent1: Set own game mode to Survival Mode]
-[17:48:28] [Client thread/INFO]: [CHAT] Your game mode has been updated
-[17:49:58] [Server thread/INFO]: [fbiagent1: Set the time to 13000]
-[17:49:58] [Client thread/INFO]: [CHAT] Set the time to 13000
-[17:51:21] [Server thread/INFO]: fbiagent1 was blown up by Creeper
-[17:51:22] [Client thread/INFO]: [CHAT] fbiagent1 was blown up by Creeper
-[17:52:04] [Server thread/INFO]: [fbiagent1: Given [Apple] * 64 to fbiagent1]
-[17:52:04] [Client thread/INFO]: [CHAT] Given [Apple] * 64 to fbiagent1
-[17:53:35] [Server thread/INFO]: fbiagent1 was shot by Skeleton
-[17:53:35] [Client thread/INFO]: [CHAT] fbiagent1 was shot by Skeleton
-[17:53:37] [Client thread/ERROR]: Item entity 10909 has no item?!
-[17:53:37] [Client thread/ERROR]: Item entity 10909 has no item?!
-[17:53:39] [Server thread/INFO]: [fbiagent1: Given [Apple] * 64 to fbiagent1]
-[17:53:39] [Client thread/INFO]: [CHAT] Given [Apple] * 64 to fbiagent1
-[17:54:52] [Client thread/INFO]: [CHAT] Unknown command. Try /help for a list of commands
-[17:54:58] [Server thread/INFO]: [fbiagent1: Set own game mode to Creative Mode]
-[17:54:58] [Client thread/INFO]: [CHAT] Your game mode has been updated
-[17:57:20] [Server thread/INFO]: Saving and pausing game...
-[17:57:20] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Overworld
-[17:57:20] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Nether
-[17:57:20] [Server thread/INFO]: Saving chunks for level 'mcpworld'/The End
-[17:57:40] [Client thread/INFO]: Stopping!
-[17:57:40] [Client thread/INFO]: SoundSystem shutting down...
-[17:57:40] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
-[17:57:40] [Server thread/INFO]: Stopping server
-[17:57:40] [Server thread/INFO]: Saving players
-[17:57:40] [Server thread/INFO]: Saving worlds
-[17:57:40] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Overworld
-[17:57:40] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Nether
-[17:57:40] [Server thread/INFO]: Saving chunks for level 'mcpworld'/The End
+[19:46:45] [Server thread/INFO]: Starting integrated minecraft server version 1.8
+[19:46:45] [Server thread/INFO]: Generating keypair
+[19:46:46] [Server thread/INFO]: Preparing start region for level 0
+[19:46:47] [Server thread/INFO]: Preparing spawn area: 0%
+[19:46:48] [Server thread/INFO]: Preparing spawn area: 13%
+[19:46:49] [Server thread/INFO]: Preparing spawn area: 34%
+[19:46:50] [Server thread/INFO]: Preparing spawn area: 52%
+[19:46:51] [Server thread/INFO]: Preparing spawn area: 80%
+[19:46:52] [Server thread/INFO]: Preparing spawn area: 99%
+[19:46:52] [Server thread/INFO]: Changing view distance to 2, from 10
+[19:46:54] [Server thread/INFO]: fbiagent1[local:E:b04abc83] logged in with entity id 134 at (250.20013139464035, 54.68441846493647, 122.41404286742384)
+[19:46:54] [Server thread/INFO]: fbiagent1 joined the game
+[19:46:56] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 2290ms behind, skipping 45 tick(s)
+[19:47:11] [Server thread/INFO]: Saving and pausing game...
+[19:47:11] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Overworld
+[19:47:12] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Nether
+[19:47:12] [Server thread/INFO]: Saving chunks for level 'mcpworld'/The End
+[19:47:46] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 11334ms behind, skipping 226 tick(s)
+[19:48:21] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 10747ms behind, skipping 214 tick(s)
+[19:49:04] [Server thread/INFO]: Saving and pausing game...
+[19:49:04] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Overworld
+[19:49:04] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Nether
+[19:49:04] [Server thread/INFO]: Saving chunks for level 'mcpworld'/The End
+[19:49:06] [Server thread/INFO]: Stopping server
+[19:49:06] [Server thread/INFO]: Saving players
+[19:49:06] [Server thread/INFO]: Saving worlds
+[19:49:06] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Overworld
+[19:49:06] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Nether
+[19:49:06] [Server thread/INFO]: Saving chunks for level 'mcpworld'/The End
+[19:49:12] [Client thread/INFO]: Stopping!
+[19:49:12] [Client thread/INFO]: SoundSystem shutting down...
+[19:49:13] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
