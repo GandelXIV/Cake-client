@@ -70,13 +70,7 @@ public class HUD
         }
         else if (key == this.selectKey) {
             try {
-                Client.modules[this.selectorPos].enabled = !Client.modules[this.selectorPos].enabled;
-                if (Client.modules[this.selectorPos].enabled) {
-                    Client.modules[this.selectorPos].onEnable();
-                }
-                else {
-                    Client.modules[this.selectorPos].onDisable();
-                }
+                Client.modules[this.selectorPos].toggle();
             }
             catch (Exception e) {
                 System.out.println("Module selector error: " + e);

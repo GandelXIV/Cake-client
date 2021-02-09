@@ -15,8 +15,19 @@ public class Module
     }
     public void toggle() {
         this.enabled = !this.enabled;
+        if (this.enabled) this.onEnable();
+        else this.onDisable();
     }
-    
+    public void enable()
+    {
+    	this.enabled = true;
+    	this.onEnable();
+    }
+    public void disable()
+    {
+    	this.enabled = false;
+    	this.onDisable();
+    }
     public void onEnable() {}
     public void onDisable() {} 
     public void onUpdate() {}

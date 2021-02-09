@@ -71,8 +71,7 @@ public class Client
     	{
     		for (Module module: modules)
     		{
-    			module.enabled = false;
-    			module.onDisable();
+    			module.disable();
     		}
     	}
     	else
