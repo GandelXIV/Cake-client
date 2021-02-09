@@ -46,9 +46,12 @@ public class HUD
         if (this.shown) { 
         	// static elements
         	mc.fontRendererObj.drawString("CakeClient",200 , 5, -1);
-            Gui.drawRect(this.leftBorder + this.boxSizeX, this.configBoxPosY, this.leftBorder + this.boxSizeX + this.configBoxSizeX, this.configBoxPosY+ this.fontSizeY,-1879048192);
-        	this.mc.fontRendererObj.drawString(Client.modules[this.selectorPos].getConfigStatus(), this.leftBorder + this.boxSizeX, this.configBoxPosY, 43520);
-
+        	if (Client.modules[this.selectorPos].getConfigStatus() != "")
+        	{
+        		Gui.drawRect(this.leftBorder + this.boxSizeX, this.configBoxPosY, this.leftBorder + this.boxSizeX + this.configBoxSizeX, this.configBoxPosY+ this.fontSizeY,-1879048192);
+        		this.mc.fontRendererObj.drawString(Client.modules[this.selectorPos].getConfigStatus(), this.leftBorder + this.boxSizeX, this.configBoxPosY, 43520);
+        	}
+        	
         	Integer y = 0;
             Integer i = 0;
             Module[] modules;
