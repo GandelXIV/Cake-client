@@ -1,6 +1,9 @@
 package net.minecraft.client.gui;
 
 import com.google.common.collect.Lists;
+
+import CakeClient.ui.MainMenuLogo;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -29,6 +32,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
+import org.lwjgl.util.Color;
 import org.lwjgl.util.glu.Project;
 
 public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
@@ -60,7 +64,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
     private static final ResourceLocation minecraftTitleTextures = new ResourceLocation("textures/gui/title/minecraft.png");
 
     /** An array of all the paths to the panorama pictures. */
-    private static final ResourceLocation[] titlePanoramaPaths = new ResourceLocation[] {new ResourceLocation("textures/gui/title/background/panorama_0.png"), new ResourceLocation("textures/gui/title/background/panorama_1.png"), new ResourceLocation("textures/gui/title/background/panorama_2.png"), new ResourceLocation("textures/gui/title/background/panorama_3.png"), new ResourceLocation("textures/gui/title/background/panorama_4.png"), new ResourceLocation("textures/gui/title/background/panorama_5.png")};
+    private static final ResourceLocation[] titlePanoramaPaths = new ResourceLocation[] {new ResourceLocation("textures/backgound.png"), new ResourceLocation("textures/backgound.png"), new ResourceLocation("textures/backgound.png"), new ResourceLocation("textures/backgound.png"), new ResourceLocation("textures/backgound.png"), new ResourceLocation("textures/backgound.png")};
     public static final String field_96138_a = "Please click " + EnumChatFormatting.UNDERLINE + "here" + EnumChatFormatting.RESET + " for more information.";
     private int field_92024_r;
     private int field_92023_s;
@@ -189,14 +193,10 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
         boolean var2 = true;
         int var3 = this.height / 4 + 48;
 
-        if (this.mc.isDemo())
-        {
-            this.addDemoButtons(var3, 24);
-        }
-        else
-        {
-            this.addSingleplayerMultiplayerButtons(var3, 24);
-        }
+
+        
+        this.addSingleplayerMultiplayerButtons(var3, 24);
+        
 
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, var3 + 72 + 12, 98, 20, I18n.format("menu.options", new Object[0])));
         this.buttonList.add(new GuiButton(4, this.width / 2 + 2, var3 + 72 + 12, 98, 20, I18n.format("menu.quit", new Object[0])));
@@ -490,50 +490,15 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         GlStateManager.disableAlpha();
-        this.renderSkybox(mouseX, mouseY, partialTicks);
-        GlStateManager.enableAlpha();
-        Tessellator var4 = Tessellator.getInstance();
-        WorldRenderer var5 = var4.getWorldRenderer();
-        short var6 = 274;
-        int var7 = this.width / 2 - var6 / 2;
-        byte var8 = 30;
-        this.drawGradientRect(0, 0, this.width, this.height, -2130706433, 16777215);
-        this.drawGradientRect(0, 0, this.width, this.height, 0, Integer.MIN_VALUE);
-        this.mc.getTextureManager().bindTexture(minecraftTitleTextures);
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        String var10 = "CakeClient";
 
-        if ((double)this.updateCounter < 1.0E-4D)
-        {
-            this.drawTexturedModalRect(var7 + 0, var8 + 0, 0, 0, 99, 44);
-            this.drawTexturedModalRect(var7 + 99, var8 + 0, 129, 0, 27, 44);
-            this.drawTexturedModalRect(var7 + 99 + 26, var8 + 0, 126, 0, 3, 44);
-            this.drawTexturedModalRect(var7 + 99 + 26 + 3, var8 + 0, 99, 0, 26, 44);
-            this.drawTexturedModalRect(var7 + 155, var8 + 0, 0, 45, 155, 44);
-        }
-        else
-        {
-            this.drawTexturedModalRect(var7 + 0, var8 + 0, 0, 0, 155, 44);
-            this.drawTexturedModalRect(var7 + 155, var8 + 0, 0, 45, 155, 44);
-        }
-
-        var5.func_178991_c(-1);
-        GlStateManager.pushMatrix();
-        GlStateManager.translate((float)(this.width / 2 + 90), 70.0F, 0.0F);
-        GlStateManager.rotate(-20.0F, 0.0F, 0.0F, 1.0F);
-        float var9 = 1.8F - MathHelper.abs(MathHelper.sin((float)(Minecraft.getSystemTime() % 1000L) / 1000.0F * (float)Math.PI * 2.0F) * 0.1F);
-        var9 = var9 * 100.0F / (float)(this.fontRendererObj.getStringWidth(this.splashText) + 32);
-        GlStateManager.scale(var9, var9, var9);
-        this.drawCenteredString(this.fontRendererObj, this.splashText, 0, -8, -256);
-        GlStateManager.popMatrix();
-        String var10 = "Minecraft 1.8";
-
-        if (this.mc.isDemo())
-        {
-            var10 = var10 + " Demo";
-        }
+        this.drawDefaultBackground();
+        
+        
+        MainMenuLogo.drawString(5,var10, this.width/10-this.fontRendererObj.getStringWidth(var10)/2,this.height/20,16718105);
 
         this.drawString(this.fontRendererObj, var10, 2, this.height - 10, -1);
-        String var11 = "Copyright Mojang AB. Do not distribute!";
+        String var11 = "this is cake";
         this.drawString(this.fontRendererObj, var11, this.width - this.fontRendererObj.getStringWidth(var11) - 2, this.height - 10, -1);
 
         if (this.field_92025_p != null && this.field_92025_p.length() > 0)

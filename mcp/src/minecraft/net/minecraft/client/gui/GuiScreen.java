@@ -37,6 +37,8 @@ import net.minecraft.stats.StatList;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
+import net.minecraft.util.ResourceLocation;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -651,18 +653,11 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
     {
         GlStateManager.disableLighting();
         GlStateManager.disableFog();
-        Tessellator var2 = Tessellator.getInstance();
-        WorldRenderer var3 = var2.getWorldRenderer();
         this.mc.getTextureManager().bindTexture(optionsBackground);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        float var4 = 32.0F;
-        var3.startDrawingQuads();
-        var3.func_178991_c(4210752);
-        var3.addVertexWithUV(0.0D, (double)this.height, 0.0D, 0.0D, (double)((float)this.height / var4 + (float)tint));
-        var3.addVertexWithUV((double)this.width, (double)this.height, 0.0D, (double)((float)this.width / var4), (double)((float)this.height / var4 + (float)tint));
-        var3.addVertexWithUV((double)this.width, 0.0D, 0.0D, (double)((float)this.width / var4), (double)tint);
-        var3.addVertexWithUV(0.0D, 0.0D, 0.0D, 0.0D, (double)tint);
-        var2.draw();
+        
+        this.mc.getTextureManager().bindTexture(new ResourceLocation("cake-client/background.png"));
+        Gui.drawScaledCustomSizeModalRect(0,0,0,0,this.width,this.height,this.width,this.height,this.width,this.height);
     }
 
     /**

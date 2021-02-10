@@ -1,67 +1,11 @@
-[19:45:47] [Client thread/INFO]: Setting user: fbiagent1
-[19:45:47] [Client thread/INFO]: (Session ID is token:0:fbiagent1)
-[19:45:57] [Client thread/INFO]: LWJGL Version: 2.9.1
-[19:45:59] [Client thread/INFO]: Reloading ResourceManager: Default
-[19:46:02] [Client thread/ERROR]: Couldn't initialize twitch stream
-[19:46:02] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[19:46:02] [Thread-7/INFO]: Initializing LWJGL OpenAL
-[19:46:02] [Thread-7/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[19:46:02] [Thread-7/INFO]: OpenAL initialized.
-[19:46:02] [Sound Library Loader/INFO]: Sound engine started
-[19:46:16] [Client thread/INFO]: Created: 1024x512 textures-atlas
-[19:46:39] [Client thread/ERROR]: Exception reading ./saves/New Worldhgkjug/level.dat
-java.io.EOFException
-	at java.util.zip.GZIPInputStream.readUByte(GZIPInputStream.java:268) ~[?:1.8.0_275]
-	at java.util.zip.GZIPInputStream.readUShort(GZIPInputStream.java:258) ~[?:1.8.0_275]
-	at java.util.zip.GZIPInputStream.readHeader(GZIPInputStream.java:164) ~[?:1.8.0_275]
-	at java.util.zip.GZIPInputStream.<init>(GZIPInputStream.java:79) ~[?:1.8.0_275]
-	at java.util.zip.GZIPInputStream.<init>(GZIPInputStream.java:91) ~[?:1.8.0_275]
-	at net.minecraft.nbt.CompressedStreamTools.readCompressed(CompressedStreamTools.java:30) ~[bin/:?]
-	at net.minecraft.world.storage.SaveFormatOld.getWorldInfo(SaveFormatOld.java:82) [bin/:?]
-	at net.minecraft.world.chunk.storage.AnvilSaveConverter.getSaveList(AnvilSaveConverter.java:61) [bin/:?]
-	at net.minecraft.client.gui.GuiSelectWorld.func_146627_h(GuiSelectWorld.java:87) [bin/:?]
-	at net.minecraft.client.gui.GuiSelectWorld.initGui(GuiSelectWorld.java:55) [bin/:?]
-	at net.minecraft.client.gui.GuiScreen.setWorldAndResolution(GuiScreen.java:537) [bin/:?]
-	at net.minecraft.client.Minecraft.displayGuiScreen(Minecraft.java:1000) [bin/:?]
-	at net.minecraft.client.gui.GuiMainMenu.actionPerformed(GuiMainMenu.java:258) [bin/:?]
-	at net.minecraft.client.gui.GuiScreen.mouseClicked(GuiScreen.java:499) [bin/:?]
-	at net.minecraft.client.gui.GuiMainMenu.mouseClicked(GuiMainMenu.java:554) [bin/:?]
-	at net.minecraft.client.gui.GuiScreen.handleMouseInput(GuiScreen.java:585) [bin/:?]
-	at net.minecraft.client.gui.GuiScreen.handleInput(GuiScreen.java:554) [bin/:?]
-	at net.minecraft.client.Minecraft.runTick(Minecraft.java:1771) [bin/:?]
-	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1104) [bin/:?]
-	at net.minecraft.client.Minecraft.run(Minecraft.java:411) [bin/:?]
-	at net.minecraft.client.main.Main.main(Main.java:117) [bin/:?]
-	at Start.main(Start.java:11) [bin/:?]
-[19:46:45] [Server thread/INFO]: Starting integrated minecraft server version 1.8
-[19:46:45] [Server thread/INFO]: Generating keypair
-[19:46:46] [Server thread/INFO]: Preparing start region for level 0
-[19:46:47] [Server thread/INFO]: Preparing spawn area: 0%
-[19:46:48] [Server thread/INFO]: Preparing spawn area: 13%
-[19:46:49] [Server thread/INFO]: Preparing spawn area: 34%
-[19:46:50] [Server thread/INFO]: Preparing spawn area: 52%
-[19:46:51] [Server thread/INFO]: Preparing spawn area: 80%
-[19:46:52] [Server thread/INFO]: Preparing spawn area: 99%
-[19:46:52] [Server thread/INFO]: Changing view distance to 2, from 10
-[19:46:54] [Server thread/INFO]: fbiagent1[local:E:b04abc83] logged in with entity id 134 at (250.20013139464035, 54.68441846493647, 122.41404286742384)
-[19:46:54] [Server thread/INFO]: fbiagent1 joined the game
-[19:46:56] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 2290ms behind, skipping 45 tick(s)
-[19:47:11] [Server thread/INFO]: Saving and pausing game...
-[19:47:11] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Overworld
-[19:47:12] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Nether
-[19:47:12] [Server thread/INFO]: Saving chunks for level 'mcpworld'/The End
-[19:47:46] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 11334ms behind, skipping 226 tick(s)
-[19:48:21] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 10747ms behind, skipping 214 tick(s)
-[19:49:04] [Server thread/INFO]: Saving and pausing game...
-[19:49:04] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Overworld
-[19:49:04] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Nether
-[19:49:04] [Server thread/INFO]: Saving chunks for level 'mcpworld'/The End
-[19:49:06] [Server thread/INFO]: Stopping server
-[19:49:06] [Server thread/INFO]: Saving players
-[19:49:06] [Server thread/INFO]: Saving worlds
-[19:49:06] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Overworld
-[19:49:06] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Nether
-[19:49:06] [Server thread/INFO]: Saving chunks for level 'mcpworld'/The End
-[19:49:12] [Client thread/INFO]: Stopping!
-[19:49:12] [Client thread/INFO]: SoundSystem shutting down...
-[19:49:13] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[20:01:21] [Client thread/INFO]: Setting user: fbiagent1
+[20:01:21] [Client thread/INFO]: (Session ID is token:0:fbiagent1)
+[20:01:40] [Client thread/INFO]: LWJGL Version: 2.9.1
+[20:01:42] [Client thread/INFO]: Reloading ResourceManager: Default
+[20:01:44] [Client thread/ERROR]: Couldn't initialize twitch stream
+[20:01:44] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[20:01:44] [Thread-7/INFO]: Initializing LWJGL OpenAL
+[20:01:44] [Thread-7/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[20:01:44] [Thread-7/INFO]: OpenAL initialized.
+[20:01:44] [Sound Library Loader/INFO]: Sound engine started
+[20:02:05] [Client thread/INFO]: Created: 1024x512 textures-atlas
