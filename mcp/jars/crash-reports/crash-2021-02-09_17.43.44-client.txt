@@ -1,0 +1,73 @@
+---- Minecraft Crash Report ----
+// This is a token for 1 free hug. Redeem at your nearest Mojangsta: [~~HUG~~]
+
+Time: 2/9/21 5:43 PM
+Description: Rendering screen
+
+java.lang.ArrayIndexOutOfBoundsException: 1
+	at net.minecraft.client.gui.GuiMainMenu.drawPanorama(GuiMainMenu.java:392)
+	at net.minecraft.client.gui.GuiMainMenu.renderSkybox(GuiMainMenu.java:461)
+	at net.minecraft.client.gui.GuiMainMenu.drawScreen(GuiMainMenu.java:493)
+	at net.minecraft.client.renderer.EntityRenderer.updateCameraAndRender(EntityRenderer.java:1375)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1130)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:411)
+	at net.minecraft.client.main.Main.main(Main.java:117)
+	at Start.main(Start.java:11)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at net.minecraft.client.gui.GuiMainMenu.drawPanorama(GuiMainMenu.java:392)
+	at net.minecraft.client.gui.GuiMainMenu.renderSkybox(GuiMainMenu.java:461)
+	at net.minecraft.client.gui.GuiMainMenu.drawScreen(GuiMainMenu.java:493)
+
+-- Screen render details --
+Details:
+	Screen name: net.minecraft.client.gui.GuiMainMenu
+	Mouse location: Scaled: (184, 0). Absolute: (368, 479)
+	Screen size: Scaled: (427, 240). Absolute: (854, 480). Scale factor of 2
+Stacktrace:
+	at net.minecraft.client.renderer.EntityRenderer.updateCameraAndRender(EntityRenderer.java:1375)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1130)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:411)
+	at net.minecraft.client.main.Main.main(Main.java:117)
+	at Start.main(Start.java:11)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.8
+	Operating System: Linux (amd64) version 4.15.0-135-generic
+	Java Version: 1.8.0_275, Private Build
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode), Private Build
+	Memory: 955571640 bytes (911 MB) / 1065025536 bytes (1015 MB) up to 1065025536 bytes (1015 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	Launched Version: mcp
+	LWJGL: 2.9.1
+	OpenGL: llvmpipe (LLVM 10.0.0, 256 bits) GL version 3.1 Mesa 20.0.8, VMware, Inc.
+	GL Caps: Using GL 1.3 multitexturing.
+Using GL 1.3 texture combiners.
+Using framebuffer objects because OpenGL 3.0 is supported and separate blending is supported.
+Shaders are available because OpenGL 2.1 is supported.
+VBOs are available because OpenGL 1.5 is supported.
+
+	Using VBOs: No
+	Is Modded: Very likely; Jar signature invalidated
+	Type: Client (map_client.txt)
+	Resource Packs: []
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	OptiFine Version: OptiFine_1.8_HD_U_H6
+	Render Distance Chunks: 2
+	Mipmaps: 4
+	Anisotropic Filtering: 1
+	Antialiasing: 0
+	Multitexture: false
+	Shaders: null
+	OpenGlVersion: 3.1 Mesa 20.0.8
+	OpenGlRenderer: llvmpipe (LLVM 10.0.0, 256 bits)
+	OpenGlVendor: VMware, Inc.
+	CpuCount: 1
