@@ -30,15 +30,16 @@ public class Client
         Client.name = "Cake Client 1.8";
         Client.hud = new HUD(35, 200, 208, Keyboard.KEY_NUMPAD0, Keyboard.KEY_LEFT, Keyboard.KEY_RIGHT);
         Client.modules = new Module[] { 
-        		(Module)new FullBright(),
-        		(Module)new Xray(),
-        		(Module)new Fly(),
-        		(Module)new PermaSprint(),
-        		(Module)new NoFall(),  
-        		(Module)new KillAura(),
-        		(Module)new AutoWtap(),
-        		(Module)new NoSlowDown(),
-        		(Module)new Speed()
+        		new FullBright(),
+        		new Xray(),
+        		// new Module("dummy"),
+        		new Fly(),
+        		new PermaSprint(),
+        		new NoFall(),  
+        		new KillAura(),
+        		new AutoWtap(),
+        		new NoSlowDown(),
+        		new Speed()
         		};
     }
     

@@ -12,6 +12,7 @@ public class FullBright extends Module
     
     @Override
     public void onEnable() {
+    	System.out.println("yasdbashdbnajsd");
         this.mc.gameSettings.gammaSetting = 1000.0f;
     }
     

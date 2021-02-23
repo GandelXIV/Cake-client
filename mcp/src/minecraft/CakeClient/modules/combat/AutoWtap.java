@@ -13,15 +13,6 @@ public class AutoWtap extends Module
 	private Float coolDown = 0f;
     
     @Override
-    public void onEnable() {
-       
-    }
-    
-    @Override
-    public void onDisable() {
-        
-    }
-    @Override
     public void onUpdate() {
     	coolDown -= 1f;
     	mc.thePlayer.setSprinting(true);

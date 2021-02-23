@@ -15,6 +15,7 @@ public class Module
     }
     
     public void toggle() {
+    	
         this.enabled = !this.enabled;
         if (this.enabled) this.onEnable();
         else this.onDisable();

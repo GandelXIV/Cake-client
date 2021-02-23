@@ -18,12 +18,11 @@ public class Xray extends Module
     
     @Override
     public void onEnable() {
+    	System.out.println("usdfbhjudasdas");
     	mc.renderGlobal.loadRenderers();
     }
     
-    @Override
     public void onDisable() {
     	mc.renderGlobal.loadRenderers();
-        
     }
 }
