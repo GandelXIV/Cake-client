@@ -1,5 +1,6 @@
 package net.minecraft.entity;
 
+import CakeClient.modules.Module;
 import com.google.common.collect.Maps;
 import java.util.Collection;
 import java.util.Iterator;
@@ -47,6 +48,15 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import java.util.Iterator;
+import java.util.List;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.client.C02PacketUseEntity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityArmorStand;
+import net.minecraft.entity.Entity;
+
+import CakeClient.Client;
 
 public abstract class EntityLivingBase extends Entity
 {
@@ -1067,24 +1077,26 @@ public abstract class EntityLivingBase extends Entity
      */
     public void knockBack(Entity p_70653_1_, float p_70653_2_, double p_70653_3_, double p_70653_5_)
     {
-        if (this.rand.nextDouble() >= this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).getAttributeValue())
-        {
-            this.isAirBorne = true;
-            float var7 = MathHelper.sqrt_double(p_70653_3_ * p_70653_3_ + p_70653_5_ * p_70653_5_);
-            float var8 = 0.4F;
-            this.motionX /= 2.0D;
-            this.motionY /= 2.0D;
-            this.motionZ /= 2.0D;
-            this.motionX -= p_70653_3_ / (double)var7 * (double)var8;
-            this.motionY += (double)var8;
-            this.motionZ -= p_70653_5_ / (double)var7 * (double)var8;
-
-            if (this.motionY > 0.4000000059604645D)
-            {
-                this.motionY = 0.4000000059604645D;
-            }
-        }
+    	if (this.rand.nextDouble() >= this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).getAttributeValue())
+    	{
+    			this.isAirBorne = true;
+    			float var7 = MathHelper.sqrt_double(p_70653_3_ * p_70653_3_ + p_70653_5_ * p_70653_5_);
+    			float var8 = 0.4F;
+    			this.motionX /= 2.0D;
+    			this.motionY /= 2.0D;
+    			this.motionZ /= 2.0D;
+    			this.motionX -= p_70653_3_ / (double)var7 * (double)var8;
+    			this.motionY += (double)var8;
+    			this.motionZ -= p_70653_5_ / (double)var7 * (double)var8;
+    			if (this.motionY > 0.4000000059604645D)
+    			this.motionY = 0.4000000059604645D;
+    	}
+    		
+        
+    	
+        
     }
+    
 
     /**
      * Returns the sound this mob makes when it is hurt.

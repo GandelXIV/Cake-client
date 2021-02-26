@@ -1,6 +1,8 @@
 package net.minecraft.network.play.server;
 
 import java.io.IOException;
+import CakeClient.Client;
+import CakeClient.modules.Module;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.Packet;
@@ -89,6 +91,14 @@ public class S12PacketEntityVelocity implements Packet
      */
     public void processPacket(INetHandlerPlayClient handler)
     {
+    	
+    	for (Module module: Client.modules)
+    	{
+    		if (module.enabled && module.name == "AntiKnockback") {
+    			return;
+    		}
+    	}
+    	
         handler.handleEntityVelocity(this);
     }
 

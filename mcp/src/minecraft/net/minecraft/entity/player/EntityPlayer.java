@@ -1,6 +1,7 @@
 package net.minecraft.entity.player;
 
 import com.google.common.base.Charsets;
+import CakeClient.modules.movement.Speed;
 import com.google.common.collect.Lists;
 import com.mojang.authlib.GameProfile;
 import java.util.Collection;
@@ -625,7 +626,7 @@ public abstract class EntityPlayer extends EntityLivingBase
 
         if (!this.worldObj.isRemote)
         {
-            var1.setBaseValue((double)this.capabilities.getWalkSpeed());
+            var1.setBaseValue((double)this.capabilities.getWalkSpeed()*CakeClient.modules.movement.Speed.speedMultiplier);
         }
 
         this.jumpMovementFactor = this.speedInAir;

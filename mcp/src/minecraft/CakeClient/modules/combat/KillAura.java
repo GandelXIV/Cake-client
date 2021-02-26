@@ -34,6 +34,7 @@ public class KillAura extends Module
     	if (target != null)
     	{
     		this.mc.thePlayer.swingItem();
+    		this.mc.thePlayer.onCriticalHit(target);
             this.mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(target, C02PacketUseEntity.Action.ATTACK));
     	}
     }

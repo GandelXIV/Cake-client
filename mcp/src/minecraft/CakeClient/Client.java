@@ -12,6 +12,7 @@ import CakeClient.modules.Module;
 import CakeClient.modules.combat.AutoWtap;
 import CakeClient.modules.movement.NoSlowDown;
 import CakeClient.modules.movement.Speed;
+import CakeClient.modules.movement.AntiKnockback;
 
 
 import CakeClient.ui.HUD;
@@ -39,7 +40,8 @@ public class Client
         		new KillAura(),
         		new AutoWtap(),
         		new NoSlowDown(),
-        		new Speed()
+        		new Speed(),
+        		new AntiKnockback()
         		};
     }
     

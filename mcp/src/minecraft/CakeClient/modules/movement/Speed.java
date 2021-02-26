@@ -1,30 +1,47 @@
 package CakeClient.modules.movement;
 
+import net.minecraft.entity.player.EntityPlayerMP;
+
 import CakeClient.modules.Module;
+import net.minecraft.network.play.server.S0BPacketAnimation;
+import net.minecraft.util.MathHelper;
 
 public class Speed extends Module
 {
+	private double prevY = 0;
+	private int i = 0;
     public Speed() {
         super("Speed");
     }
-    public double motX;
-    public double motZ;
+    public String getConfigStatus()
+    {
+    	return "SpeedMultiplier"+speedMultiplier;
+    }
+    public void onLeftConfig()  {if(speedMultiplier > 0.1F) {speedMultiplier -= 0.1f; }}
+    public void onRightConfig() {speedMultiplier += 0.1f; }
+    public static float speedMultiplier = 1F;
     @Override
     public void onDisable() {
+    	mc.timer.timerSpeed = 1f;
     }
     
     @Override
     public void onUpdate() {
-    	if (mc.thePlayer.onGround) 
-    		{
-    		mc.thePlayer.motionX*=1.4D;
-    		mc.thePlayer.motionZ*=1.4D;
-    		}
+    	if (this.enabled) {
+    	timer();
     	}
-    @Override
-    public void onEnable() {
-    	
     }
+   
     
+    public void timer() {
+    	mc.timer.timerSpeed = speedMultiplier ;
+    }
+
+    
+    
+    
+
+
+
 }
 

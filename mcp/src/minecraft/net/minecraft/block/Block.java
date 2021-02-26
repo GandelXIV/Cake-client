@@ -442,7 +442,7 @@ public class Block
     {
     	for (Module module: Client.modules)
     	{
-    		if (module.enabled && module.name == "FullBright") {
+    		if (module.enabled && module.name == "Xray") {
     			return 1000000000;
     		}
     	}
