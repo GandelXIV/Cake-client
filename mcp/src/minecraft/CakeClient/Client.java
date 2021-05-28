@@ -12,6 +12,7 @@ import CakeClient.modules.Module;
 import CakeClient.modules.combat.AutoWtap;
 import CakeClient.modules.movement.NoSlowDown;
 import CakeClient.modules.movement.Speed;
+import CakeClient.modules.movement.DontFallFromBlock;
 import CakeClient.modules.movement.AntiKnockback;
 
 
@@ -41,7 +42,8 @@ public class Client
         		new AutoWtap(),
         		new NoSlowDown(),
         		new Speed(),
-        		new AntiKnockback()
+        		new AntiKnockback(),
+        		new DontFallFromBlock()
         		};
     }
     

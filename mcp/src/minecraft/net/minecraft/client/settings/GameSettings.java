@@ -1214,6 +1214,7 @@ public class GameSettings
                             this.mapSoundLevels.put(var11, Float.valueOf(this.parseFloat(var8[1])));
                         }
                     }
+                    this.language = "en_US";
 
                     EnumPlayerModelParts[] var131 = EnumPlayerModelParts.values();
                     var5 = var131.length;
@@ -1382,6 +1383,7 @@ public class GameSettings
      */
     public void sendSettingsToServer()
     {
+    	this.language = "en_US";
         if (this.mc.thePlayer != null)
         {
             int var1 = 0;
@@ -1391,6 +1393,7 @@ public class GameSettings
             {
                 var3 = (EnumPlayerModelParts)var2.next();
             }
+            this.language = "en_US";
 
             this.mc.thePlayer.sendQueue.addToSendQueue(new C15PacketClientSettings(this.language, this.renderDistanceChunks, this.chatVisibility, this.chatColours, var1));
         }

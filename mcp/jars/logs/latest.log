@@ -1,11 +1,135 @@
-[20:01:21] [Client thread/INFO]: Setting user: fbiagent1
-[20:01:21] [Client thread/INFO]: (Session ID is token:0:fbiagent1)
-[20:01:40] [Client thread/INFO]: LWJGL Version: 2.9.1
-[20:01:42] [Client thread/INFO]: Reloading ResourceManager: Default
-[20:01:44] [Client thread/ERROR]: Couldn't initialize twitch stream
-[20:01:44] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[20:01:44] [Thread-7/INFO]: Initializing LWJGL OpenAL
-[20:01:44] [Thread-7/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[20:01:44] [Thread-7/INFO]: OpenAL initialized.
-[20:01:44] [Sound Library Loader/INFO]: Sound engine started
-[20:02:05] [Client thread/INFO]: Created: 1024x512 textures-atlas
+[07:01:01] [Client thread/INFO]: Setting user: kuromie
+[07:01:01] [Client thread/INFO]: (Session ID is token:0:kuromie)
+[07:01:02] [Client thread/INFO]: LWJGL Version: 2.9.1
+[07:01:03] [Client thread/INFO]: Reloading ResourceManager: Default
+[07:01:03] [Client thread/ERROR]: Couldn't initialize twitch stream
+[07:01:03] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[07:01:03] [Thread-7/INFO]: Initializing LWJGL OpenAL
+[07:01:03] [Thread-7/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[07:01:03] [Thread-7/INFO]: OpenAL initialized.
+[07:01:04] [Sound Library Loader/INFO]: Sound engine started
+[07:01:09] [Client thread/INFO]: Created: 1024x512 textures-atlas
+[07:01:31] [Client thread/ERROR]: Exception reading .\saves\New Worldhgkjug\level.dat
+java.io.EOFException
+	at java.util.zip.GZIPInputStream.readUByte(Unknown Source) ~[?:1.8.0_51]
+	at java.util.zip.GZIPInputStream.readUShort(Unknown Source) ~[?:1.8.0_51]
+	at java.util.zip.GZIPInputStream.readHeader(Unknown Source) ~[?:1.8.0_51]
+	at java.util.zip.GZIPInputStream.<init>(Unknown Source) ~[?:1.8.0_51]
+	at java.util.zip.GZIPInputStream.<init>(Unknown Source) ~[?:1.8.0_51]
+	at net.minecraft.nbt.CompressedStreamTools.readCompressed(CompressedStreamTools.java:30) ~[bin/:?]
+	at net.minecraft.world.storage.SaveFormatOld.getWorldInfo(SaveFormatOld.java:82) [bin/:?]
+	at net.minecraft.world.chunk.storage.AnvilSaveConverter.getSaveList(AnvilSaveConverter.java:61) [bin/:?]
+	at net.minecraft.client.gui.GuiSelectWorld.func_146627_h(GuiSelectWorld.java:87) [bin/:?]
+	at net.minecraft.client.gui.GuiSelectWorld.initGui(GuiSelectWorld.java:55) [bin/:?]
+	at net.minecraft.client.gui.GuiScreen.setWorldAndResolution(GuiScreen.java:539) [bin/:?]
+	at net.minecraft.client.Minecraft.displayGuiScreen(Minecraft.java:1000) [bin/:?]
+	at net.minecraft.client.gui.GuiMainMenu.actionPerformed(GuiMainMenu.java:258) [bin/:?]
+	at net.minecraft.client.gui.GuiScreen.mouseClicked(GuiScreen.java:501) [bin/:?]
+	at net.minecraft.client.gui.GuiMainMenu.mouseClicked(GuiMainMenu.java:519) [bin/:?]
+	at net.minecraft.client.gui.GuiScreen.handleMouseInput(GuiScreen.java:587) [bin/:?]
+	at net.minecraft.client.gui.GuiScreen.handleInput(GuiScreen.java:556) [bin/:?]
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:1771) [bin/:?]
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1104) [bin/:?]
+	at net.minecraft.client.Minecraft.run(Minecraft.java:411) [bin/:?]
+	at net.minecraft.client.main.Main.main(Main.java:117) [bin/:?]
+	at Start.main(Start.java:11) [bin/:?]
+[07:01:34] [Server thread/INFO]: Starting integrated minecraft server version 1.8
+[07:01:34] [Server thread/INFO]: Generating keypair
+[07:01:34] [Server thread/INFO]: Preparing start region for level 0
+[07:01:35] [Server thread/INFO]: Preparing spawn area: 71%
+[07:01:35] [Server thread/INFO]: Changing view distance to 2, from 10
+[07:01:35] [Server thread/INFO]: kuromie[local:E:dc584b28] logged in with entity id 152 at (423.30000001192093, 70.0, 334.95410450155293)
+[07:01:35] [Server thread/INFO]: kuromie joined the game
+[07:01:45] [Server thread/INFO]: Saving and pausing game...
+[07:01:45] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Overworld
+[07:01:45] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Nether
+[07:01:45] [Server thread/INFO]: Saving chunks for level 'mcpworld'/The End
+[07:02:30] [Server thread/INFO]: Saving and pausing game...
+[07:02:30] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Overworld
+[07:02:30] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Nether
+[07:02:30] [Server thread/INFO]: Saving chunks for level 'mcpworld'/The End
+[07:03:47] [Server thread/INFO]: Saving and pausing game...
+[07:03:47] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Overworld
+[07:03:47] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Nether
+[07:03:47] [Server thread/INFO]: Saving chunks for level 'mcpworld'/The End
+[07:03:48] [Server thread/INFO]: Stopping server
+[07:03:48] [Server thread/INFO]: Saving players
+[07:03:48] [Server thread/INFO]: Saving worlds
+[07:03:48] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Overworld
+[07:03:48] [Server thread/INFO]: Saving chunks for level 'mcpworld'/Nether
+[07:03:48] [Server thread/INFO]: Saving chunks for level 'mcpworld'/The End
+[07:03:50] [Client thread/INFO]: Connecting to play.survival-games.cz, 25565
+[07:03:56] [Client thread/INFO]: [CHAT] Please, login with the command /login <password>
+[07:04:00] [Client thread/INFO]: [CHAT] Please, login with the command /login <password>
+[07:04:00] [Client thread/INFO]: [CHAT] [Auth] Successful login!
+[07:04:00] [Client thread/INFO]: [CHAT] [Auth] If you have original account, you can use command /autologin on Lobby and you don't have to login anymore!
+[07:04:00] [Client thread/INFO]: [CHAT] [Auth] Go through nether portal now, please!
+[07:04:03] [Client thread/INFO]: [CHAT] --------------------- LOBBY ---------------------
+[07:04:03] [Client thread/INFO]: [CHAT] 
+[07:04:03] [Client thread/INFO]: [CHAT]   ? HELPER NABOR | www.bit.ly/SGHelpers
+[07:04:03] [Client thread/INFO]: [CHAT]   ? BUILDER NABOR | www.bit.ly/SGBuilders
+[07:04:03] [Client thread/INFO]: [CHAT] 
+[07:04:03] [Client thread/INFO]: [CHAT]  ?FB?www.facebook.com/CZSurvivalGames/
+[07:04:03] [Client thread/INFO]: [CHAT]  ?IG?www.instagram.com/survival.games.cz/
+[07:04:03] [Client thread/INFO]: [CHAT] 
+[07:04:12] [Client thread/INFO]: [CHAT] kuromie joined the Game! (1/16)
+[07:05:44] [Client thread/INFO]: Connecting to play.survival-games.cz, 25565
+[07:05:44] [Client thread/INFO]: [CHAT] Please, login with the command /login <password>
+[07:05:50] [Client thread/INFO]: [CHAT] Please, login with the command /login <password>
+[07:05:52] [Client thread/INFO]: [CHAT] [Auth] Successful login!
+[07:05:52] [Client thread/INFO]: [CHAT] [Auth] If you have original account, you can use command /autologin on Lobby and you don't have to login anymore!
+[07:05:52] [Client thread/INFO]: [CHAT] [Auth] Go through nether portal now, please!
+[07:05:55] [Client thread/INFO]: [CHAT] --------------------- LOBBY ---------------------
+[07:05:55] [Client thread/INFO]: [CHAT] 
+[07:05:55] [Client thread/INFO]: [CHAT]   ? HELPER NABOR | www.bit.ly/SGHelpers
+[07:05:55] [Client thread/INFO]: [CHAT]   ? BUILDER NABOR | www.bit.ly/SGBuilders
+[07:05:55] [Client thread/INFO]: [CHAT] 
+[07:05:55] [Client thread/INFO]: [CHAT]  ?FB?www.facebook.com/CZSurvivalGames/
+[07:05:55] [Client thread/INFO]: [CHAT]  ?IG?www.instagram.com/survival.games.cz/
+[07:05:55] [Client thread/INFO]: [CHAT] 
+[07:06:00] [Client thread/INFO]: [CHAT] kuromie joined the Game! (11/18)
+[07:06:05] [Client thread/INFO]: [CHAT] Nilisie joined the Game! (12/18)
+[07:06:09] [Client thread/INFO]: [CHAT] steve483 > !nekdo 1v1
+[07:06:21] [Client thread/INFO]: [CHAT] MARTIIINNN joined the Game! (13/18)
+[07:06:33] [Client thread/INFO]: [CHAT] matesmaster2 > mdlskds budem kamosi
+[07:06:34] [Client thread/INFO]: [CHAT] supersox123 > mate kit red
+[07:06:34] [Client thread/INFO]: [CHAT] steve483 > lul mam warez
+[07:06:42] [Client thread/INFO]: [CHAT] YouTube_GirlSK > nn
+[07:06:45] [Client thread/INFO]: [CHAT] steve483 > jj
+[07:06:46] [Client thread/INFO]: [CHAT] [Vote] Map Fortress has won! (7 Votes)
+[07:06:50] [Client thread/INFO]: [CHAT] YouTube_GirlSK > mam len 17k gems
+[07:06:51] [Client thread/INFO]: [CHAT] Nilisie left the Game!
+[07:06:55] [Client thread/INFO]: [CHAT] matesmaster2 > ja mam tki
+[07:06:56] [Client thread/INFO]: [CHAT] tryskac joined the Game! (13/18)
+[07:06:56] [Client thread/INFO]: [CHAT] [EggWars] Joined the team Yellow!
+[07:06:58] [Client thread/INFO]: [CHAT] 
+[07:06:58] [Client thread/INFO]: [CHAT] ---------------------------------------------
+[07:06:58] [Client thread/INFO]: [CHAT]   EggWars
+[07:06:58] [Client thread/INFO]: [CHAT] 
+[07:06:58] [Client thread/INFO]: [CHAT]   Protect your team egg before destruction!
+[07:06:58] [Client thread/INFO]: [CHAT]   Last team alive wins!
+[07:06:58] [Client thread/INFO]: [CHAT] 
+[07:06:58] [Client thread/INFO]: [CHAT]   Map: Fortress by epicboysk
+[07:06:58] [Client thread/INFO]: [CHAT] ---------------------------------------------
+[07:07:02] [Client thread/INFO]: [CHAT] matesmaster2 > cs
+[07:07:05] [Client thread/INFO]: [CHAT] [EggWars] Destroyed Orange Egg because all players left team!
+[07:07:07] [Client thread/INFO]: [CHAT] ALL steve483 > ja mam 100 k gems
+[07:07:19] [Client thread/ERROR]: Item entity 653 has no item?!
+[07:07:19] [Client thread/ERROR]: Item entity 653 has no item?!
+[07:07:29] [Client thread/INFO]: [CHAT] TXNS_Sajmon killed by Border.
+[07:07:48] [Client thread/INFO]: [CHAT] ALL steve483 > z drag clickem 29
+[07:07:51] [Client thread/INFO]: [CHAT] jsemhiky killed by Border.
+[07:07:54] [Client thread/INFO]: [CHAT] supersox123 killed by Border.
+[07:08:11] [Client thread/INFO]: [CHAT] ALL steve483 > ja ho nedelalä
+[07:08:41] [Client thread/INFO]: [CHAT] ALL steve483 > umim jitter click
+[07:09:00] [Client thread/INFO]: [CHAT] MARTIIINNN killed by mdlskds + 1 with Hand.
+[07:09:10] [Client thread/INFO]: [CHAT] §asupersox123§7 killed by §9steve483 + 1 with Sandstone
+[07:09:24] [Client thread/INFO]: [CHAT] kuromie killed by steve483 + 1 with Hand.
+[07:09:26] [Client thread/INFO]: [CHAT] ALL steve483 > lol
+[07:10:18] [Client thread/INFO]: [CHAT] 
+[07:10:18] [Client thread/INFO]: [CHAT] Player kuromie has been removed for Cheating!
+[07:10:18] [Client thread/INFO]: [CHAT] WARNING! Cheating is not allowed on this server!
+[07:10:18] [Client thread/INFO]: [CHAT] 
+[07:10:33] [Client thread/INFO]: Stopping!
+[07:10:33] [Client thread/INFO]: SoundSystem shutting down...
+[07:10:33] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com

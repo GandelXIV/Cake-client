@@ -1,11 +1,11 @@
 [Shaders] ShadersMod version: 2.4.12
-[Shaders] OpenGL Version: 3.1 Mesa 20.0.8
-[Shaders] Vendor:  VMware, Inc.
-[Shaders] Renderer: llvmpipe (LLVM 10.0.0, 256 bits)
+[Shaders] OpenGL Version: 3.1.0 - Build 9.17.10.4459
+[Shaders] Vendor:  Intel
+[Shaders] Renderer: Intel(R) HD Graphics 3000
 [Shaders] Capabilities:  2.0  2.1  3.0  -  - 
 [Shaders] GL_MAX_DRAW_BUFFERS: 8
 [Shaders] GL_MAX_COLOR_ATTACHMENTS_EXT: 8
-[Shaders] GL_MAX_TEXTURE_IMAGE_UNITS: 32
+[Shaders] GL_MAX_TEXTURE_IMAGE_UNITS: 16
 [Shaders] Load ShadersMod configuration.
 [Shaders] Save ShadersMod configuration.
 [Shaders] Shaders can not be loaded, Fast Render is enabled.

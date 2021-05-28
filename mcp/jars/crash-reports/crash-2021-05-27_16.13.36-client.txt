@@ -1,0 +1,73 @@
+---- Minecraft Crash Report ----
+// Hey, that tickles! Hehehe!
+
+Time: 27.5.21 16:13
+Description: Initializing game
+
+org.lwjgl.LWJGLException: Pixel format not accelerated
+	at org.lwjgl.opengl.WindowsPeerInfo.nChoosePixelFormat(Native Method)
+	at org.lwjgl.opengl.WindowsPeerInfo.choosePixelFormat(WindowsPeerInfo.java:52)
+	at org.lwjgl.opengl.WindowsDisplay.createWindow(WindowsDisplay.java:252)
+	at org.lwjgl.opengl.Display.createWindow(Display.java:306)
+	at org.lwjgl.opengl.Display.create(Display.java:848)
+	at org.lwjgl.opengl.Display.create(Display.java:757)
+	at org.lwjgl.opengl.Display.create(Display.java:739)
+	at net.minecraft.client.Minecraft.func_175609_am(Minecraft.java:638)
+	at net.minecraft.client.Minecraft.startGame(Minecraft.java:472)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:391)
+	at net.minecraft.client.main.Main.main(Main.java:117)
+	at Start.main(Start.java:11)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at org.lwjgl.opengl.WindowsPeerInfo.nChoosePixelFormat(Native Method)
+	at org.lwjgl.opengl.WindowsPeerInfo.choosePixelFormat(WindowsPeerInfo.java:52)
+	at org.lwjgl.opengl.WindowsDisplay.createWindow(WindowsDisplay.java:252)
+	at org.lwjgl.opengl.Display.createWindow(Display.java:306)
+	at org.lwjgl.opengl.Display.create(Display.java:848)
+	at org.lwjgl.opengl.Display.create(Display.java:757)
+	at org.lwjgl.opengl.Display.create(Display.java:739)
+	at net.minecraft.client.Minecraft.func_175609_am(Minecraft.java:638)
+	at net.minecraft.client.Minecraft.startGame(Minecraft.java:472)
+
+-- Initialization --
+Details:
+Stacktrace:
+	at net.minecraft.client.Minecraft.run(Minecraft.java:391)
+	at net.minecraft.client.main.Main.main(Main.java:117)
+	at Start.main(Start.java:11)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.8
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 1.8.0_281, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 984722808 bytes (939 MB) / 1038876672 bytes (990 MB) up to 1038876672 bytes (990 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	Launched Version: mcp
+	LWJGL: 2.9.1
+	OpenGL: ~~ERROR~~ RuntimeException: No OpenGL context found in the current thread.
+	GL Caps: 
+	Using VBOs: No
+	Is Modded: Very likely; Jar signature invalidated
+	Type: Client (map_client.txt)
+	Resource Packs: []
+	Current Language: ~~ERROR~~ NullPointerException: null
+	Profiler Position: N/A (disabled)
+	OptiFine Version: OptiFine_1.8_HD_U_H6
+	Render Distance Chunks: 2
+	Mipmaps: 4
+	Anisotropic Filtering: 1
+	Antialiasing: 0
+	Multitexture: false
+	Shaders: null
+	OpenGlVersion: null
+	OpenGlRenderer: null
+	OpenGlVendor: null
+	CpuCount: 4

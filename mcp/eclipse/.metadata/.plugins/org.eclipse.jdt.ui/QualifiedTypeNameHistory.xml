@@ -1,9 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="net.minecraft.client.main.Main"/>
-    <fullyQualifiedTypeName name="CakeClient.Client"/>
-    <fullyQualifiedTypeName name="org.lwjgl.input.Keyboard"/>
-    <fullyQualifiedTypeName name="net.minecraft.util.ResourceLocation"/>
-    <fullyQualifiedTypeName name="CakeClient.ui.MainMenuLogo"/>
-    <fullyQualifiedTypeName name="org.lwjgl.util.Color"/>
-</qualifiedTypeNameHistroy>
+<qualifiedTypeNameHistroy/>

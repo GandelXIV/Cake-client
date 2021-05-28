@@ -2,9 +2,20 @@ package net.minecraft.entity;
 
 import java.util.Iterator;
 import java.util.List;
+import net.minecraft.client.Minecraft;
+
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.Callable;
+import CakeClient.modules.Module;
+import net.minecraft.client.gui.Gui;
+import CakeClient.modules.movement.DontFallFromBlock;
+import org.apache.http.conn.ClientConnectionRequest;
+
+import CakeClient.Client;
+import net.minecraft.client.Minecraft;
+import CakeClient.Client;
+import CakeClient.modules.Module;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockFenceGate;
@@ -604,9 +615,17 @@ public abstract class Entity implements ICommandSender
             double var13 = x;
             double var15 = y;
             double var17 = z;
-            boolean var19 = this.onGround && this.isSneaking() && this instanceof EntityPlayer;
+            int isDFFBActive = 0;
+            for (Module module: Client.modules)
+        	{
+        		if (module.enabled && module.name == "Dont fall from block") {
+        			isDFFBActive = 1;
+        		}
+        		
+        	}
+            boolean var19 = this.onGround && (this.isSneaking() || isDFFBActive == 1) && this instanceof EntityPlayer;
 
-            if (var19)
+            if (var19 || isDFFBActive == 1 && (this.onGround || DontFallFromBlock.onlyOnGround))
             {
                 double var20;
 
