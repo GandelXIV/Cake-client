@@ -1,7 +1,0 @@
-package CakeClient.ui;
-
-import net.minecraft.client.gui.GuiScreen;
-
-public class MainMenu extends GuiScreen {
-
-}
